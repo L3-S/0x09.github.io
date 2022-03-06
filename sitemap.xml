@@ -2,28 +2,28 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost/</loc>
+    <loc>http://0x09.dev/</loc>
     <lastmod>2022-03-01T20:51:21+01:00</lastmod>
   </url><url>
-    <loc>http://localhost/authors/</loc>
+    <loc>http://0x09.dev/authors/</loc>
     <lastmod>2022-03-01T20:51:21+01:00</lastmod>
   </url><url>
-    <loc>http://localhost/posts/quiproquo_ntlm/</loc>
+    <loc>http://0x09.dev/posts/quiproquo_ntlm/</loc>
     <lastmod>2022-03-01T20:51:21+01:00</lastmod>
   </url><url>
-    <loc>http://localhost/posts/</loc>
+    <loc>http://0x09.dev/posts/</loc>
     <lastmod>2022-03-01T20:51:21+01:00</lastmod>
   </url><url>
-    <loc>http://localhost/tags/Security/</loc>
+    <loc>http://0x09.dev/tags/Security/</loc>
     <lastmod>2022-03-01T20:51:21+01:00</lastmod>
   </url><url>
-    <loc>http://localhost/authors/skander-belabed/</loc>
+    <loc>http://0x09.dev/authors/skander-belabed/</loc>
     <lastmod>2022-03-01T20:51:21+01:00</lastmod>
   </url><url>
-    <loc>http://localhost/tags/</loc>
+    <loc>http://0x09.dev/tags/</loc>
     <lastmod>2022-03-01T20:51:21+01:00</lastmod>
   </url><url>
-    <loc>http://localhost/tags/Windows/</loc>
+    <loc>http://0x09.dev/tags/Windows/</loc>
     <lastmod>2022-03-01T20:51:21+01:00</lastmod>
   </url>
 </urlset>

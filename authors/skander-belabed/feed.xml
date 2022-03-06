@@ -3,18 +3,18 @@
     <generator uri="https://gohugo.io/" version="0.93.2">Hugo</generator>
     <title>Skander Belabed on 0x09</title>
         <subtitle>I&#39;m trying to master some 0ffs3c skills, so let me teach you !</subtitle>
-            <link href="http://localhost/authors/skander-belabed/" rel="alternate" type="text/html" title="HTML" />
-            <link href="http://localhost/authors/skander-belabed/feed.xml" rel="self" type="application/atom+xml" title="Atom" />
-    <updated>2022-03-06T18:26:25+01:00</updated>
+            <link href="http://0x09.dev/authors/skander-belabed/" rel="alternate" type="text/html" title="HTML" />
+            <link href="http://0x09.dev/authors/skander-belabed/feed.xml" rel="self" type="application/atom+xml" title="Atom" />
+    <updated>2022-03-06T19:10:35+01:00</updated>
         <author>
             <name>Skander BELABED</name>
                 <email>belabedskander@gmail.com</email>
         </author>
-    <id>http://localhost/authors/skander-belabed/</id>
+    <id>http://0x09.dev/authors/skander-belabed/</id>
         <entry>
             <title>Le quiproquo NTLM</title>
-            <link href="http://localhost/posts/quiproquo_ntlm/" rel="alternate" type="text/html"  hreflang="en" />
-            <id>http://localhost/posts/quiproquo_ntlm/</id>
+            <link href="http://0x09.dev/posts/quiproquo_ntlm/" rel="alternate" type="text/html"  hreflang="en" />
+            <id>http://0x09.dev/posts/quiproquo_ntlm/</id>
                     <author>
                         <name>Skander BELABED</name>
                     </author>
@@ -25,7 +25,7 @@
 &lt;div class=&#34;gblog-post__anchorwrap&#34;&gt;
     &lt;h1 id=&#34;tldr&#34;&gt;
         TL;DR
-        &lt;a data-clipboard-text=&#34;http://localhost/posts/quiproquo_ntlm/#tldr&#34; class=&#34;gblog-post__anchor gblog-post__anchor--right clip&#34; aria-label=&#34;Anchor TL;DR&#34; href=&#34;#tldr&#34;&gt;
+        &lt;a data-clipboard-text=&#34;http://0x09.dev/posts/quiproquo_ntlm/#tldr&#34; class=&#34;gblog-post__anchor gblog-post__anchor--right clip&#34; aria-label=&#34;Anchor TL;DR&#34; href=&#34;#tldr&#34;&gt;
             &lt;svg class=&#34;icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
         &lt;/a&gt;
     &lt;/h1&gt;
@@ -45,7 +45,7 @@
 &lt;div class=&#34;gblog-post__anchorwrap&#34;&gt;
     &lt;h1 id=&#34;introduction&#34;&gt;
         Introduction
-        &lt;a data-clipboard-text=&#34;http://localhost/posts/quiproquo_ntlm/#introduction&#34; class=&#34;gblog-post__anchor gblog-post__anchor--right clip&#34; aria-label=&#34;Anchor Introduction&#34; href=&#34;#introduction&#34;&gt;
+        &lt;a data-clipboard-text=&#34;http://0x09.dev/posts/quiproquo_ntlm/#introduction&#34; class=&#34;gblog-post__anchor gblog-post__anchor--right clip&#34; aria-label=&#34;Anchor Introduction&#34; href=&#34;#introduction&#34;&gt;
             &lt;svg class=&#34;icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
         &lt;/a&gt;
     &lt;/h1&gt;
@@ -54,7 +54,7 @@
 &lt;div class=&#34;gblog-post__anchorwrap&#34;&gt;
     &lt;h1 id=&#34;new-technology-lan-manager-ntlm&#34;&gt;
         New Technology LAN Manager (NTLM)
-        &lt;a data-clipboard-text=&#34;http://localhost/posts/quiproquo_ntlm/#new-technology-lan-manager-ntlm&#34; class=&#34;gblog-post__anchor gblog-post__anchor--right clip&#34; aria-label=&#34;Anchor New Technology LAN Manager (NTLM)&#34; href=&#34;#new-technology-lan-manager-ntlm&#34;&gt;
+        &lt;a data-clipboard-text=&#34;http://0x09.dev/posts/quiproquo_ntlm/#new-technology-lan-manager-ntlm&#34; class=&#34;gblog-post__anchor gblog-post__anchor--right clip&#34; aria-label=&#34;Anchor New Technology LAN Manager (NTLM)&#34; href=&#34;#new-technology-lan-manager-ntlm&#34;&gt;
             &lt;svg class=&#34;icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
         &lt;/a&gt;
     &lt;/h1&gt;
@@ -76,7 +76,7 @@
 &lt;div class=&#34;gblog-post__anchorwrap&#34;&gt;
     &lt;h2 id=&#34;nt-hash--lm-hash&#34;&gt;
         NT-hash / LM-hash
-        &lt;a data-clipboard-text=&#34;http://localhost/posts/quiproquo_ntlm/#nt-hash--lm-hash&#34; class=&#34;gblog-post__anchor gblog-post__anchor--right clip&#34; aria-label=&#34;Anchor NT-hash / LM-hash&#34; href=&#34;#nt-hash--lm-hash&#34;&gt;
+        &lt;a data-clipboard-text=&#34;http://0x09.dev/posts/quiproquo_ntlm/#nt-hash--lm-hash&#34; class=&#34;gblog-post__anchor gblog-post__anchor--right clip&#34; aria-label=&#34;Anchor NT-hash / LM-hash&#34; href=&#34;#nt-hash--lm-hash&#34;&gt;
             &lt;svg class=&#34;icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
         &lt;/a&gt;
     &lt;/h2&gt;
@@ -102,7 +102,7 @@ Utilisateur ID unique      LM-hash (vide)                      NT-hash
 &lt;div class=&#34;gblog-post__anchorwrap&#34;&gt;
     &lt;h2 id=&#34;ntlmv1-aka-net-ntlmv1&#34;&gt;
         NTLMv1 (a.k.a Net-NTLMv1)
-        &lt;a data-clipboard-text=&#34;http://localhost/posts/quiproquo_ntlm/#ntlmv1-aka-net-ntlmv1&#34; class=&#34;gblog-post__anchor gblog-post__anchor--right clip&#34; aria-label=&#34;Anchor NTLMv1 (a.k.a Net-NTLMv1)&#34; href=&#34;#ntlmv1-aka-net-ntlmv1&#34;&gt;
+        &lt;a data-clipboard-text=&#34;http://0x09.dev/posts/quiproquo_ntlm/#ntlmv1-aka-net-ntlmv1&#34; class=&#34;gblog-post__anchor gblog-post__anchor--right clip&#34; aria-label=&#34;Anchor NTLMv1 (a.k.a Net-NTLMv1)&#34; href=&#34;#ntlmv1-aka-net-ntlmv1&#34;&gt;
             &lt;svg class=&#34;icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
         &lt;/a&gt;
     &lt;/h2&gt;
@@ -123,7 +123,7 @@ Utilisateur ID unique      LM-hash (vide)                      NT-hash
 &lt;div class=&#34;gblog-post__anchorwrap&#34;&gt;
     &lt;h2 id=&#34;ntlmv2-aka-net-ntlmv2&#34;&gt;
         NTLMv2 (a.k.a Net-NTLMv2)
-        &lt;a data-clipboard-text=&#34;http://localhost/posts/quiproquo_ntlm/#ntlmv2-aka-net-ntlmv2&#34; class=&#34;gblog-post__anchor gblog-post__anchor--right clip&#34; aria-label=&#34;Anchor NTLMv2 (a.k.a Net-NTLMv2)&#34; href=&#34;#ntlmv2-aka-net-ntlmv2&#34;&gt;
+        &lt;a data-clipboard-text=&#34;http://0x09.dev/posts/quiproquo_ntlm/#ntlmv2-aka-net-ntlmv2&#34; class=&#34;gblog-post__anchor gblog-post__anchor--right clip&#34; aria-label=&#34;Anchor NTLMv2 (a.k.a Net-NTLMv2)&#34; href=&#34;#ntlmv2-aka-net-ntlmv2&#34;&gt;
             &lt;svg class=&#34;icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
         &lt;/a&gt;
     &lt;/h2&gt;
@@ -145,7 +145,7 @@ Utilisateur ID unique      LM-hash (vide)                      NT-hash
 &lt;div class=&#34;gblog-post__anchorwrap&#34;&gt;
     &lt;h2 id=&#34;ntlmv1v2-hash&#34;&gt;
         NTLMv1/v2 hash
-        &lt;a data-clipboard-text=&#34;http://localhost/posts/quiproquo_ntlm/#ntlmv1v2-hash&#34; class=&#34;gblog-post__anchor gblog-post__anchor--right clip&#34; aria-label=&#34;Anchor NTLMv1/v2 hash&#34; href=&#34;#ntlmv1v2-hash&#34;&gt;
+        &lt;a data-clipboard-text=&#34;http://0x09.dev/posts/quiproquo_ntlm/#ntlmv1v2-hash&#34; class=&#34;gblog-post__anchor gblog-post__anchor--right clip&#34; aria-label=&#34;Anchor NTLMv1/v2 hash&#34; href=&#34;#ntlmv1v2-hash&#34;&gt;
             &lt;svg class=&#34;icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
         &lt;/a&gt;
     &lt;/h2&gt;
@@ -171,7 +171,7 @@ Utilisateur ID unique      LM-hash (vide)                      NT-hash
 &lt;div class=&#34;gblog-post__anchorwrap&#34;&gt;
     &lt;h1 id=&#34;conclusion&#34;&gt;
         Conclusion
-        &lt;a data-clipboard-text=&#34;http://localhost/posts/quiproquo_ntlm/#conclusion&#34; class=&#34;gblog-post__anchor gblog-post__anchor--right clip&#34; aria-label=&#34;Anchor Conclusion&#34; href=&#34;#conclusion&#34;&gt;
+        &lt;a data-clipboard-text=&#34;http://0x09.dev/posts/quiproquo_ntlm/#conclusion&#34; class=&#34;gblog-post__anchor gblog-post__anchor--right clip&#34; aria-label=&#34;Anchor Conclusion&#34; href=&#34;#conclusion&#34;&gt;
             &lt;svg class=&#34;icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
         &lt;/a&gt;
     &lt;/h1&gt;
@@ -180,7 +180,7 @@ Utilisateur ID unique      LM-hash (vide)                      NT-hash
 &lt;div class=&#34;gblog-post__anchorwrap&#34;&gt;
     &lt;h1 id=&#34;ressources&#34;&gt;
         Ressources
-        &lt;a data-clipboard-text=&#34;http://localhost/posts/quiproquo_ntlm/#ressources&#34; class=&#34;gblog-post__anchor gblog-post__anchor--right clip&#34; aria-label=&#34;Anchor Ressources&#34; href=&#34;#ressources&#34;&gt;
+        &lt;a data-clipboard-text=&#34;http://0x09.dev/posts/quiproquo_ntlm/#ressources&#34; class=&#34;gblog-post__anchor gblog-post__anchor--right clip&#34; aria-label=&#34;Anchor Ressources&#34; href=&#34;#ressources&#34;&gt;
             &lt;svg class=&#34;icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
         &lt;/a&gt;
     &lt;/h1&gt;
@@ -214,8 +214,8 @@ Utilisateur ID unique      LM-hash (vide)                      NT-hash
 &lt;/ul&gt;
 
             </content>  
-                                <category scheme="http://localhost/authors/skander-belabed" term="skander-belabed" label="skander-belabed" />  
-                                <category scheme="http://localhost/tags/Windows" term="Windows" label="Windows" /> 
-                                <category scheme="http://localhost/tags/Security" term="Security" label="Security" />
+                                <category scheme="http://0x09.dev/authors/skander-belabed" term="skander-belabed" label="skander-belabed" />  
+                                <category scheme="http://0x09.dev/tags/Windows" term="Windows" label="Windows" /> 
+                                <category scheme="http://0x09.dev/tags/Security" term="Security" label="Security" />
         </entry>
 </feed>
