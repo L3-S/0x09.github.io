@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>http://localhost/</loc>
+    <lastmod>2022-03-01T20:51:21+01:00</lastmod>
+  </url><url>
+    <loc>http://localhost/authors/</loc>
+    <lastmod>2022-03-01T20:51:21+01:00</lastmod>
+  </url><url>
+    <loc>http://localhost/posts/quiproquo_ntlm/</loc>
+    <lastmod>2022-03-01T20:51:21+01:00</lastmod>
+  </url><url>
+    <loc>http://localhost/posts/</loc>
+    <lastmod>2022-03-01T20:51:21+01:00</lastmod>
+  </url><url>
+    <loc>http://localhost/tags/Security/</loc>
+    <lastmod>2022-03-01T20:51:21+01:00</lastmod>
+  </url><url>
+    <loc>http://localhost/authors/skander-belabed/</loc>
+    <lastmod>2022-03-01T20:51:21+01:00</lastmod>
+  </url><url>
+    <loc>http://localhost/tags/</loc>
+    <lastmod>2022-03-01T20:51:21+01:00</lastmod>
+  </url><url>
+    <loc>http://localhost/tags/Windows/</loc>
+    <lastmod>2022-03-01T20:51:21+01:00</lastmod>
+  </url>
+</urlset>
