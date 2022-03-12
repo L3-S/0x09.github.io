@@ -9,7 +9,7 @@
     <meta charset="UTF-8" />
 <meta name="referrer" content="no-referrer" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="generator" content="Hugo 0.93.2" />
+<meta name="generator" content="Hugo 0.94.0" />
   <meta name="description" content="This is my personal blog about tech." />
     <meta name="author" content="Skander BELABED" />
 
@@ -152,7 +152,7 @@
         <span class="gblog-brand flex align-center justify-center">
           <img
             class="gblog-brand__img"
-            src="/brand.svg"
+            src="/img/logo.png"
             alt=""
           />
           <span class="gblog-brand__title">0x09</span>
@@ -197,6 +197,17 @@
           <li>
             <a
               class="gblog-nav__entry"
+              href="/tags/Reverse-engineering/"
+            >
+              Reverse Engineering
+            </a>
+          </li>
+        
+      
+        
+          <li>
+            <a
+              class="gblog-nav__entry"
               href="/tags/Security/"
             >
               Security
@@ -232,6 +243,125 @@
     <article class="gblog-post">
       <header class="gblog-post__header">
         <h1 class="gblog-post__title">
+          <a href="/posts/undifined_but_simple_anti_decompiler/">Undifined but simple anti-decompiling instruction</a>
+        </h1>
+      </header>
+
+      <section class="gblog-markdown">
+        TL:DR     UD2 is an x86 assembly instruction that simulates an invalid opcode and mostly used for testing purposes, but not only. Indeed it can be used by malware authors for example to disturbe the decompilation process of the malware.
+ UD2 instruction     UD2 is an x86 assembly mnemonic and stands for Undefined instruction. Only used for testing purposes, this instruction simulates the presence of an invalid opcode in the code and when executed raises an Invalid opcode exception.
+      </section>
+      <div class="gblog-post__readmore">
+        
+          <a
+            class="flex-inline align-center fake-link"
+            title="Read full post"
+            href="/posts/undifined_but_simple_anti_decompiler/"
+          >
+            Read full post
+            <i class="gblog-icon">gblog_arrow_right</i>
+          </a>
+        
+      </div>
+
+      <footer class="gblog-post__footer">
+        <div class="flex flex-wrap align-center gblog-post__meta">
+          <span class="flex align-center no-wrap">
+  <svg class="icon gblog_date"><use xlink:href="#gblog_date"></use></svg>
+  <span class="gblog-post__tag">
+    <time datetime="2022-03-12T18:40:31&#43;01:00">
+      
+      Mar 12, 2022
+    </time>
+  </span>
+</span>
+
+<span class="flex align-center no-wrap">
+  <svg class="icon gblog_timer"><use xlink:href="#gblog_timer"></use></svg>
+  <span class="gblog-post__tag">5 min read</span>
+</span>
+
+
+
+
+
+  
+    
+    
+      
+        <span class="flex align-center no-wrap">
+          <svg class="icon gblog_person"><use xlink:href="#gblog_person"></use></svg>
+          
+  <span class="gblog-post__tag gblog-button gblog-button--regular">
+    <a class="gblog-button__link" href="/authors/skander-belabed/" title="All posts of this author">
+      Skander BELABED
+    </a>
+  </span>
+
+        </span>
+      
+    
+    
+  
+
+
+
+
+  
+    
+    
+      
+        <span class="flex align-center no-wrap">
+          <svg class="icon gblog_bookmark"><use xlink:href="#gblog_bookmark"></use></svg>
+          
+  <span class="gblog-post__tag gblog-button gblog-button--regular">
+    <a
+      class="gblog-button__link"
+      href="/tags/Reverse-engineering/"
+      title="All posts tagged with 'Reverse engineering'"
+    >
+      Reverse engineering
+    </a>
+  </span>
+
+        </span>
+      
+    
+    
+  
+    
+    
+      
+        <span class="flex align-center">
+          
+  <span class="gblog-post__tag gblog-button gblog-button--regular">
+    <a
+      class="gblog-button__link"
+      href="/tags/Security/"
+      title="All posts tagged with 'Security'"
+    >
+      Security
+    </a>
+  </span>
+
+        </span>
+      
+    
+    
+  
+
+
+
+
+
+
+        </div>
+      </footer>
+    </article>
+  
+    <article class="gblog-post">
+      <header class="gblog-post__header">
+        <h1 class="gblog-post__title">
           <a href="/posts/quiproquo_ntlm/">Le quiproquo NTLM</a>
         </h1>
       </header>
@@ -257,7 +387,7 @@
           <span class="flex align-center no-wrap">
   <svg class="icon gblog_date"><use xlink:href="#gblog_date"></use></svg>
   <span class="gblog-post__tag">
-    <time datetime="2022-03-06T19:13:09&#43;01:00">
+    <time datetime="2022-03-06T19:25:50&#43;01:00">
       
         Updated on
       
@@ -377,14 +507,6 @@
         
         
         
-          <span class="gblog-footer__item gblog-footer__item--row">
-            <a href="https://blog.example.com/legal" class="gblog-footer__link">Legal Notice</a>
-          </span>
-        
-        
-          <span class="gblog-footer__item gblog-footer__item--row">
-            <a href="/privacy" class="gblog-footer__link">Privacy Policy</a>
-          </span>
         
       </section>
       <section class="flex flex-wrap align-center">

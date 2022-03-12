@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
-    <generator uri="https://gohugo.io/" version="0.93.2">Hugo</generator>
+    <generator uri="https://gohugo.io/" version="0.94.0">Hugo</generator>
     <title>Windows on 0x09</title>
         <subtitle>I&#39;m trying to master some 0ffs3c skills, so let me teach you !</subtitle>
             <link href="https://0x09.dev/tags/Windows/" rel="alternate" type="text/html" title="HTML" />
             <link href="https://0x09.dev/tags/Windows/feed.xml" rel="self" type="application/atom+xml" title="Atom" />
-    <updated>2022-03-06T19:13:19+01:00</updated>
+    <updated>2022-03-12T18:40:44+01:00</updated>
         <author>
             <name>Skander BELABED</name>
                 <email>belabedskander@gmail.com</email>
@@ -19,7 +19,7 @@
                         <name>Skander BELABED</name>
                     </author>
             <published>2022-03-01T20:51:21+01:00</published>
-            <updated>2022-03-06T19:13:09+01:00</updated>
+            <updated>2022-03-06T19:25:50+01:00</updated>
             <content type="html">
                 &lt;hr&gt;
 &lt;div class=&#34;gblog-post__anchorwrap&#34;&gt;
@@ -50,7 +50,8 @@
         &lt;/a&gt;
     &lt;/h1&gt;
 &lt;/div&gt;
-&lt;p&gt;Durant ma quête vers l&amp;rsquo;amélioration de mes connaissances de l&amp;rsquo;environnement Windows (afin de mieux l&amp;rsquo;exploiter), je suis passé par différents articles qui évoquaient les mots NTLM, NT, LM, NTLMv1,&amp;hellip;. et ça a vite créée une confusion dans ma tête. Ce blogpost n&amp;rsquo;a pas pour but de rentrer dans des détails techniques poussés (d&amp;rsquo;autres posts le font très bien) mais juste de donner des définitions concises afin de lever les ambiguïtés.&lt;/p&gt;
+&lt;p&gt;Durant ma quête vers l&amp;rsquo;amélioration de mes connaissances de l&amp;rsquo;environnement Windows (afin de mieux l&amp;rsquo;exploiter &lt;span class=&#34;emoji&#34;&gt;😉&lt;/span&gt;
+), je suis passé par différents articles qui évoquaient les mots NTLM, NT, LM, NTLMv1,&amp;hellip;. et ça a vite créée une confusion dans ma tête. Ce blogpost n&amp;rsquo;a pas pour but de rentrer dans des détails techniques poussés (d&amp;rsquo;autres posts le font très bien) mais juste de donner des définitions concises afin de lever les ambiguïtés.&lt;/p&gt;
 &lt;div class=&#34;gblog-post__anchorwrap&#34;&gt;
     &lt;h1 id=&#34;new-technology-lan-manager-ntlm&#34;&gt;
         New Technology LAN Manager (NTLM)
