@@ -56,7 +56,7 @@
     />
     <meta
       property="article:modified_time"
-      content="2022-03-12T18:40:31+01:00"
+      content="2022-03-12T18:53:41+01:00"
     />
 
 
@@ -74,7 +74,7 @@
       "url" : "https://0x09.dev/posts/undifined_but_simple_anti_decompiler/",
       "headline": "Undifined but simple anti-decompiling instruction",
       "description": "TL:DR     UD2 is an x86 assembly instruction that simulates an invalid opcode and mostly used for testing purposes, but not only. Indeed it can be used by malware authors for example to disturbe the decompilation process of the malware.\n UD2 instruction     UD2 is an x86 assembly mnemonic and stands for Undefined instruction. Only used for testing purposes, this instruction simulates the presence of an invalid opcode in the code and when executed raises an Invalid opcode exception.",
-      "wordCount" : "951",
+      "wordCount" : "955",
       "license": "CC BY-SA 4.0",
       "inLanguage": "en",
       "isFamilyFriendly": "true",
@@ -93,7 +93,7 @@
       "copyrightYear" : "2022",
       "dateCreated": "2022-03-12T15:37:43.00Z",
       "datePublished": "2022-03-12T15:37:43.00Z",
-      "dateModified": "2022-03-12T18:40:31.00Z",
+      "dateModified": "2022-03-12T18:53:41.00Z",
       "publisher":{
           "@type":"Organization",
           "name": "0x09",
@@ -371,18 +371,20 @@
 </span><span class="lnt">23
 </span><span class="lnt">24
 </span><span class="lnt">25
+</span><span class="lnt">26
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;windows.h&gt;</span><span class="cp">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">//https://fr-academic.com/dic.nsf/frwiki/1672713
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&lt;windows.h&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span> 
-</span></span><span class="line hl"><span class="cl"><span class="kt">bool</span> <span class="nf">__ud2</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span></span></span><span class="line hl"><span class="cl"><span class="cp"></span> 
+</span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="nf">__ud2</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="kr">__try</span><span class="p">{</span>
-</span></span><span class="line hl"><span class="cl">                <span class="kr">__asm</span><span class="p">{</span><span class="n">UD2</span><span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line hl"><span class="cl">        <span class="kr">__try</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="kr">__asm</span><span class="p">{</span><span class="n">UD2</span><span class="p">}</span>
+</span></span><span class="line hl"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line hl"><span class="cl">    <span class="kr">__except</span><span class="p">(</span><span class="n">GetExceptionCode</span><span class="p">()</span> <span class="o">==</span> <span class="n">EXCEPTION_ILLEGAL_INSTRUCTION</span> <span class="o">?</span> 
-</span></span><span class="line hl"><span class="cl">             <span class="nl">EXCEPTION_EXECUTE_HANDLER</span> <span class="p">:</span> <span class="n">EXCEPTION_CONTINUE_SEARCH</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">             <span class="nl">EXCEPTION_EXECUTE_HANDLER</span> <span class="p">:</span> <span class="n">EXCEPTION_CONTINUE_SEARCH</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="p">{</span>
 </span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
@@ -390,8 +392,8 @@
 </span></span><span class="line"><span class="cl"> <span class="p">}</span>
 </span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line hl"><span class="cl">        <span class="k">if</span> <span class="p">(</span> <span class="n">__ud2</span><span class="p">()</span> <span class="p">)</span>
+</span></span><span class="line hl"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span> <span class="n">__ud2</span><span class="p">()</span> <span class="p">)</span>
 </span></span><span class="line"><span class="cl">                <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Exception d&#39;opcode invalide rencontrée&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        <span class="k">else</span> 
 </span></span><span class="line"><span class="cl">                <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Exception d&#39;opcode invalide non rencontrée&#34;</span><span class="p">;</span>
@@ -723,6 +725,11 @@
   href="https://docs.microsoft.com/fr-fr/cpp/intrinsics/ud2?view=msvc-170"
   
 >https://docs.microsoft.com/fr-fr/cpp/intrinsics/ud2?view=msvc-170</a></li>
+<li>[3] <a
+  class="gblog-markdown__link"
+  href="https://fr-academic.com/dic.nsf/frwiki/1672713"
+  
+>https://fr-academic.com/dic.nsf/frwiki/1672713</a></li>
 <li>[3] <a
   class="gblog-markdown__link"
   href="https://xem.github.io/minix86/manual/intel-x86-and-64-manual-vol3/o_fe12b1e2a880e0ce-212.html"
