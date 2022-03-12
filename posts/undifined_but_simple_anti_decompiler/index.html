@@ -56,7 +56,7 @@
     />
     <meta
       property="article:modified_time"
-      content="2022-03-12T18:53:41+01:00"
+      content="2022-03-12T19:01:52+01:00"
     />
 
 
@@ -93,7 +93,7 @@
       "copyrightYear" : "2022",
       "dateCreated": "2022-03-12T15:37:43.00Z",
       "datePublished": "2022-03-12T15:37:43.00Z",
-      "dateModified": "2022-03-12T18:53:41.00Z",
+      "dateModified": "2022-03-12T19:01:52.00Z",
       "publisher":{
           "@type":"Organization",
           "name": "0x09",
@@ -349,24 +349,24 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
-</span><span class="hl"><span class="lnt"> 4
-</span></span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="hl"><span class="lnt"> 7
-</span></span><span class="lnt"> 8
-</span><span class="hl"><span class="lnt"> 9
-</span></span><span class="hl"><span class="lnt">10
-</span></span><span class="lnt">11
-</span><span class="lnt">12
+</span><span class="lnt"> 4
+</span><span class="hl"><span class="lnt"> 5
+</span></span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="hl"><span class="lnt"> 8
+</span></span><span class="lnt"> 9
+</span><span class="hl"><span class="lnt">10
+</span></span><span class="hl"><span class="lnt">11
+</span></span><span class="lnt">12
 </span><span class="lnt">13
 </span><span class="lnt">14
 </span><span class="lnt">15
 </span><span class="lnt">16
 </span><span class="lnt">17
 </span><span class="lnt">18
-</span><span class="hl"><span class="lnt">19
-</span></span><span class="lnt">20
-</span><span class="lnt">21
+</span><span class="lnt">19
+</span><span class="hl"><span class="lnt">20
+</span></span><span class="lnt">21
 </span><span class="lnt">22
 </span><span class="lnt">23
 </span><span class="lnt">24
@@ -377,14 +377,14 @@
 <pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">//https://fr-academic.com/dic.nsf/frwiki/1672713
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="cp">#include</span> <span class="cpf">&lt;windows.h&gt;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
-</span></span></span><span class="line hl"><span class="cl"><span class="cp"></span> 
-</span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="nf">__ud2</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span> 
+</span></span><span class="line hl"><span class="cl"><span class="kt">bool</span> <span class="nf">__ud2</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line hl"><span class="cl">        <span class="kr">__try</span><span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="kr">__asm</span><span class="p">{</span><span class="n">UD2</span><span class="p">}</span>
-</span></span><span class="line hl"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="kr">__try</span><span class="p">{</span>
+</span></span><span class="line hl"><span class="cl">                <span class="kr">__asm</span><span class="p">{</span><span class="n">UD2</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line hl"><span class="cl">    <span class="kr">__except</span><span class="p">(</span><span class="n">GetExceptionCode</span><span class="p">()</span> <span class="o">==</span> <span class="n">EXCEPTION_ILLEGAL_INSTRUCTION</span> <span class="o">?</span> 
-</span></span><span class="line"><span class="cl">             <span class="nl">EXCEPTION_EXECUTE_HANDLER</span> <span class="p">:</span> <span class="n">EXCEPTION_CONTINUE_SEARCH</span><span class="p">)</span>
+</span></span><span class="line hl"><span class="cl">             <span class="nl">EXCEPTION_EXECUTE_HANDLER</span> <span class="p">:</span> <span class="n">EXCEPTION_CONTINUE_SEARCH</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="p">{</span>
 </span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
@@ -392,8 +392,8 @@
 </span></span><span class="line"><span class="cl"> <span class="p">}</span>
 </span></span><span class="line"><span class="cl"> 
 </span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
-</span></span><span class="line hl"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span> <span class="n">__ud2</span><span class="p">()</span> <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line hl"><span class="cl">        <span class="k">if</span> <span class="p">(</span> <span class="n">__ud2</span><span class="p">()</span> <span class="p">)</span>
 </span></span><span class="line"><span class="cl">                <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Exception d&#39;opcode invalide rencontrée&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        <span class="k">else</span> 
 </span></span><span class="line"><span class="cl">                <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Exception d&#39;opcode invalide non rencontrée&#34;</span><span class="p">;</span>
