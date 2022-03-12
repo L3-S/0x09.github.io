@@ -5,7 +5,7 @@
         <subtitle>I&#39;m trying to master some 0ffs3c skills, so let me teach you !</subtitle>
             <link href="https://0x09.dev/" rel="alternate" type="text/html" title="HTML" />
             <link href="https://0x09.dev/feed.xml" rel="self" type="application/atom+xml" title="Atom" />
-    <updated>2022-03-12T20:06:15+01:00</updated>
+    <updated>2022-03-12T20:12:15+01:00</updated>
         <author>
             <name>Skander BELABED</name>
                 <email>belabedskander@gmail.com</email>
@@ -30,7 +30,7 @@
         &lt;/a&gt;
     &lt;/h1&gt;
 &lt;/div&gt;
-&lt;p&gt;UD2 is an x86 assembly instruction that simulates an invalid opcode and mostly used for testing purposes, but not only. Indeed it can be used by malware authors for example to disturbe the decompilation process of the malware.&lt;/p&gt;
+&lt;p&gt;UD2 is an x86 assembly instruction that simulates an invalid opcode and mostly used for testing purposes, but not only. Indeed it can be used by malware authors for example to disturbe and slow down the reverse engineering process of it&amp;rsquo;s malware.&lt;/p&gt;
 &lt;hr&gt;
 &lt;div class=&#34;gblog-post__anchorwrap&#34;&gt;
     &lt;h1 id=&#34;ud2-instruction&#34;&gt;
@@ -378,7 +378,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;We can see that instead of continuing the decompilation process the decompiler stopped after adding an infinit loop that calls &lt;strong&gt;invalidInstructionException()&lt;/strong&gt; function. My personal explanation to this, is that during the optimization process of the decompiler, he detected an invalid opcode &lt;a
+&lt;/div&gt;&lt;p&gt;We can see that instead of continuing the decompilation process, the decompiler stopped after adding an infinit loop that calls &lt;strong&gt;invalidInstructionException()&lt;/strong&gt; function. My &lt;em&gt;personal&lt;/em&gt; explanation to this, is that during the optimization process of the decompiler, he detected an invalid opcode &lt;a
   class=&#34;gblog-markdown__link&#34;
   href=&#34;#ud2-instruction&#34;
   

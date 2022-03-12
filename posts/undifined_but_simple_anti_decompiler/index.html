@@ -10,7 +10,7 @@
 <meta name="referrer" content="no-referrer" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="generator" content="Hugo 0.94.0" />
-  <meta name="description" content="TL;DR     UD2 is an x86 assembly instruction that simulates an invalid opcode and mostly used for testing purposes, but not only. Indeed it can be used by malware authors for example to disturbe the decompilation process of the malware.
+  <meta name="description" content="TL;DR     UD2 is an x86 assembly instruction that simulates an invalid opcode and mostly used for testing purposes, but not only. Indeed it can be used by malware authors for example to disturbe and slow down the reverse engineering process of it’s malware.
  UD2 instruction     UD2 is an x86 assembly mnemonic and stands for Undefined instruction. Only used for testing purposes, this instruction simulates the presence of an invalid opcode in the code and when executed raises an Invalid opcode exception." />
     <meta name="author" content="Skander BELABED" />
 
@@ -44,7 +44,7 @@
     content="Undifined but simple anti-decompiling instruction"
   />
   <meta property="og:site_name" content="0x09" />
-  <meta property="og:description" content="TL;DR     UD2 is an x86 assembly instruction that simulates an invalid opcode and mostly used for testing purposes, but not only. Indeed it can be used by malware authors for example to disturbe the decompilation process of the malware.
+  <meta property="og:description" content="TL;DR     UD2 is an x86 assembly instruction that simulates an invalid opcode and mostly used for testing purposes, but not only. Indeed it can be used by malware authors for example to disturbe and slow down the reverse engineering process of it’s malware.
  UD2 instruction     UD2 is an x86 assembly mnemonic and stands for Undefined instruction. Only used for testing purposes, this instruction simulates the presence of an invalid opcode in the code and when executed raises an Invalid opcode exception." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://0x09.dev/posts/undifined_but_simple_anti_decompiler/" />
@@ -62,7 +62,7 @@
 
   <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Undifined but simple anti-decompiling instruction" />
-  <meta name="twitter:description" content="TL;DR     UD2 is an x86 assembly instruction that simulates an invalid opcode and mostly used for testing purposes, but not only. Indeed it can be used by malware authors for example to disturbe the decompilation process of the malware.
+  <meta name="twitter:description" content="TL;DR     UD2 is an x86 assembly instruction that simulates an invalid opcode and mostly used for testing purposes, but not only. Indeed it can be used by malware authors for example to disturbe and slow down the reverse engineering process of it’s malware.
  UD2 instruction     UD2 is an x86 assembly mnemonic and stands for Undefined instruction. Only used for testing purposes, this instruction simulates the presence of an invalid opcode in the code and when executed raises an Invalid opcode exception." />
 
 <script type="application/ld+json">
@@ -73,8 +73,8 @@
       "name": "Undifined but simple anti-decompiling instruction",
       "url" : "https://0x09.dev/posts/undifined_but_simple_anti_decompiler/",
       "headline": "Undifined but simple anti-decompiling instruction",
-      "description": "TL;DR     UD2 is an x86 assembly instruction that simulates an invalid opcode and mostly used for testing purposes, but not only. Indeed it can be used by malware authors for example to disturbe the decompilation process of the malware.\n UD2 instruction     UD2 is an x86 assembly mnemonic and stands for Undefined instruction. Only used for testing purposes, this instruction simulates the presence of an invalid opcode in the code and when executed raises an Invalid opcode exception.",
-      "wordCount" : "955",
+      "description": "TL;DR     UD2 is an x86 assembly instruction that simulates an invalid opcode and mostly used for testing purposes, but not only. Indeed it can be used by malware authors for example to disturbe and slow down the reverse engineering process of it’s malware.\n UD2 instruction     UD2 is an x86 assembly mnemonic and stands for Undefined instruction. Only used for testing purposes, this instruction simulates the presence of an invalid opcode in the code and when executed raises an Invalid opcode exception.",
+      "wordCount" : "959",
       "license": "CC BY-SA 4.0",
       "inLanguage": "en",
       "isFamilyFriendly": "true",
@@ -307,7 +307,7 @@
         </a>
     </h1>
 </div>
-<p>UD2 is an x86 assembly instruction that simulates an invalid opcode and mostly used for testing purposes, but not only. Indeed it can be used by malware authors for example to disturbe the decompilation process of the malware.</p>
+<p>UD2 is an x86 assembly instruction that simulates an invalid opcode and mostly used for testing purposes, but not only. Indeed it can be used by malware authors for example to disturbe and slow down the reverse engineering process of it&rsquo;s malware.</p>
 <hr>
 <div class="gblog-post__anchorwrap">
     <h1 id="ud2-instruction">
@@ -655,7 +655,7 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>We can see that instead of continuing the decompilation process the decompiler stopped after adding an infinit loop that calls <strong>invalidInstructionException()</strong> function. My personal explanation to this, is that during the optimization process of the decompiler, he detected an invalid opcode <a
+</div><p>We can see that instead of continuing the decompilation process, the decompiler stopped after adding an infinit loop that calls <strong>invalidInstructionException()</strong> function. My <em>personal</em> explanation to this, is that during the optimization process of the decompiler, he detected an invalid opcode <a
   class="gblog-markdown__link"
   href="#ud2-instruction"
   
