@@ -5,7 +5,7 @@
         <subtitle>I&#39;m trying to master some 0ffs3c skills, so let me teach you !</subtitle>
             <link href="https://0x09.dev/" rel="alternate" type="text/html" title="HTML" />
             <link href="https://0x09.dev/feed.xml" rel="self" type="application/atom+xml" title="Atom" />
-    <updated>2022-03-12T20:16:07+01:00</updated>
+    <updated>2022-03-13T22:56:44+01:00</updated>
         <author>
             <name>Skander BELABED</name>
                 <email>belabedskander@gmail.com</email>
@@ -546,15 +546,13 @@
   href=&#34;https://en.wikipedia.org/wiki/UTF-16&#34;
   
 &gt;unicode&lt;/a&gt; du mot de passe en clair&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;NTHash(password) = MD4(UTF-16LE(password)) = 8846F7EAEE8FB117AD06BDD830B7586C
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Donc le mot de passe d&amp;rsquo;un utilisateur est stocké localement sous ce format :&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;Administrator:500:AAD3C435B514A4EEAAD3B935B51304FE:8846F7EAEE8FB117AD06BDD830B7586C
-     ^         ^                 ^                                ^
-     |         |                 |                                |
-Utilisateur ID unique      LM-hash (vide)                      NT-hash
-&lt;/code&gt;&lt;/pre&gt;
-&lt;div class=&#34;gblog-post__anchorwrap&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;NTHash&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;password&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; MD4&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;UTF-16LE&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;password&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; 8846F7EAEE8FB117AD06BDD830B7586C
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Donc le mot de passe d&amp;rsquo;un utilisateur est stocké localement sous ce format :&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Administrator:500:AAD3C435B514A4EEAAD3B935B51304FE:8846F7EAEE8FB117AD06BDD830B7586C
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        ^         ^                 ^                                ^
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;         &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;                 &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;                                &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Utilisateur ID unique      LM-hash &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;vide&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;                      NT-hash
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;gblog-post__anchorwrap&#34;&gt;
     &lt;h2 id=&#34;ntlmv1-aka-net-ntlmv1&#34;&gt;
         NTLMv1 (a.k.a Net-NTLMv1)
         &lt;a data-clipboard-text=&#34;https://0x09.dev/posts/quiproquo_ntlm/#ntlmv1-aka-net-ntlmv1&#34; class=&#34;gblog-post__anchor gblog-post__anchor--right clip&#34; aria-label=&#34;Anchor NTLMv1 (a.k.a Net-NTLMv1)&#34; href=&#34;#ntlmv1-aka-net-ntlmv1&#34;&gt;
@@ -607,20 +605,17 @@ Utilisateur ID unique      LM-hash (vide)                      NT-hash
 &lt;/div&gt;
 &lt;p&gt;Le hash NTLMv1/v2 est la réponse envoyée par le client au serveur (étape 3). D&amp;rsquo;un point de vu d&amp;rsquo;un attaquant, on peut penser au minimum à deux scénarios d&amp;rsquo;exploitation :&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Vu que le NTLMv1/v2 hash a été crypté grâce au NT-hash (ou LM-hash), on peut essayer de le cracker pour retrouver le mot de passe en clair&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;  $ hashcat -h | grep &amp;quot;NTLMv&amp;quot;
-  5500 | NetNTLMv1 / NetNTLMv1+ESS                        | Network Protocols
-  5600 | NetNTLMv2                                        | Network Protocols
-  $ hashcat -a 0 -m 5600 my_hash /opt/SecLists/Passwords/rockyou.txt
-              #       ^ 
-              #       |
-              #   NetNTLMv2
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Faire croire au client qu&amp;rsquo;on est le serveur, et au serveur qu&amp;rsquo;on est le client, ce qui mène à relayer cette réponse pour acceder à certains services avec l&amp;rsquo;identité du client, cette attaque est connue sous le nom de NTLM-relay. Bien sûr, il faut que certaines conditions soient réunies comme la signature SMB désactivée&lt;/p&gt;
-&lt;/li&gt;
+&lt;li&gt;Vu que le NTLMv1/v2 hash a été crypté grâce au NT-hash (ou LM-hash), on peut essayer de le cracker pour retrouver le mot de passe en clair&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ hashcat -h &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; grep &lt;span class=&#34;s2&#34;&gt;&amp;#34;NTLMv&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;m&#34;&gt;5500&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; NetNTLMv1 / NetNTLMv1+ESS                        &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; Network Protocols
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;m&#34;&gt;5600&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; NetNTLMv2                                        &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; Network Protocols
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ hashcat -a &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; -m &lt;span class=&#34;m&#34;&gt;5600&lt;/span&gt; my_hash /opt/SecLists/Passwords/rockyou.txt
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;c1&#34;&gt;#       ^ &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;c1&#34;&gt;#       |&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;c1&#34;&gt;#   NetNTLMv2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;Faire croire au client qu&amp;rsquo;on est le serveur, et au serveur qu&amp;rsquo;on est le client, ce qui mène à relayer cette réponse pour acceder à certains services avec l&amp;rsquo;identité du client, cette attaque est connue sous le nom de NTLM-relay. Bien sûr, il faut que certaines conditions soient réunies comme la signature SMB désactivée&lt;/li&gt;
 &lt;/ul&gt;
 &lt;figure align=&#34;center&#34;&gt;&lt;img src=&#34;/img/relai_ntlm.png&#34; /&gt;&lt;figcaption align=&#34;center&#34;&gt;Attaque NTLM Relay&lt;/figcaption&gt;&lt;/figure&gt;
 &lt;div class=&#34;gblog-post__anchorwrap&#34;&gt;

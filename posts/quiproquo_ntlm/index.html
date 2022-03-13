@@ -366,15 +366,13 @@
   href="https://en.wikipedia.org/wiki/UTF-16"
   
 >unicode</a> du mot de passe en clair</p>
-<pre><code>NTHash(password) = MD4(UTF-16LE(password)) = 8846F7EAEE8FB117AD06BDD830B7586C
-</code></pre>
-<p>Donc le mot de passe d&rsquo;un utilisateur est stocké localement sous ce format :</p>
-<pre><code>Administrator:500:AAD3C435B514A4EEAAD3B935B51304FE:8846F7EAEE8FB117AD06BDD830B7586C
-     ^         ^                 ^                                ^
-     |         |                 |                                |
-Utilisateur ID unique      LM-hash (vide)                      NT-hash
-</code></pre>
-<div class="gblog-post__anchorwrap">
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">NTHash<span class="o">(</span>password<span class="o">)</span> <span class="o">=</span> MD4<span class="o">(</span>UTF-16LE<span class="o">(</span>password<span class="o">))</span> <span class="o">=</span> 8846F7EAEE8FB117AD06BDD830B7586C
+</span></span></code></pre></div><p>Donc le mot de passe d&rsquo;un utilisateur est stocké localement sous ce format :</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Administrator:500:AAD3C435B514A4EEAAD3B935B51304FE:8846F7EAEE8FB117AD06BDD830B7586C
+</span></span><span class="line"><span class="cl">        ^         ^                 ^                                ^
+</span></span><span class="line"><span class="cl">        <span class="p">|</span>         <span class="p">|</span>                 <span class="p">|</span>                                <span class="p">|</span>
+</span></span><span class="line"><span class="cl">Utilisateur ID unique      LM-hash <span class="o">(</span>vide<span class="o">)</span>                      NT-hash
+</span></span></code></pre></div><div class="gblog-post__anchorwrap">
     <h2 id="ntlmv1-aka-net-ntlmv1">
         NTLMv1 (a.k.a Net-NTLMv1)
         <a data-clipboard-text="https://0x09.dev/posts/quiproquo_ntlm/#ntlmv1-aka-net-ntlmv1" class="gblog-post__anchor gblog-post__anchor--right clip" aria-label="Anchor NTLMv1 (a.k.a Net-NTLMv1)" href="#ntlmv1-aka-net-ntlmv1">
@@ -427,20 +425,17 @@ Utilisateur ID unique      LM-hash (vide)                      NT-hash
 </div>
 <p>Le hash NTLMv1/v2 est la réponse envoyée par le client au serveur (étape 3). D&rsquo;un point de vu d&rsquo;un attaquant, on peut penser au minimum à deux scénarios d&rsquo;exploitation :</p>
 <ul>
-<li>
-<p>Vu que le NTLMv1/v2 hash a été crypté grâce au NT-hash (ou LM-hash), on peut essayer de le cracker pour retrouver le mot de passe en clair</p>
-<pre><code>  $ hashcat -h | grep &quot;NTLMv&quot;
-  5500 | NetNTLMv1 / NetNTLMv1+ESS                        | Network Protocols
-  5600 | NetNTLMv2                                        | Network Protocols
-  $ hashcat -a 0 -m 5600 my_hash /opt/SecLists/Passwords/rockyou.txt
-              #       ^ 
-              #       |
-              #   NetNTLMv2
-</code></pre>
-</li>
-<li>
-<p>Faire croire au client qu&rsquo;on est le serveur, et au serveur qu&rsquo;on est le client, ce qui mène à relayer cette réponse pour acceder à certains services avec l&rsquo;identité du client, cette attaque est connue sous le nom de NTLM-relay. Bien sûr, il faut que certaines conditions soient réunies comme la signature SMB désactivée</p>
-</li>
+<li>Vu que le NTLMv1/v2 hash a été crypté grâce au NT-hash (ou LM-hash), on peut essayer de le cracker pour retrouver le mot de passe en clair</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ hashcat -h <span class="p">|</span> grep <span class="s2">&#34;NTLMv&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="m">5500</span> <span class="p">|</span> NetNTLMv1 / NetNTLMv1+ESS                        <span class="p">|</span> Network Protocols
+</span></span><span class="line"><span class="cl"><span class="m">5600</span> <span class="p">|</span> NetNTLMv2                                        <span class="p">|</span> Network Protocols
+</span></span><span class="line"><span class="cl">$ hashcat -a <span class="m">0</span> -m <span class="m">5600</span> my_hash /opt/SecLists/Passwords/rockyou.txt
+</span></span><span class="line"><span class="cl">            <span class="c1">#       ^ </span>
+</span></span><span class="line"><span class="cl">            <span class="c1">#       |</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">#   NetNTLMv2</span>
+</span></span></code></pre></div><ul>
+<li>Faire croire au client qu&rsquo;on est le serveur, et au serveur qu&rsquo;on est le client, ce qui mène à relayer cette réponse pour acceder à certains services avec l&rsquo;identité du client, cette attaque est connue sous le nom de NTLM-relay. Bien sûr, il faut que certaines conditions soient réunies comme la signature SMB désactivée</li>
 </ul>
 <figure align="center"><img src="/img/relai_ntlm.png" /><figcaption align="center">Attaque NTLM Relay</figcaption></figure>
 <div class="gblog-post__anchorwrap">
