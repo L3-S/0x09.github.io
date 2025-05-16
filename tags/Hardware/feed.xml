@@ -2,84 +2,38 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
     <generator uri="https://gohugo.io/" version="0.147.3">Hugo</generator>
     <title>Hardware on 0x09</title>
-        <subtitle>I&#39;m trying to master some 0ffs3c skills, so let me teach you !</subtitle>
-            <link href="https://L3-S.github.io/0x09.github.io/tags/Hardware/" rel="alternate" type="text/html" title="html" />
-            <link href="https://L3-S.github.io/0x09.github.io/tags/Hardware/feed.xml" rel="self" type="application/atom+xml" title="atom" />
-    <updated>2025-05-16T22:02:04+02:00</updated>
+        <subtitle>Just Trying To Master Some 0ffs3c Skills...</subtitle>
+            <link href="https://0x09.dev/tags/Hardware/" rel="alternate" type="text/html" title="html" />
+            <link href="https://0x09.dev/tags/Hardware/feed.xml" rel="self" type="application/atom+xml" title="atom" />
+    <updated>2025-05-16T22:40:45+02:00</updated>
         <author>
             <name>Skander BELABED</name>
                 <email>belabedskander@gmail.com</email>
         </author>
-    <id>https://L3-S.github.io/0x09.github.io/tags/Hardware/</id>
+    <id>https://0x09.dev/tags/Hardware/</id>
         <entry>
-            <title>Toto Découvre Une ~Backdoor~ Interface De Debug</title>
-            <link href="https://L3-S.github.io/0x09.github.io/posts/toto_decouvre_une_backdoor/" rel="alternate" type="text/html"  hreflang="en" />
-            <id>https://L3-S.github.io/0x09.github.io/posts/toto_decouvre_une_backdoor/</id>
+            <title>Toto Découvre Une &#34;Interface De Debug&#34;</title>
+            <link href="https://0x09.dev/posts/toto_decouvre_une_backdoor/" rel="alternate" type="text/html"  hreflang="en" />
+            <id>https://0x09.dev/posts/toto_decouvre_une_backdoor/</id>
             <published>2025-05-14T20:18:18+02:00</published>
-            <updated>2025-05-16T18:35:58+02:00</updated>
+            <updated>2025-05-16T22:40:34+02:00</updated>
             <content type="html">
                 &lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
     &lt;h1 id=&#34;tldr&#34;
     &gt;
         TL;DR
     &lt;/h1&gt;
-    &lt;a data-clipboard-text=&#34;https://L3-S.github.io/0x09.github.io/posts/toto_decouvre_une_backdoor/#tldr&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor TL;DR&#34; href=&#34;#tldr&#34;&gt;
+    &lt;a data-clipboard-text=&#34;https://0x09.dev/posts/toto_decouvre_une_backdoor/#tldr&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor TL;DR&#34; href=&#34;#tldr&#34;&gt;
         &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
     &lt;/a&gt;
 &lt;/div&gt;
 &lt;p&gt;Après l&amp;rsquo;extraction et l&amp;rsquo;analyse du firmware d&amp;rsquo;un router &lt;em&gt;TOTOLINK N300RB&lt;/em&gt;, une &lt;del&gt;backdoor&lt;/del&gt; interface de debug /cgi-b]]in/d.cgi permettant de lire des fichiers et d&amp;rsquo;exécuter des commandes de manière arbitraire en tant qu&amp;rsquo;utilisateur root a été découverte. Cette fonctionnalité peut être utilisée sous condition d&amp;rsquo;activation d&amp;rsquo;une option dans la configuration du router ainsi qu&amp;rsquo;un mot de passe.&lt;/p&gt;
 &lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
-    &lt;h1 id=&#34;sommaire&#34;
-    &gt;
-        Sommaire
-    &lt;/h1&gt;
-    &lt;a data-clipboard-text=&#34;https://L3-S.github.io/0x09.github.io/posts/toto_decouvre_une_backdoor/#sommaire&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Sommaire&#34; href=&#34;#sommaire&#34;&gt;
-        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
-    &lt;/a&gt;
-&lt;/div&gt;
-
-
-
-  &lt;div class=&#34;gblog-toc gblog-toc__level--3&#34;&gt;
-    &lt;nav id=&#34;TableOfContents&#34;&gt;
-  &lt;ul&gt;
-    &lt;li&gt;&lt;a href=&#34;#tldr&#34;&gt;TL;DR&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href=&#34;#sommaire&#34;&gt;Sommaire&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href=&#34;#introduction&#34;&gt;Introduction&lt;/a&gt;
-      &lt;ul&gt;
-        &lt;li&gt;&lt;a href=&#34;#objectifs&#34;&gt;Objectifs&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href=&#34;#sujet-n300rb&#34;&gt;Sujet N300RB&lt;/a&gt;&lt;/li&gt;
-      &lt;/ul&gt;
-    &lt;/li&gt;
-    &lt;li&gt;&lt;a href=&#34;#première-autopsie&#34;&gt;Première autopsie&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href=&#34;#uart&#34;&gt;UART&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href=&#34;#extraction-du-firmware-via-spi&#34;&gt;Extraction du firmware via SPI&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href=&#34;#analyse-du-firmware&#34;&gt;Analyse du firmware&lt;/a&gt;
-      &lt;ul&gt;
-        &lt;li&gt;&lt;a href=&#34;#binwalk-run&#34;&gt;Binwalk &amp;ldquo;run&amp;rdquo;&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href=&#34;#mapping-du-code-source&#34;&gt;Mapping du code source&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href=&#34;#un-air-de-déjà-vue&#34;&gt;Un air de déjà vue&lt;/a&gt;&lt;/li&gt;
-        &lt;li&gt;&lt;a href=&#34;#analyse-du-fichier&#34;&gt;Analyse du fichier&lt;/a&gt;
-          &lt;ul&gt;
-            &lt;li&gt;&lt;a href=&#34;#option&#34;&gt;Option&lt;/a&gt;&lt;/li&gt;
-            &lt;li&gt;&lt;a href=&#34;#secret-en-paramètre&#34;&gt;Secret en paramètre&lt;/a&gt;&lt;/li&gt;
-          &lt;/ul&gt;
-        &lt;/li&gt;
-      &lt;/ul&gt;
-    &lt;/li&gt;
-    &lt;li&gt;&lt;a href=&#34;#exploitation&#34;&gt;Exploitation&lt;/a&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/nav&gt;
-    &lt;hr /&gt;
-  &lt;/div&gt;
-
-
-&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
     &lt;h1 id=&#34;introduction&#34;
     &gt;
         Introduction
     &lt;/h1&gt;
-    &lt;a data-clipboard-text=&#34;https://L3-S.github.io/0x09.github.io/posts/toto_decouvre_une_backdoor/#introduction&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Introduction&#34; href=&#34;#introduction&#34;&gt;
+    &lt;a data-clipboard-text=&#34;https://0x09.dev/posts/toto_decouvre_une_backdoor/#introduction&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Introduction&#34; href=&#34;#introduction&#34;&gt;
         &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
     &lt;/a&gt;
 &lt;/div&gt;
@@ -88,7 +42,7 @@
     &gt;
         Objectifs
     &lt;/h2&gt;
-    &lt;a data-clipboard-text=&#34;https://L3-S.github.io/0x09.github.io/posts/toto_decouvre_une_backdoor/#objectifs&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Objectifs&#34; href=&#34;#objectifs&#34;&gt;
+    &lt;a data-clipboard-text=&#34;https://0x09.dev/posts/toto_decouvre_une_backdoor/#objectifs&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Objectifs&#34; href=&#34;#objectifs&#34;&gt;
         &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
     &lt;/a&gt;
 &lt;/div&gt;
@@ -103,7 +57,7 @@
     &gt;
         Sujet N300RB
     &lt;/h2&gt;
-    &lt;a data-clipboard-text=&#34;https://L3-S.github.io/0x09.github.io/posts/toto_decouvre_une_backdoor/#sujet-n300rb&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Sujet N300RB&#34; href=&#34;#sujet-n300rb&#34;&gt;
+    &lt;a data-clipboard-text=&#34;https://0x09.dev/posts/toto_decouvre_une_backdoor/#sujet-n300rb&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Sujet N300RB&#34; href=&#34;#sujet-n300rb&#34;&gt;
         &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
     &lt;/a&gt;
 &lt;/div&gt;
@@ -114,7 +68,7 @@ TODO : image du carton&lt;/p&gt;
     &gt;
         Première autopsie
     &lt;/h1&gt;
-    &lt;a data-clipboard-text=&#34;https://L3-S.github.io/0x09.github.io/posts/toto_decouvre_une_backdoor/#première-autopsie&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Première autopsie&#34; href=&#34;#premi%c3%a8re-autopsie&#34;&gt;
+    &lt;a data-clipboard-text=&#34;https://0x09.dev/posts/toto_decouvre_une_backdoor/#première-autopsie&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Première autopsie&#34; href=&#34;#premi%c3%a8re-autopsie&#34;&gt;
         &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
     &lt;/a&gt;
 &lt;/div&gt;
@@ -146,7 +100,7 @@ TODO : image du carton&lt;/p&gt;
     &gt;
         UART
     &lt;/h1&gt;
-    &lt;a data-clipboard-text=&#34;https://L3-S.github.io/0x09.github.io/posts/toto_decouvre_une_backdoor/#uart&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor UART&#34; href=&#34;#uart&#34;&gt;
+    &lt;a data-clipboard-text=&#34;https://0x09.dev/posts/toto_decouvre_une_backdoor/#uart&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor UART&#34; href=&#34;#uart&#34;&gt;
         &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
     &lt;/a&gt;
 &lt;/div&gt;
@@ -155,7 +109,7 @@ TODO : image du carton&lt;/p&gt;
     &gt;
         Extraction du firmware via SPI
     &lt;/h1&gt;
-    &lt;a data-clipboard-text=&#34;https://L3-S.github.io/0x09.github.io/posts/toto_decouvre_une_backdoor/#extraction-du-firmware-via-spi&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Extraction du firmware via SPI&#34; href=&#34;#extraction-du-firmware-via-spi&#34;&gt;
+    &lt;a data-clipboard-text=&#34;https://0x09.dev/posts/toto_decouvre_une_backdoor/#extraction-du-firmware-via-spi&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Extraction du firmware via SPI&#34; href=&#34;#extraction-du-firmware-via-spi&#34;&gt;
         &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
     &lt;/a&gt;
 &lt;/div&gt;
@@ -192,7 +146,7 @@ TODO : image du carton&lt;/p&gt;
     &gt;
         Analyse du firmware
     &lt;/h1&gt;
-    &lt;a data-clipboard-text=&#34;https://L3-S.github.io/0x09.github.io/posts/toto_decouvre_une_backdoor/#analyse-du-firmware&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Analyse du firmware&#34; href=&#34;#analyse-du-firmware&#34;&gt;
+    &lt;a data-clipboard-text=&#34;https://0x09.dev/posts/toto_decouvre_une_backdoor/#analyse-du-firmware&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Analyse du firmware&#34; href=&#34;#analyse-du-firmware&#34;&gt;
         &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
     &lt;/a&gt;
 &lt;/div&gt;
@@ -201,7 +155,7 @@ TODO : image du carton&lt;/p&gt;
     &gt;
         Binwalk &amp;ldquo;run&amp;rdquo;
     &lt;/h2&gt;
-    &lt;a data-clipboard-text=&#34;https://L3-S.github.io/0x09.github.io/posts/toto_decouvre_une_backdoor/#binwalk-run&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Binwalk &amp;ldquo;run&amp;rdquo;&#34; href=&#34;#binwalk-run&#34;&gt;
+    &lt;a data-clipboard-text=&#34;https://0x09.dev/posts/toto_decouvre_une_backdoor/#binwalk-run&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Binwalk &amp;ldquo;run&amp;rdquo;&#34; href=&#34;#binwalk-run&#34;&gt;
         &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
     &lt;/a&gt;
 &lt;/div&gt;
@@ -242,8 +196,8 @@ Bien que son objectif principal soit l&amp;rsquo;analyse de firmwares, il prend 
 &gt;TRX&lt;/a&gt; censé contenir différentes partitions telles que celle du noyau ou encore du système de fichiers&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Pour des raisons qu&amp;rsquo;on verra plus tard, concentrons nous donc sur ce deuxième bloc &lt;em&gt;TRX&lt;/em&gt; qui suit la structure suivante :&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  0                   1                   2                   3   
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-txt&#34; data-lang=&#34;txt&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  0                   1                   2                   3
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; +---------------------------------------------------------------+
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; |                     magic number (&amp;#39;HDR0&amp;#39;)                     |
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; +---------------------------------------------------------------+
@@ -264,7 +218,7 @@ Bien que son objectif principal soit l&amp;rsquo;analyse de firmwares, il prend 
   class=&#34;gblog-markdown__link&#34;
   href=&#34;https://git.archive.openwrt.org/?p=14.07/openwrt.git;a=blob;f=tools/firmware-utils/src/trx.c;h=aa1f5be4b65b66ac9a1a48d7304d9bef131080e1;hb=HEAD#l69&#34;
 &gt;openwrt/tools/firmware-utils/src/trx.c&lt;/a&gt;&lt;/p&gt;&lt;/blockquote&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ file extractions/firmware.bin.extracted/20000/* 
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ file extractions/firmware.bin.extracted/20000/*
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;extractions/firmware.bin.extracted/20000/partition_0.bin: LZMA compressed data, non-streamed, size &lt;span class=&#34;m&#34;&gt;4276224&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;extractions/firmware.bin.extracted/20000/partition_1.bin: Linux Compressed ROM File System data, little endian size &lt;span class=&#34;m&#34;&gt;1740800&lt;/span&gt; version &lt;span class=&#34;c1&#34;&gt;#2 sorted_dirs CRC 0xe66d68a8, edition 0, 1334 blocks, 247 files&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;On peut voir que &lt;em&gt;Binwalk&lt;/em&gt; a identifié et extrait deux partitions dans le conteneur &lt;em&gt;TRX&lt;/em&gt; :&lt;/p&gt;
@@ -279,7 +233,7 @@ Bien que son objectif principal soit l&amp;rsquo;analyse de firmwares, il prend 
   class=&#34;gblog-markdown__link&#34;
   href=&#34;https://7-zip.org/&#34;
 &gt;7z&lt;/a&gt; qui supporte le format &lt;em&gt;CramFs&lt;/em&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ 7z x extractions/firmware.bin.extracted/20000/partition_1.bin -o/tmp/firm_fs/ 
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ 7z x extractions/firmware.bin.extracted/20000/partition_1.bin -o/tmp/firm_fs/
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;7-Zip &lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;64&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; 16.02 : Copyright &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;c&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; 1999-2016 Igor Pavlov : 2016-05-21
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;p7zip Version 16.02 &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nv&#34;&gt;locale&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;en_US.UTF-8,Utf16&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;on,HugeFiles&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;on,64 bits,12 CPUs Intel&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;R&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; Core&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;TM&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; i7-10750H CPU @ 2.60GHz &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;A0652&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;,ASM,AES-NI&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
@@ -317,7 +271,7 @@ Bien que son objectif principal soit l&amp;rsquo;analyse de firmwares, il prend 
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Files: &lt;span class=&#34;m&#34;&gt;214&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Size:       &lt;span class=&#34;m&#34;&gt;5031151&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Compressed: &lt;span class=&#34;m&#34;&gt;1742824&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ ls -la /tmp/firm_fs 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ ls -la /tmp/firm_fs
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;total &lt;span class=&#34;m&#34;&gt;112&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;drwx------ &lt;span class=&#34;m&#34;&gt;15&lt;/span&gt; skander skander  &lt;span class=&#34;m&#34;&gt;4096&lt;/span&gt; mai   &lt;span class=&#34;m&#34;&gt;10&lt;/span&gt; 21:51 .
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;drwxrwxrwt &lt;span class=&#34;m&#34;&gt;41&lt;/span&gt; root    root    &lt;span class=&#34;m&#34;&gt;40960&lt;/span&gt; mai   &lt;span class=&#34;m&#34;&gt;10&lt;/span&gt; 21:51 ..
@@ -342,12 +296,12 @@ Bien que son objectif principal soit l&amp;rsquo;analyse de firmwares, il prend 
     &gt;
         Mapping du code source
     &lt;/h2&gt;
-    &lt;a data-clipboard-text=&#34;https://L3-S.github.io/0x09.github.io/posts/toto_decouvre_une_backdoor/#mapping-du-code-source&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Mapping du code source&#34; href=&#34;#mapping-du-code-source&#34;&gt;
+    &lt;a data-clipboard-text=&#34;https://0x09.dev/posts/toto_decouvre_une_backdoor/#mapping-du-code-source&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Mapping du code source&#34; href=&#34;#mapping-du-code-source&#34;&gt;
         &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
     &lt;/a&gt;
 &lt;/div&gt;
 &lt;p&gt;Maintenant que nous avons un accès à l&amp;rsquo;ensemble des éléments présents dans le système de fichiers, il est necessaire d&amp;rsquo;identifier les fichiers contenant la partie applicative du router. Pour cela, le fichier de configuration du serveur web peut être un bon début :&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ cat default/var/boa_vh.conf                                                                                                                                                 
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ cat default/var/boa_vh.conf
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Port &lt;span class=&#34;m&#34;&gt;80&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;User root
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Group root
@@ -427,7 +381,7 @@ Bien que son objectif principal soit l&amp;rsquo;analyse de firmwares, il prend 
     &gt;
         Un air de déjà vue
     &lt;/h2&gt;
-    &lt;a data-clipboard-text=&#34;https://L3-S.github.io/0x09.github.io/posts/toto_decouvre_une_backdoor/#un-air-de-déjà-vue&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Un air de déjà vue&#34; href=&#34;#un-air-de-d%c3%a9j%c3%a0-vue&#34;&gt;
+    &lt;a data-clipboard-text=&#34;https://0x09.dev/posts/toto_decouvre_une_backdoor/#un-air-de-déjà-vue&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Un air de déjà vue&#34; href=&#34;#un-air-de-d%c3%a9j%c3%a0-vue&#34;&gt;
         &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
     &lt;/a&gt;
 &lt;/div&gt;
@@ -491,7 +445,7 @@ Bien que son objectif principal soit l&amp;rsquo;analyse de firmwares, il prend 
     &gt;
         Analyse du fichier
     &lt;/h2&gt;
-    &lt;a data-clipboard-text=&#34;https://L3-S.github.io/0x09.github.io/posts/toto_decouvre_une_backdoor/#analyse-du-fichier&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Analyse du fichier&#34; href=&#34;#analyse-du-fichier&#34;&gt;
+    &lt;a data-clipboard-text=&#34;https://0x09.dev/posts/toto_decouvre_une_backdoor/#analyse-du-fichier&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Analyse du fichier&#34; href=&#34;#analyse-du-fichier&#34;&gt;
         &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
     &lt;/a&gt;
 &lt;/div&gt;
@@ -511,7 +465,7 @@ Bien que son objectif principal soit l&amp;rsquo;analyse de firmwares, il prend 
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;kt&#34;&gt;char&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pcVar6&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;kt&#34;&gt;char&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;acStack_70&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;64&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;];&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;kt&#34;&gt;char&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;acStack_30&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;];&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nf&#34;&gt;install_ui&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ui&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;n&#34;&gt;iVar1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;get_pvalue&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;param_2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;DAT_00477b24&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;iVar1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;!=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
@@ -595,7 +549,7 @@ Bien que son objectif principal soit l&amp;rsquo;analyse de firmwares, il prend 
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;kt&#34;&gt;char&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;local_109&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;kt&#34;&gt;char&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;local_108&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;kt&#34;&gt;char&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;local_107&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;n&#34;&gt;iVar1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;get_remote_support&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;iVar1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;!=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;local_118&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;sc&#34;&gt;&amp;#39;\0&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
@@ -694,7 +648,7 @@ Bien que son objectif principal soit l&amp;rsquo;analyse de firmwares, il prend 
     &gt;
         Option
     &lt;/h3&gt;
-    &lt;a data-clipboard-text=&#34;https://L3-S.github.io/0x09.github.io/posts/toto_decouvre_une_backdoor/#option&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Option&#34; href=&#34;#option&#34;&gt;
+    &lt;a data-clipboard-text=&#34;https://0x09.dev/posts/toto_decouvre_une_backdoor/#option&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Option&#34; href=&#34;#option&#34;&gt;
         &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
     &lt;/a&gt;
 &lt;/div&gt;
@@ -704,7 +658,7 @@ Bien que son objectif principal soit l&amp;rsquo;analyse de firmwares, il prend 
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;iVar1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;iVar2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;n&#34;&gt;iVar1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;iconfig_get_intvalue_direct&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;remote_support&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;n&#34;&gt;iVar2&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;iVar1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;!=&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
@@ -718,7 +672,7 @@ Bien que son objectif principal soit l&amp;rsquo;analyse de firmwares, il prend 
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;iVar1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;iVar2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;kt&#34;&gt;char&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;acStack_28&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;];&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;n&#34;&gt;iVar1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;iconfig_get_value_direct&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;param_1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;acStack_28&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;n&#34;&gt;iVar2&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;iVar1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;!=&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
@@ -733,7 +687,7 @@ Bien que son objectif principal soit l&amp;rsquo;analyse de firmwares, il prend 
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;iVar2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;n&#34;&gt;undefined4&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;local_20&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;n&#34;&gt;undefined4&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;local_1c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;n&#34;&gt;local_20&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;n&#34;&gt;local_1c&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;n&#34;&gt;uVar1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;lock_file&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;/etc/iconfig.cfg&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
@@ -828,7 +782,7 @@ Bien que son objectif principal soit l&amp;rsquo;analyse de firmwares, il prend 
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;dhcpd&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;dhcpd_conf&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;br0,192.168.1.1,192.168.1.254,192.168.1.33,255.255.255.0
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;dhcpd_dns&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;168.126.63.1,168.126.63.2
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;dhcpd_opt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;7200,30,200, 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;dhcpd_opt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;7200,30,200,
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;dhcpd_configfile&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;/etc/udhcpd.conf
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;dhcpd_lease_file&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;/etc/udhcpd.leases
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nv&#34;&gt;dhcpd_static_lease_file&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;/etc/udhcpd.static
@@ -852,7 +806,7 @@ Bien que son objectif principal soit l&amp;rsquo;analyse de firmwares, il prend 
     &gt;
         Secret en paramètre
     &lt;/h3&gt;
-    &lt;a data-clipboard-text=&#34;https://L3-S.github.io/0x09.github.io/posts/toto_decouvre_une_backdoor/#secret-en-paramètre&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Secret en paramètre&#34; href=&#34;#secret-en-param%c3%a8tre&#34;&gt;
+    &lt;a data-clipboard-text=&#34;https://0x09.dev/posts/toto_decouvre_une_backdoor/#secret-en-paramètre&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Secret en paramètre&#34; href=&#34;#secret-en-param%c3%a8tre&#34;&gt;
         &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
     &lt;/a&gt;
 &lt;/div&gt;
@@ -903,14 +857,14 @@ Bien que son objectif principal soit l&amp;rsquo;analyse de firmwares, il prend 
     &gt;
         Exploitation
     &lt;/h1&gt;
-    &lt;a data-clipboard-text=&#34;https://L3-S.github.io/0x09.github.io/posts/toto_decouvre_une_backdoor/#exploitation&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Exploitation&#34; href=&#34;#exploitation&#34;&gt;
+    &lt;a data-clipboard-text=&#34;https://0x09.dev/posts/toto_decouvre_une_backdoor/#exploitation&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Exploitation&#34; href=&#34;#exploitation&#34;&gt;
         &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
     &lt;/a&gt;
 &lt;/div&gt;
 
             </content>   
-                                <category scheme="https://L3-S.github.io/0x09.github.io/tags/Reverse-engineering" term="Reverse-engineering" label="Reverse engineering" /> 
-                                <category scheme="https://L3-S.github.io/0x09.github.io/tags/Security" term="Security" label="Security" /> 
-                                <category scheme="https://L3-S.github.io/0x09.github.io/tags/Hardware" term="Hardware" label="Hardware" />
+                                <category scheme="https://0x09.dev/tags/Reverse-engineering" term="Reverse-engineering" label="Reverse engineering" /> 
+                                <category scheme="https://0x09.dev/tags/Security" term="Security" label="Security" /> 
+                                <category scheme="https://0x09.dev/tags/Hardware" term="Hardware" label="Hardware" />
         </entry>
 </feed>

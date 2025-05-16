@@ -2,19 +2,19 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
     <generator uri="https://gohugo.io/" version="0.147.3">Hugo</generator>
     <title>Skander Belabed on 0x09</title>
-        <subtitle>I&#39;m trying to master some 0ffs3c skills, so let me teach you !</subtitle>
-            <link href="https://L3-S.github.io/0x09.github.io/authors/skander-belabed/" rel="alternate" type="text/html" title="html" />
-            <link href="https://L3-S.github.io/0x09.github.io/authors/skander-belabed/feed.xml" rel="self" type="application/atom+xml" title="atom" />
-    <updated>2025-05-16T22:02:04+02:00</updated>
+        <subtitle>Just Trying To Master Some 0ffs3c Skills...</subtitle>
+            <link href="https://0x09.dev/authors/skander-belabed/" rel="alternate" type="text/html" title="html" />
+            <link href="https://0x09.dev/authors/skander-belabed/feed.xml" rel="self" type="application/atom+xml" title="atom" />
+    <updated>2025-05-16T22:40:45+02:00</updated>
         <author>
             <name>Skander BELABED</name>
                 <email>belabedskander@gmail.com</email>
         </author>
-    <id>https://L3-S.github.io/0x09.github.io/authors/skander-belabed/</id>
+    <id>https://0x09.dev/authors/skander-belabed/</id>
         <entry>
             <title>Undifined but simple anti-decompiling instruction</title>
-            <link href="https://L3-S.github.io/0x09.github.io/posts/undifined_but_simple_anti_decompiler/" rel="alternate" type="text/html"  hreflang="en" />
-            <id>https://L3-S.github.io/0x09.github.io/posts/undifined_but_simple_anti_decompiler/</id>
+            <link href="https://0x09.dev/posts/undifined_but_simple_anti_decompiler/" rel="alternate" type="text/html"  hreflang="en" />
+            <id>https://0x09.dev/posts/undifined_but_simple_anti_decompiler/</id>
                     <author>
                         <name>Skander BELABED</name>
                     </author>
@@ -27,7 +27,7 @@
     &gt;
         TL;DR
     &lt;/h1&gt;
-    &lt;a data-clipboard-text=&#34;https://L3-S.github.io/0x09.github.io/posts/undifined_but_simple_anti_decompiler/#tldr&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor TL;DR&#34; href=&#34;#tldr&#34;&gt;
+    &lt;a data-clipboard-text=&#34;https://0x09.dev/posts/undifined_but_simple_anti_decompiler/#tldr&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor TL;DR&#34; href=&#34;#tldr&#34;&gt;
         &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
     &lt;/a&gt;
 &lt;/div&gt;
@@ -38,7 +38,7 @@
     &gt;
         UD2 instruction
     &lt;/h1&gt;
-    &lt;a data-clipboard-text=&#34;https://L3-S.github.io/0x09.github.io/posts/undifined_but_simple_anti_decompiler/#ud2-instruction&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor UD2 instruction&#34; href=&#34;#ud2-instruction&#34;&gt;
+    &lt;a data-clipboard-text=&#34;https://0x09.dev/posts/undifined_but_simple_anti_decompiler/#ud2-instruction&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor UD2 instruction&#34; href=&#34;#ud2-instruction&#34;&gt;
         &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
     &lt;/a&gt;
 &lt;/div&gt;
@@ -65,7 +65,7 @@
     &gt;
         Microsoft Visual C++ example
     &lt;/h2&gt;
-    &lt;a data-clipboard-text=&#34;https://L3-S.github.io/0x09.github.io/posts/undifined_but_simple_anti_decompiler/#microsoft-visual-c-example&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Microsoft Visual C&amp;#43;&amp;#43; example&#34; href=&#34;#microsoft-visual-c-example&#34;&gt;
+    &lt;a data-clipboard-text=&#34;https://0x09.dev/posts/undifined_but_simple_anti_decompiler/#microsoft-visual-c-example&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Microsoft Visual C&amp;#43;&amp;#43; example&#34; href=&#34;#microsoft-visual-c-example&#34;&gt;
         &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
     &lt;/a&gt;
 &lt;/div&gt;
@@ -132,7 +132,7 @@
     &gt;
         Anti-decompiling purpose
     &lt;/h1&gt;
-    &lt;a data-clipboard-text=&#34;https://L3-S.github.io/0x09.github.io/posts/undifined_but_simple_anti_decompiler/#anti-decompiling-purpose&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Anti-decompiling purpose&#34; href=&#34;#anti-decompiling-purpose&#34;&gt;
+    &lt;a data-clipboard-text=&#34;https://0x09.dev/posts/undifined_but_simple_anti_decompiler/#anti-decompiling-purpose&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Anti-decompiling purpose&#34; href=&#34;#anti-decompiling-purpose&#34;&gt;
         &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
     &lt;/a&gt;
 &lt;/div&gt;
@@ -145,7 +145,7 @@
     &gt;
         Simple program
     &lt;/h2&gt;
-    &lt;a data-clipboard-text=&#34;https://L3-S.github.io/0x09.github.io/posts/undifined_but_simple_anti_decompiler/#simple-program&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Simple program&#34; href=&#34;#simple-program&#34;&gt;
+    &lt;a data-clipboard-text=&#34;https://0x09.dev/posts/undifined_but_simple_anti_decompiler/#simple-program&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Simple program&#34; href=&#34;#simple-program&#34;&gt;
         &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
     &lt;/a&gt;
 &lt;/div&gt;
@@ -276,7 +276,7 @@
     &gt;
         &amp;ldquo;Protected&amp;rdquo; simple program
     &lt;/h2&gt;
-    &lt;a data-clipboard-text=&#34;https://L3-S.github.io/0x09.github.io/posts/undifined_but_simple_anti_decompiler/#protected-simple-program&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor &amp;ldquo;Protected&amp;rdquo; simple program&#34; href=&#34;#protected-simple-program&#34;&gt;
+    &lt;a data-clipboard-text=&#34;https://0x09.dev/posts/undifined_but_simple_anti_decompiler/#protected-simple-program&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor &amp;ldquo;Protected&amp;rdquo; simple program&#34; href=&#34;#protected-simple-program&#34;&gt;
         &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
     &lt;/a&gt;
 &lt;/div&gt;
@@ -391,7 +391,7 @@
     &gt;
         &amp;ldquo;Protection&amp;rdquo; bypass
     &lt;/h2&gt;
-    &lt;a data-clipboard-text=&#34;https://L3-S.github.io/0x09.github.io/posts/undifined_but_simple_anti_decompiler/#protection-bypass&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor &amp;ldquo;Protection&amp;rdquo; bypass&#34; href=&#34;#protection-bypass&#34;&gt;
+    &lt;a data-clipboard-text=&#34;https://0x09.dev/posts/undifined_but_simple_anti_decompiler/#protection-bypass&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor &amp;ldquo;Protection&amp;rdquo; bypass&#34; href=&#34;#protection-bypass&#34;&gt;
         &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
     &lt;/a&gt;
 &lt;/div&gt;
@@ -436,7 +436,7 @@
     &gt;
         Resources
     &lt;/h1&gt;
-    &lt;a data-clipboard-text=&#34;https://L3-S.github.io/0x09.github.io/posts/undifined_but_simple_anti_decompiler/#resources&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Resources&#34; href=&#34;#resources&#34;&gt;
+    &lt;a data-clipboard-text=&#34;https://0x09.dev/posts/undifined_but_simple_anti_decompiler/#resources&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Resources&#34; href=&#34;#resources&#34;&gt;
         &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
     &lt;/a&gt;
 &lt;/div&gt;
@@ -460,212 +460,8 @@
 &lt;/ul&gt;
 
             </content>  
-                                <category scheme="https://L3-S.github.io/0x09.github.io/authors/skander-belabed" term="skander-belabed" label="skander-belabed" />  
-                                <category scheme="https://L3-S.github.io/0x09.github.io/tags/Reverse-engineering" term="Reverse-engineering" label="Reverse engineering" /> 
-                                <category scheme="https://L3-S.github.io/0x09.github.io/tags/Security" term="Security" label="Security" />
-        </entry>
-        <entry>
-            <title>Le quiproquo NTLM</title>
-            <link href="https://L3-S.github.io/0x09.github.io/posts/quiproquo_ntlm/" rel="alternate" type="text/html"  hreflang="en" />
-            <id>https://L3-S.github.io/0x09.github.io/posts/quiproquo_ntlm/</id>
-                    <author>
-                        <name>Skander BELABED</name>
-                    </author>
-            <published>2022-03-01T20:51:21+01:00</published>
-            <updated>2022-03-06T19:25:50+01:00</updated>
-            <content type="html">
-                &lt;hr&gt;
-&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
-    &lt;h1 id=&#34;tldr&#34;
-    &gt;
-        TL;DR
-    &lt;/h1&gt;
-    &lt;a data-clipboard-text=&#34;https://L3-S.github.io/0x09.github.io/posts/quiproquo_ntlm/#tldr&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor TL;DR&#34; href=&#34;#tldr&#34;&gt;
-        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
-    &lt;/a&gt;
-&lt;/div&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;LM-hash :&lt;/strong&gt; Ancien moyen de stocker le mot de passe utilisateur en local utilisé par LAN Manager&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;&lt;del&gt;Hash NTLM&lt;/del&gt; NT-Hash :&lt;/strong&gt; Utilisé par NT LAN Manager qui remplace LAN Manager pour stocker le mot de passe utilisateur en local&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;NTLM (a.k.a Net-NTLM) :&lt;/strong&gt; Protocol d&amp;rsquo;authentification unique (SSO), basé sur le principe de défi-réponse.
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;NTLMv1 (a.k.a Net-NTLMv1) :&lt;/strong&gt;  Désigne la première version du protocol d&amp;rsquo;authentification NTLM.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;NTLMv2 (a.k.a Net-NTLMv2) :&lt;/strong&gt; Désigne la version 2 du protocol d&amp;rsquo;authentification NTLM, qui propose des améliorations en terme de sécurité.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Hash NTLMv1/v2 (reponse) :&lt;/strong&gt; Le hash NTLMv1 ou NTLMv2 représentent respectivement la réponse au défi envoyé par le serveur durant une authentification NTLMv1 ou NTLMv2.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
-    &lt;h1 id=&#34;introduction&#34;
-    &gt;
-        Introduction
-    &lt;/h1&gt;
-    &lt;a data-clipboard-text=&#34;https://L3-S.github.io/0x09.github.io/posts/quiproquo_ntlm/#introduction&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Introduction&#34; href=&#34;#introduction&#34;&gt;
-        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
-    &lt;/a&gt;
-&lt;/div&gt;
-&lt;p&gt;Durant ma quête vers l&amp;rsquo;amélioration de mes connaissances de l&amp;rsquo;environnement Windows (afin de mieux l&amp;rsquo;exploiter &lt;span class=&#34;emoji&#34;&gt;😉&lt;/span&gt;
-), je suis passé par différents articles qui évoquaient les mots NTLM, NT, LM, NTLMv1,&amp;hellip;. et ça a vite créée une confusion dans ma tête. Ce blogpost n&amp;rsquo;a pas pour but de rentrer dans des détails techniques poussés (d&amp;rsquo;autres posts le font très bien) mais juste de donner des définitions concises afin de lever les ambiguïtés.&lt;/p&gt;
-&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
-    &lt;h1 id=&#34;new-technology-lan-manager-ntlm&#34;
-    &gt;
-        New Technology LAN Manager (NTLM)
-    &lt;/h1&gt;
-    &lt;a data-clipboard-text=&#34;https://L3-S.github.io/0x09.github.io/posts/quiproquo_ntlm/#new-technology-lan-manager-ntlm&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor New Technology LAN Manager (NTLM)&#34; href=&#34;#new-technology-lan-manager-ntlm&#34;&gt;
-        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
-    &lt;/a&gt;
-&lt;/div&gt;
-&lt;p&gt;Windows New Technology LAN Manager (NTLM) est une suite de protocols qui propose non pas qu&amp;rsquo;une authentification &lt;a
-  class=&#34;gblog-markdown__link&#34;
-  href=&#34;https://en.wikipedia.org/wiki/Single_sign-on&#34;
-&gt;Signe-Sign On (SSO)&lt;/a&gt; en se basant sur le principe de &lt;a
-  class=&#34;gblog-markdown__link&#34;
-  href=&#34;https://en.wikipedia.org/wiki/Challenge%E2%80%93response_authentication&#34;
-&gt;défi-réponse&lt;/a&gt; mais aussi d&amp;rsquo;autres aspects de sécurité comme garantir l&amp;rsquo;intégrité et la confidentialité de certaines informations qui transitent dans le réseau. Le protocol NTLM est venu succèder Microsoft &lt;a
-  class=&#34;gblog-markdown__link&#34;
-  href=&#34;https://en.wikipedia.org/wiki/LAN_Manager&#34;
-&gt;LAN Manager (LANMAN)&lt;/a&gt; en rajoutant le &lt;em&gt;New Technology&lt;/em&gt; au début mais pas que&amp;hellip;&lt;/p&gt;
-&lt;figure align=&#34;center&#34;&gt;&lt;img src=&#34;/img/ntlm_authentication.png&#34; /&gt;&lt;figcaption align=&#34;center&#34;&gt;NTLM authentication protocol&lt;/figcaption&gt;&lt;/figure&gt;
-&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
-    &lt;h2 id=&#34;nt-hash--lm-hash&#34;
-    &gt;
-        NT-hash / LM-hash
-    &lt;/h2&gt;
-    &lt;a data-clipboard-text=&#34;https://L3-S.github.io/0x09.github.io/posts/quiproquo_ntlm/#nt-hash--lm-hash&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor NT-hash / LM-hash&#34; href=&#34;#nt-hash--lm-hash&#34;&gt;
-        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
-    &lt;/a&gt;
-&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;LM-hash&lt;/strong&gt; est l&amp;rsquo;ancien moyen de stocker les mots de passe utilisateur dans LAN Manager. En vue de sa facilité à être cracké, il est par defaut désactivé depuis Windows 7 et plus. Malgré ses faiblesses et la disponibilité d&amp;rsquo;autres technologies plus sécurisées, il n&amp;rsquo;a pas été complétement retiré afin d&amp;rsquo;assurer une certaine compatibilité.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;NT-hash&lt;/strong&gt; souvent aussi d&amp;rsquo;une manière grossière appelé &lt;del&gt;NTLM hash&lt;/del&gt;, est le hash venu remplacer le LM-hash. Il est obtenu en calculant le &lt;a
-  class=&#34;gblog-markdown__link&#34;
-  href=&#34;https://en.wikipedia.org/wiki/MD4&#34;
-&gt;MD4&lt;/a&gt; de la version &lt;a
-  class=&#34;gblog-markdown__link&#34;
-  href=&#34;https://en.wikipedia.org/wiki/UTF-16&#34;
-&gt;unicode&lt;/a&gt; du mot de passe en clair&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;NTHash(password) = MD4(UTF-16LE(password)) = 8846F7EAEE8FB117AD06BDD830B7586C
-&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Donc le mot de passe d&amp;rsquo;un utilisateur est stocké localement sous ce format :&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;Administrator:500:AAD3C435B514A4EEAAD3B935B51304FE:8846F7EAEE8FB117AD06BDD830B7586C
-     ^         ^                 ^                                ^
-     |         |                 |                                |
-Utilisateur ID unique      LM-hash (vide)                      NT-hash
-&lt;/code&gt;&lt;/pre&gt;
-&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
-    &lt;h2 id=&#34;ntlmv1-aka-net-ntlmv1&#34;
-    &gt;
-        NTLMv1 (a.k.a Net-NTLMv1)
-    &lt;/h2&gt;
-    &lt;a data-clipboard-text=&#34;https://L3-S.github.io/0x09.github.io/posts/quiproquo_ntlm/#ntlmv1-aka-net-ntlmv1&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor NTLMv1 (a.k.a Net-NTLMv1)&#34; href=&#34;#ntlmv1-aka-net-ntlmv1&#34;&gt;
-        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
-    &lt;/a&gt;
-&lt;/div&gt;
-&lt;p&gt;NTLMv1 désigne la première version de l&amp;rsquo;authentification NTLM, voici comment se passe une authentification entre un client et un serveur d&amp;rsquo;un point de vu haut niveau :&lt;/p&gt;
-&lt;p&gt;1- Le client envoi une demande d&amp;rsquo;authentification&lt;/p&gt;
-&lt;p&gt;2- Le serveur répond en renvoyant un &lt;em&gt;nonce&lt;/em&gt; qui réprésente le défi auquel le client doit répondre.&lt;/p&gt;
-&lt;p&gt;3- Le client récupère le &lt;em&gt;nonce&lt;/em&gt;, le crypt avec son NT-hash (ou son LM-hash, tout dépend de la configuration) puis le renvoi au serveur &lt;a
-  class=&#34;gblog-markdown__link&#34;
-  href=&#34;#ntlmv1v2-hash&#34;
-&gt;&lt;em&gt;(NTLMv1 Hash)&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;4- Pour vérifier l&amp;rsquo;authenticité du client, le serveur peut par exemple :&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Dans le cas où le serveur est hors Domain, grâce à sa connaissance du mot de passe, décrypter la réponse pour retrouver le &lt;em&gt;nonce&lt;/em&gt; initial&lt;/li&gt;
-&lt;li&gt;Envoyer le résultat au Domain Controller pour qu&amp;rsquo;il vérifie à sa place&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
-    &lt;h2 id=&#34;ntlmv2-aka-net-ntlmv2&#34;
-    &gt;
-        NTLMv2 (a.k.a Net-NTLMv2)
-    &lt;/h2&gt;
-    &lt;a data-clipboard-text=&#34;https://L3-S.github.io/0x09.github.io/posts/quiproquo_ntlm/#ntlmv2-aka-net-ntlmv2&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor NTLMv2 (a.k.a Net-NTLMv2)&#34; href=&#34;#ntlmv2-aka-net-ntlmv2&#34;&gt;
-        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
-    &lt;/a&gt;
-&lt;/div&gt;
-&lt;p&gt;Cette deuxième version, possède le même workflow que la première à quelques différences prés comme par exemple :&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Sur l&amp;rsquo;étape 3, le client rajoute un timestamp et son nom d&amp;rsquo;utilisateur&lt;/li&gt;
-&lt;li&gt;La taille du nonce (défi) est de taille variable contrairement à celle de NTLMv1 qui a une longueur fixe de 16 bytes&lt;/li&gt;
-&lt;li&gt;La réponse au défi n&amp;rsquo;est plus chiffré avec &lt;a
-  class=&#34;gblog-markdown__link&#34;
-  href=&#34;https://en.wikipedia.org/wiki/Data_Encryption_Standard&#34;
-&gt;&lt;em&gt;Data Encryption Standard (DES)&lt;/em&gt;&lt;/a&gt; mais utilise d&amp;rsquo;autres algorithmes comme &lt;a
-  class=&#34;gblog-markdown__link&#34;
-  href=&#34;https://en.wikipedia.org/wiki/HMAC&#34;
-&gt;&lt;em&gt;HMAC_MD5&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
-    &lt;h2 id=&#34;ntlmv1v2-hash&#34;
-    &gt;
-        NTLMv1/v2 hash
-    &lt;/h2&gt;
-    &lt;a data-clipboard-text=&#34;https://L3-S.github.io/0x09.github.io/posts/quiproquo_ntlm/#ntlmv1v2-hash&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor NTLMv1/v2 hash&#34; href=&#34;#ntlmv1v2-hash&#34;&gt;
-        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
-    &lt;/a&gt;
-&lt;/div&gt;
-&lt;p&gt;Le hash NTLMv1/v2 est la réponse envoyée par le client au serveur (étape 3). D&amp;rsquo;un point de vu d&amp;rsquo;un attaquant, on peut penser au minimum à deux scénarios d&amp;rsquo;exploitation :&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Vu que le NTLMv1/v2 hash a été crypté grâce au NT-hash (ou LM-hash), on peut essayer de le cracker pour retrouver le mot de passe en clair&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;  $ hashcat -h | grep &amp;quot;NTLMv&amp;quot;
-  5500 | NetNTLMv1 / NetNTLMv1+ESS                        | Network Protocols
-  5600 | NetNTLMv2                                        | Network Protocols
-  $ hashcat -a 0 -m 5600 my_hash /opt/SecLists/Passwords/rockyou.txt
-              #       ^ 
-              #       |
-              #   NetNTLMv2
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Faire croire au client qu&amp;rsquo;on est le serveur, et au serveur qu&amp;rsquo;on est le client, ce qui mène à relayer cette réponse pour acceder à certains services avec l&amp;rsquo;identité du client, cette attaque est connue sous le nom de NTLM-relay. Bien sûr, il faut que certaines conditions soient réunies comme la signature SMB désactivée&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;figure align=&#34;center&#34;&gt;&lt;img src=&#34;/img/relai_ntlm.png&#34; /&gt;&lt;figcaption align=&#34;center&#34;&gt;Attaque NTLM Relay&lt;/figcaption&gt;&lt;/figure&gt;
-&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
-    &lt;h1 id=&#34;conclusion&#34;
-    &gt;
-        Conclusion
-    &lt;/h1&gt;
-    &lt;a data-clipboard-text=&#34;https://L3-S.github.io/0x09.github.io/posts/quiproquo_ntlm/#conclusion&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Conclusion&#34; href=&#34;#conclusion&#34;&gt;
-        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
-    &lt;/a&gt;
-&lt;/div&gt;
-&lt;p&gt;Malgré l&amp;rsquo;éxistance d&amp;rsquo;autres protocols d&amp;rsquo;authentification plus sécurisés, NTLM est encore très présent dans les infrastructures Windows. De ce fait comprendre les différentes terminologies et employer le bon mot pour désigner un élément précis dans le protocol NTLM peut aider à le décompléxifier et à mieux le comprendre.&lt;/p&gt;
-&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
-    &lt;h1 id=&#34;ressources&#34;
-    &gt;
-        Ressources
-    &lt;/h1&gt;
-    &lt;a data-clipboard-text=&#34;https://L3-S.github.io/0x09.github.io/posts/quiproquo_ntlm/#ressources&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Ressources&#34; href=&#34;#ressources&#34;&gt;
-        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
-    &lt;/a&gt;
-&lt;/div&gt;
-&lt;ul&gt;
-&lt;li&gt;[1] &lt;a
-  class=&#34;gblog-markdown__link&#34;
-  href=&#34;https://en.wikipedia.org/wiki/LAN_Manager&#34;
-&gt;https://en.wikipedia.org/wiki/LAN_Manager&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;[2] &lt;a
-  class=&#34;gblog-markdown__link&#34;
-  href=&#34;https://en.wikipedia.org/wiki/NT_LAN_Manager&#34;
-&gt;https://en.wikipedia.org/wiki/NT_LAN_Manager&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;[3] &lt;a
-  class=&#34;gblog-markdown__link&#34;
-  href=&#34;https://zer1t0.gitlab.io/posts/attacking_ad/&#34;
-&gt;https://zer1t0.gitlab.io/posts/attacking_ad/&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;[4] &lt;a
-  class=&#34;gblog-markdown__link&#34;
-  href=&#34;https://byt3bl33d3r.github.io/practical-guide-to-ntlm-relaying-in-2017-aka-getting-a-foothold-in-under-5-minutes.html&#34;
-&gt;https://byt3bl33d3r.github.io/practical-guide-to-ntlm-relaying-in-2017-aka-getting-a-foothold-in-under-5-minutes.html&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;[5] &lt;a
-  class=&#34;gblog-markdown__link&#34;
-  href=&#34;https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-samr/8c5c1438-1807-4d19-9f4e-66290f214a63&#34;
-&gt;https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-samr/8c5c1438-1807-4d19-9f4e-66290f214a63&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-            </content>  
-                                <category scheme="https://L3-S.github.io/0x09.github.io/authors/skander-belabed" term="skander-belabed" label="skander-belabed" />  
-                                <category scheme="https://L3-S.github.io/0x09.github.io/tags/Windows" term="Windows" label="Windows" /> 
-                                <category scheme="https://L3-S.github.io/0x09.github.io/tags/Security" term="Security" label="Security" />
+                                <category scheme="https://0x09.dev/authors/skander-belabed" term="skander-belabed" label="skander-belabed" />  
+                                <category scheme="https://0x09.dev/tags/Reverse-engineering" term="Reverse-engineering" label="Reverse engineering" /> 
+                                <category scheme="https://0x09.dev/tags/Security" term="Security" label="Security" />
         </entry>
 </feed>

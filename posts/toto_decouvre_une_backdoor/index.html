@@ -13,23 +13,23 @@
 <meta name="generator" content="Hugo 0.147.3">
   <meta name="robots" content="index, follow" />
   <meta name="description" content=" TL;DR Après l’extraction et l’analyse du firmware d’un router TOTOLINK N300RB, une backdoor interface de debug /cgi-b]]in/d.cgi permettant de lire des fichiers et d’exécuter des commandes de manière arbitraire en tant qu’utilisateur root a été découverte. Cette fonctionnalité peut être utilisée sous condition d’activation d’une option dans la configuration du router ainsi qu’un mot de passe.
-Sommaire TL;DR Sommaire Introduction Objectifs Sujet N300RB Première autopsie UART Extraction du firmware via SPI Analyse du firmware Binwalk “run” Mapping du code source Un air de déjà vue Analyse du fichier Option Secret en paramètre Exploitation Introduction Objectifs Dans une optique d’apprentissage sur la sécurité hardware, nous allons retracer les différentes étapes réalisées lors de l’analyse du firmware d’un routeur cible et plus précisémment :" />
+Introduction Objectifs Dans une optique d’apprentissage sur la sécurité hardware, nous allons retracer les différentes étapes réalisées lors de l’analyse du firmware d’un routeur cible et plus précisémment :" />
     <meta name="author" content="Skander BELABED" />
 
-    <title>Toto Découvre Une ~Backdoor~ Interface De Debug | 0x09</title>
+    <title>Toto Découvre Une &#34;Interface De Debug&#34; | 0x09</title>
 
-    <link rel="icon" type="image/svg+xml" href="/0x09.github.io/favicon/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
 <link
   rel="icon"
   type="image/png"
   sizes="32x32"
-  href="/0x09.github.io/favicon/favicon-32x32.png"
+  href="/favicon/favicon-32x32.png"
 />
 <link
   rel="icon"
   type="image/png"
   sizes="16x16"
-  href="/0x09.github.io/favicon/favicon-16x16.png"
+  href="/favicon/favicon-16x16.png"
 />
 
     
@@ -37,13 +37,13 @@ Sommaire TL;DR Sommaire Introduction Objectifs Sujet N300RB Première autopsie U
     
   <meta
     property="og:title"
-    content="Toto Découvre Une ~Backdoor~ Interface De Debug"
+    content="Toto Découvre Une \"Interface De Debug\""
   />
   <meta property="og:site_name" content="0x09" />
   <meta property="og:description" content=" TL;DR Après l’extraction et l’analyse du firmware d’un router TOTOLINK N300RB, une backdoor interface de debug /cgi-b]]in/d.cgi permettant de lire des fichiers et d’exécuter des commandes de manière arbitraire en tant qu’utilisateur root a été découverte. Cette fonctionnalité peut être utilisée sous condition d’activation d’une option dans la configuration du router ainsi qu’un mot de passe.
-Sommaire TL;DR Sommaire Introduction Objectifs Sujet N300RB Première autopsie UART Extraction du firmware via SPI Analyse du firmware Binwalk “run” Mapping du code source Un air de déjà vue Analyse du fichier Option Secret en paramètre Exploitation Introduction Objectifs Dans une optique d’apprentissage sur la sécurité hardware, nous allons retracer les différentes étapes réalisées lors de l’analyse du firmware d’un routeur cible et plus précisémment :" />
+Introduction Objectifs Dans une optique d’apprentissage sur la sécurité hardware, nous allons retracer les différentes étapes réalisées lors de l’analyse du firmware d’un routeur cible et plus précisémment :" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://L3-S.github.io/0x09.github.io/posts/toto_decouvre_une_backdoor/" />
+<meta property="og:url" content="https://0x09.dev/posts/toto_decouvre_une_backdoor/" />
 
 <meta property="article:section" content="Posts" />
     <meta
@@ -52,31 +52,31 @@ Sommaire TL;DR Sommaire Introduction Objectifs Sujet N300RB Première autopsie U
     />
     <meta
       property="article:modified_time"
-      content="2025-05-16T18:35:58+02:00"
+      content="2025-05-16T22:40:34+02:00"
     />
 
 
   <meta name="twitter:card" content="summary" />
-<meta name="twitter:title" content="Toto Découvre Une ~Backdoor~ Interface De Debug" />
+<meta name="twitter:title" content="Toto Découvre Une \"Interface De Debug\"" />
   <meta name="twitter:description" content=" TL;DR Après l’extraction et l’analyse du firmware d’un router TOTOLINK N300RB, une backdoor interface de debug /cgi-b]]in/d.cgi permettant de lire des fichiers et d’exécuter des commandes de manière arbitraire en tant qu’utilisateur root a été découverte. Cette fonctionnalité peut être utilisée sous condition d’activation d’une option dans la configuration du router ainsi qu’un mot de passe.
-Sommaire TL;DR Sommaire Introduction Objectifs Sujet N300RB Première autopsie UART Extraction du firmware via SPI Analyse du firmware Binwalk “run” Mapping du code source Un air de déjà vue Analyse du fichier Option Secret en paramètre Exploitation Introduction Objectifs Dans une optique d’apprentissage sur la sécurité hardware, nous allons retracer les différentes étapes réalisées lors de l’analyse du firmware d’un routeur cible et plus précisémment :" />
+Introduction Objectifs Dans une optique d’apprentissage sur la sécurité hardware, nous allons retracer les différentes étapes réalisées lors de l’analyse du firmware d’un routeur cible et plus précisémment :" />
 
 <script type="application/ld+json">
   {
       "@context": "http://schema.org",
       "@type": "BlogPosting",
       "articleSection": "Posts",
-      "name": "Toto Découvre Une ~Backdoor~ Interface De Debug",
-      "url" : "https://L3-S.github.io/0x09.github.io/posts/toto_decouvre_une_backdoor/",
-      "headline": "Toto Découvre Une ~Backdoor~ Interface De Debug",
-      "description": " TL;DR Après l’extraction et l’analyse du firmware d’un router TOTOLINK N300RB, une backdoor interface de debug \/cgi-b]]in\/d.cgi permettant de lire des fichiers et d’exécuter des commandes de manière arbitraire en tant qu’utilisateur root a été découverte. Cette fonctionnalité peut être utilisée sous condition d’activation d’une option dans la configuration du router ainsi qu’un mot de passe.\nSommaire TL;DR Sommaire Introduction Objectifs Sujet N300RB Première autopsie UART Extraction du firmware via SPI Analyse du firmware Binwalk “run” Mapping du code source Un air de déjà vue Analyse du fichier Option Secret en paramètre Exploitation Introduction Objectifs Dans une optique d’apprentissage sur la sécurité hardware, nous allons retracer les différentes étapes réalisées lors de l’analyse du firmware d’un routeur cible et plus précisémment :",
-      "wordCount" : "3108",
+      "name": "Toto Découvre Une \"Interface De Debug\"",
+      "url" : "https://0x09.dev/posts/toto_decouvre_une_backdoor/",
+      "headline": "Toto Découvre Une \"Interface De Debug\"",
+      "description": " TL;DR Après l’extraction et l’analyse du firmware d’un router TOTOLINK N300RB, une backdoor interface de debug \/cgi-b]]in\/d.cgi permettant de lire des fichiers et d’exécuter des commandes de manière arbitraire en tant qu’utilisateur root a été découverte. Cette fonctionnalité peut être utilisée sous condition d’activation d’une option dans la configuration du router ainsi qu’un mot de passe.\nIntroduction Objectifs Dans une optique d’apprentissage sur la sécurité hardware, nous allons retracer les différentes étapes réalisées lors de l’analyse du firmware d’un routeur cible et plus précisémment :",
+      "wordCount" : "3071",
       "license": "CC BY-SA 4.0",
       "inLanguage": "en",
       "isFamilyFriendly": "true",
       "mainEntityOfPage": {
           "@type": "WebPage",
-          "@id": "https://L3-S.github.io/0x09.github.io/posts/toto_decouvre_une_backdoor/"
+          "@id": "https://0x09.dev/posts/toto_decouvre_une_backdoor/"
       },
       "keywords" : [ "Reverse engineering" , "Security" , "Hardware" ],
       "author" : [
@@ -89,14 +89,14 @@ Sommaire TL;DR Sommaire Introduction Objectifs Sujet N300RB Première autopsie U
       "copyrightYear" : "2025",
       "dateCreated": "2025-05-14T20:18:18.00Z",
       "datePublished": "2025-05-14T20:18:18.00Z",
-      "dateModified": "2025-05-16T18:35:58.00Z",
+      "dateModified": "2025-05-16T22:40:34.00Z",
       "publisher":{
           "@type":"Organization",
           "name": "0x09",
-          "url": "https://L3-S.github.io/0x09.github.io/",
+          "url": "https://0x09.dev/",
           "logo": {
               "@type": "ImageObject",
-              "url": "https://L3-S.github.io/0x09.github.io/img/logo.png",
+              "url": "https://0x09.dev/img/logo.png",
               "width":"32",
               "height":"32"
           }
@@ -106,76 +106,76 @@ Sommaire TL;DR Sommaire Introduction Objectifs Sujet N300RB Première autopsie U
 
 
     
-  <script src="/0x09.github.io/js/colortheme-d3fa0dc0.bundle.min.js"></script>
-<script src="/0x09.github.io/js/main-335bae8d.bundle.min.js"></script>
+  <script src="/js/colortheme-d3fa0dc0.bundle.min.js"></script>
+<script src="/js/main-335bae8d.bundle.min.js"></script>
 
 <link
   rel="preload"
   as="font"
-  href="/0x09.github.io/fonts/Metropolis.woff2"
+  href="/fonts/Metropolis.woff2"
   type="font/woff2"
   crossorigin="anonymous"
 />
 <link
   rel="preload"
   as="font"
-  href="/0x09.github.io/fonts/LiberationSans.woff2"
+  href="/fonts/LiberationSans.woff2"
   type="font/woff2"
   crossorigin="anonymous"
 />
 <link
   rel="preload"
   as="font"
-  href="/0x09.github.io/fonts/GeekblogIcons.woff2"
+  href="/fonts/GeekblogIcons.woff2"
   type="font/woff2"
   crossorigin="anonymous"
 />
 
 <link
   rel="preload"
-  href="/0x09.github.io/main-d8f6de16.min.css"
+  href="/main-d8f6de16.min.css"
   as="style"
 />
 <link
   rel="stylesheet"
-  href="/0x09.github.io/main-d8f6de16.min.css"
+  href="/main-d8f6de16.min.css"
   media="all"
 />
 
 <link
   rel="preload"
-  href="/0x09.github.io/mobile-7fcdde51.min.css"
+  href="/mobile-7fcdde51.min.css"
   as="style"
 />
 <link
   rel="stylesheet"
-  href="/0x09.github.io/mobile-7fcdde51.min.css"
+  href="/mobile-7fcdde51.min.css"
   media="screen and (max-width: 45rem)"
 />
 
 <link
   rel="preload"
-  href="/0x09.github.io/print-cc34f864.min.css"
+  href="/print-cc34f864.min.css"
   as="style"
 />
 <link
   rel="stylesheet"
-  href="/0x09.github.io/print-cc34f864.min.css"
+  href="/print-cc34f864.min.css"
   media="print"
 />
 
 <link
   rel="preload"
-  href="/0x09.github.io/custom.css"
+  href="/custom.css"
   as="style"
 />
 <link
   rel="stylesheet"
-  href="/0x09.github.io/custom.css"
+  href="/custom.css"
   media="all"
 />
-  <link href="https://L3-S.github.io/0x09.github.io/posts/toto_decouvre_une_backdoor/" rel="canonical" type="text/html" />
-    <link href="https://L3-S.github.io/0x09.github.io/feed.xml" rel="alternate" type="application/atom+xml" title="0x09 atom Feed" />
+  <link href="https://0x09.dev/posts/toto_decouvre_une_backdoor/" rel="canonical" type="text/html" />
+    <link href="https://0x09.dev/feed.xml" rel="alternate" type="application/atom+xml" title="0x09 atom Feed" />
 
 <!-- Made with Geekblog theme https://github.com/thegeeklab/hugo-geekblog -->
 
@@ -198,17 +198,17 @@ Sommaire TL;DR Sommaire Introduction Objectifs Sujet N300RB Première autopsie U
   <div class="container flex flex-wrap">
     <div class="gblog-header__col-1 flex justify-start hidden-mobile"></div>
     <div class="gblog-header__col-2 flex align-center justify-center ">
-      <a class="gblog-header__link" rel="me" href="https://L3-S.github.io/0x09.github.io/">
+      <a class="gblog-header__link" rel="me" href="https://0x09.dev/">
         <span class="gblog-brand flex align-center justify-center">
           <img
             class="gblog-brand__img"
-            src="/0x09.github.io/img/logo.png"
+            src="/img/logo.png"
             alt=""
           />
           <span class="gblog-brand__title">0x09</span>
         </span>
         
-          <span class="gblog-brand__subtitle flex align-center justify-center">I&#39;m trying to master some 0ffs3c skills, so let me teach you !</span>
+          <span class="gblog-brand__subtitle flex align-center justify-center">Just Trying To Master Some 0ffs3c Skills...</span>
         
       </a>
     </div>
@@ -247,7 +247,7 @@ Sommaire TL;DR Sommaire Introduction Objectifs Sujet N300RB Première autopsie U
           <li>
             <a
               class="gblog-nav__entry"
-              href="/0x09.github.io/tags/Hardware/"
+              href="/tags/Hardware/"
             >
               Hardware
             </a>
@@ -258,7 +258,7 @@ Sommaire TL;DR Sommaire Introduction Objectifs Sujet N300RB Première autopsie U
           <li>
             <a
               class="gblog-nav__entry"
-              href="/0x09.github.io/tags/Reverse-engineering/"
+              href="/tags/Reverse-engineering/"
             >
               Reverse Engineering
             </a>
@@ -269,20 +269,9 @@ Sommaire TL;DR Sommaire Introduction Objectifs Sujet N300RB Première autopsie U
           <li>
             <a
               class="gblog-nav__entry"
-              href="/0x09.github.io/tags/Security/"
+              href="/tags/Security/"
             >
               Security
-            </a>
-          </li>
-        
-      
-        
-          <li>
-            <a
-              class="gblog-nav__entry"
-              href="/0x09.github.io/tags/Windows/"
-            >
-              Windows
             </a>
           </li>
         
@@ -302,7 +291,7 @@ Sommaire TL;DR Sommaire Introduction Objectifs Sujet N300RB Première autopsie U
       
 
 
-      <h1 class="gblog-post__title">Toto Découvre Une ~Backdoor~ Interface De Debug</h1>
+      <h1 class="gblog-post__title">Toto Découvre Une &#34;Interface De Debug&#34;</h1>
 
       
     </header>
@@ -312,63 +301,17 @@ Sommaire TL;DR Sommaire Introduction Objectifs Sujet N300RB Première autopsie U
     >
         TL;DR
     </h1>
-    <a data-clipboard-text="https://L3-S.github.io/0x09.github.io/posts/toto_decouvre_une_backdoor/#tldr" class="gblog-post__anchor clip flex align-center" aria-label="Anchor TL;DR" href="#tldr">
+    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_backdoor/#tldr" class="gblog-post__anchor clip flex align-center" aria-label="Anchor TL;DR" href="#tldr">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
 <p>Après l&rsquo;extraction et l&rsquo;analyse du firmware d&rsquo;un router <em>TOTOLINK N300RB</em>, une <del>backdoor</del> interface de debug /cgi-b]]in/d.cgi permettant de lire des fichiers et d&rsquo;exécuter des commandes de manière arbitraire en tant qu&rsquo;utilisateur root a été découverte. Cette fonctionnalité peut être utilisée sous condition d&rsquo;activation d&rsquo;une option dans la configuration du router ainsi qu&rsquo;un mot de passe.</p>
 <div class="flex align-center gblog-post__anchorwrap">
-    <h1 id="sommaire"
-    >
-        Sommaire
-    </h1>
-    <a data-clipboard-text="https://L3-S.github.io/0x09.github.io/posts/toto_decouvre_une_backdoor/#sommaire" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Sommaire" href="#sommaire">
-        <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
-    </a>
-</div>
-
-
-
-  <div class="gblog-toc gblog-toc__level--3">
-    <nav id="TableOfContents">
-  <ul>
-    <li><a href="#tldr">TL;DR</a></li>
-    <li><a href="#sommaire">Sommaire</a></li>
-    <li><a href="#introduction">Introduction</a>
-      <ul>
-        <li><a href="#objectifs">Objectifs</a></li>
-        <li><a href="#sujet-n300rb">Sujet N300RB</a></li>
-      </ul>
-    </li>
-    <li><a href="#première-autopsie">Première autopsie</a></li>
-    <li><a href="#uart">UART</a></li>
-    <li><a href="#extraction-du-firmware-via-spi">Extraction du firmware via SPI</a></li>
-    <li><a href="#analyse-du-firmware">Analyse du firmware</a>
-      <ul>
-        <li><a href="#binwalk-run">Binwalk &ldquo;run&rdquo;</a></li>
-        <li><a href="#mapping-du-code-source">Mapping du code source</a></li>
-        <li><a href="#un-air-de-déjà-vue">Un air de déjà vue</a></li>
-        <li><a href="#analyse-du-fichier">Analyse du fichier</a>
-          <ul>
-            <li><a href="#option">Option</a></li>
-            <li><a href="#secret-en-paramètre">Secret en paramètre</a></li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-    <li><a href="#exploitation">Exploitation</a></li>
-  </ul>
-</nav>
-    <hr />
-  </div>
-
-
-<div class="flex align-center gblog-post__anchorwrap">
     <h1 id="introduction"
     >
         Introduction
     </h1>
-    <a data-clipboard-text="https://L3-S.github.io/0x09.github.io/posts/toto_decouvre_une_backdoor/#introduction" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Introduction" href="#introduction">
+    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_backdoor/#introduction" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Introduction" href="#introduction">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
@@ -377,7 +320,7 @@ Sommaire TL;DR Sommaire Introduction Objectifs Sujet N300RB Première autopsie U
     >
         Objectifs
     </h2>
-    <a data-clipboard-text="https://L3-S.github.io/0x09.github.io/posts/toto_decouvre_une_backdoor/#objectifs" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Objectifs" href="#objectifs">
+    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_backdoor/#objectifs" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Objectifs" href="#objectifs">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
@@ -392,7 +335,7 @@ Sommaire TL;DR Sommaire Introduction Objectifs Sujet N300RB Première autopsie U
     >
         Sujet N300RB
     </h2>
-    <a data-clipboard-text="https://L3-S.github.io/0x09.github.io/posts/toto_decouvre_une_backdoor/#sujet-n300rb" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Sujet N300RB" href="#sujet-n300rb">
+    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_backdoor/#sujet-n300rb" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Sujet N300RB" href="#sujet-n300rb">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
@@ -403,7 +346,7 @@ TODO : image du carton</p>
     >
         Première autopsie
     </h1>
-    <a data-clipboard-text="https://L3-S.github.io/0x09.github.io/posts/toto_decouvre_une_backdoor/#première-autopsie" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Première autopsie" href="#premi%c3%a8re-autopsie">
+    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_backdoor/#première-autopsie" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Première autopsie" href="#premi%c3%a8re-autopsie">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
@@ -435,7 +378,7 @@ TODO : image du carton</p>
     >
         UART
     </h1>
-    <a data-clipboard-text="https://L3-S.github.io/0x09.github.io/posts/toto_decouvre_une_backdoor/#uart" class="gblog-post__anchor clip flex align-center" aria-label="Anchor UART" href="#uart">
+    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_backdoor/#uart" class="gblog-post__anchor clip flex align-center" aria-label="Anchor UART" href="#uart">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
@@ -444,7 +387,7 @@ TODO : image du carton</p>
     >
         Extraction du firmware via SPI
     </h1>
-    <a data-clipboard-text="https://L3-S.github.io/0x09.github.io/posts/toto_decouvre_une_backdoor/#extraction-du-firmware-via-spi" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Extraction du firmware via SPI" href="#extraction-du-firmware-via-spi">
+    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_backdoor/#extraction-du-firmware-via-spi" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Extraction du firmware via SPI" href="#extraction-du-firmware-via-spi">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
@@ -481,7 +424,7 @@ TODO : image du carton</p>
     >
         Analyse du firmware
     </h1>
-    <a data-clipboard-text="https://L3-S.github.io/0x09.github.io/posts/toto_decouvre_une_backdoor/#analyse-du-firmware" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Analyse du firmware" href="#analyse-du-firmware">
+    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_backdoor/#analyse-du-firmware" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Analyse du firmware" href="#analyse-du-firmware">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
@@ -490,7 +433,7 @@ TODO : image du carton</p>
     >
         Binwalk &ldquo;run&rdquo;
     </h2>
-    <a data-clipboard-text="https://L3-S.github.io/0x09.github.io/posts/toto_decouvre_une_backdoor/#binwalk-run" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Binwalk &ldquo;run&rdquo;" href="#binwalk-run">
+    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_backdoor/#binwalk-run" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Binwalk &ldquo;run&rdquo;" href="#binwalk-run">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
@@ -531,8 +474,8 @@ Bien que son objectif principal soit l&rsquo;analyse de firmwares, il prend en c
 >TRX</a> censé contenir différentes partitions telles que celle du noyau ou encore du système de fichiers</li>
 </ol>
 <p>Pour des raisons qu&rsquo;on verra plus tard, concentrons nous donc sur ce deuxième bloc <em>TRX</em> qui suit la structure suivante :</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">  0                   1                   2                   3   
-</span></span><span class="line"><span class="cl">  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">  0                   1                   2                   3
+</span></span><span class="line"><span class="cl">  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
 </span></span><span class="line"><span class="cl"> +---------------------------------------------------------------+
 </span></span><span class="line"><span class="cl"> |                     magic number (&#39;HDR0&#39;)                     |
 </span></span><span class="line"><span class="cl"> +---------------------------------------------------------------+
@@ -553,7 +496,7 @@ Bien que son objectif principal soit l&rsquo;analyse de firmwares, il prend en c
   class="gblog-markdown__link"
   href="https://git.archive.openwrt.org/?p=14.07/openwrt.git;a=blob;f=tools/firmware-utils/src/trx.c;h=aa1f5be4b65b66ac9a1a48d7304d9bef131080e1;hb=HEAD#l69"
 >openwrt/tools/firmware-utils/src/trx.c</a></p></blockquote>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ file extractions/firmware.bin.extracted/20000/* 
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ file extractions/firmware.bin.extracted/20000/*
 </span></span><span class="line"><span class="cl">extractions/firmware.bin.extracted/20000/partition_0.bin: LZMA compressed data, non-streamed, size <span class="m">4276224</span>
 </span></span><span class="line"><span class="cl">extractions/firmware.bin.extracted/20000/partition_1.bin: Linux Compressed ROM File System data, little endian size <span class="m">1740800</span> version <span class="c1">#2 sorted_dirs CRC 0xe66d68a8, edition 0, 1334 blocks, 247 files</span>
 </span></span></code></pre></div><p>On peut voir que <em>Binwalk</em> a identifié et extrait deux partitions dans le conteneur <em>TRX</em> :</p>
@@ -568,7 +511,7 @@ Bien que son objectif principal soit l&rsquo;analyse de firmwares, il prend en c
   class="gblog-markdown__link"
   href="https://7-zip.org/"
 >7z</a> qui supporte le format <em>CramFs</em></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ 7z x extractions/firmware.bin.extracted/20000/partition_1.bin -o/tmp/firm_fs/ 
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ 7z x extractions/firmware.bin.extracted/20000/partition_1.bin -o/tmp/firm_fs/
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">7-Zip <span class="o">[</span>64<span class="o">]</span> 16.02 : Copyright <span class="o">(</span>c<span class="o">)</span> 1999-2016 Igor Pavlov : 2016-05-21
 </span></span><span class="line"><span class="cl">p7zip Version 16.02 <span class="o">(</span><span class="nv">locale</span><span class="o">=</span>en_US.UTF-8,Utf16<span class="o">=</span>on,HugeFiles<span class="o">=</span>on,64 bits,12 CPUs Intel<span class="o">(</span>R<span class="o">)</span> Core<span class="o">(</span>TM<span class="o">)</span> i7-10750H CPU @ 2.60GHz <span class="o">(</span>A0652<span class="o">)</span>,ASM,AES-NI<span class="o">)</span>
@@ -606,7 +549,7 @@ Bien que son objectif principal soit l&rsquo;analyse de firmwares, il prend en c
 </span></span><span class="line"><span class="cl">Files: <span class="m">214</span>
 </span></span><span class="line"><span class="cl">Size:       <span class="m">5031151</span>
 </span></span><span class="line"><span class="cl">Compressed: <span class="m">1742824</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ ls -la /tmp/firm_fs 
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ ls -la /tmp/firm_fs
 </span></span><span class="line"><span class="cl">total <span class="m">112</span>
 </span></span><span class="line"><span class="cl">drwx------ <span class="m">15</span> skander skander  <span class="m">4096</span> mai   <span class="m">10</span> 21:51 .
 </span></span><span class="line"><span class="cl">drwxrwxrwt <span class="m">41</span> root    root    <span class="m">40960</span> mai   <span class="m">10</span> 21:51 ..
@@ -631,12 +574,12 @@ Bien que son objectif principal soit l&rsquo;analyse de firmwares, il prend en c
     >
         Mapping du code source
     </h2>
-    <a data-clipboard-text="https://L3-S.github.io/0x09.github.io/posts/toto_decouvre_une_backdoor/#mapping-du-code-source" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Mapping du code source" href="#mapping-du-code-source">
+    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_backdoor/#mapping-du-code-source" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Mapping du code source" href="#mapping-du-code-source">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
 <p>Maintenant que nous avons un accès à l&rsquo;ensemble des éléments présents dans le système de fichiers, il est necessaire d&rsquo;identifier les fichiers contenant la partie applicative du router. Pour cela, le fichier de configuration du serveur web peut être un bon début :</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ cat default/var/boa_vh.conf                                                                                                                                                 
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ cat default/var/boa_vh.conf
 </span></span><span class="line"><span class="cl">Port <span class="m">80</span>
 </span></span><span class="line"><span class="cl">User root
 </span></span><span class="line"><span class="cl">Group root
@@ -716,7 +659,7 @@ Bien que son objectif principal soit l&rsquo;analyse de firmwares, il prend en c
     >
         Un air de déjà vue
     </h2>
-    <a data-clipboard-text="https://L3-S.github.io/0x09.github.io/posts/toto_decouvre_une_backdoor/#un-air-de-déjà-vue" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Un air de déjà vue" href="#un-air-de-d%c3%a9j%c3%a0-vue">
+    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_backdoor/#un-air-de-déjà-vue" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Un air de déjà vue" href="#un-air-de-d%c3%a9j%c3%a0-vue">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
@@ -780,7 +723,7 @@ Bien que son objectif principal soit l&rsquo;analyse de firmwares, il prend en c
     >
         Analyse du fichier
     </h2>
-    <a data-clipboard-text="https://L3-S.github.io/0x09.github.io/posts/toto_decouvre_une_backdoor/#analyse-du-fichier" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Analyse du fichier" href="#analyse-du-fichier">
+    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_backdoor/#analyse-du-fichier" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Analyse du fichier" href="#analyse-du-fichier">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
@@ -800,7 +743,7 @@ Bien que son objectif principal soit l&rsquo;analyse de firmwares, il prend en c
 </span></span><span class="line"><span class="cl">  <span class="kt">char</span> <span class="o">*</span><span class="n">pcVar6</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="kt">char</span> <span class="n">acStack_70</span> <span class="p">[</span><span class="mi">64</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">  <span class="kt">char</span> <span class="n">acStack_30</span> <span class="p">[</span><span class="mi">32</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="nf">install_ui</span><span class="p">(</span><span class="o">&amp;</span><span class="n">ui</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="n">iVar1</span> <span class="o">=</span> <span class="nf">get_pvalue</span><span class="p">(</span><span class="n">param_2</span><span class="p">,</span><span class="o">&amp;</span><span class="n">DAT_00477b24</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">iVar1</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
@@ -884,7 +827,7 @@ Bien que son objectif principal soit l&rsquo;analyse de firmwares, il prend en c
 </span></span><span class="line"><span class="cl">  <span class="kt">char</span> <span class="n">local_109</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="kt">char</span> <span class="n">local_108</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="kt">char</span> <span class="n">local_107</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="n">iVar1</span> <span class="o">=</span> <span class="nf">get_remote_support</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">iVar1</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">local_118</span> <span class="o">=</span> <span class="sc">&#39;\0&#39;</span><span class="p">;</span>
@@ -983,7 +926,7 @@ Bien que son objectif principal soit l&rsquo;analyse de firmwares, il prend en c
     >
         Option
     </h3>
-    <a data-clipboard-text="https://L3-S.github.io/0x09.github.io/posts/toto_decouvre_une_backdoor/#option" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Option" href="#option">
+    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_backdoor/#option" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Option" href="#option">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
@@ -993,7 +936,7 @@ Bien que son objectif principal soit l&rsquo;analyse de firmwares, il prend en c
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">iVar1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">iVar2</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="n">iVar1</span> <span class="o">=</span> <span class="nf">iconfig_get_intvalue_direct</span><span class="p">(</span><span class="s">&#34;remote_support&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="n">iVar2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">iVar1</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
@@ -1007,7 +950,7 @@ Bien que son objectif principal soit l&rsquo;analyse de firmwares, il prend en c
 </span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">iVar1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">iVar2</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="kt">char</span> <span class="n">acStack_28</span> <span class="p">[</span><span class="mi">32</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="n">iVar1</span> <span class="o">=</span> <span class="nf">iconfig_get_value_direct</span><span class="p">(</span><span class="n">param_1</span><span class="p">,</span><span class="n">acStack_28</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="n">iVar2</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">iVar1</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
@@ -1022,7 +965,7 @@ Bien que son objectif principal soit l&rsquo;analyse de firmwares, il prend en c
 </span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">iVar2</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="n">undefined4</span> <span class="n">local_20</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="n">undefined4</span> <span class="n">local_1c</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">  <span class="n">local_20</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="n">local_1c</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="n">uVar1</span> <span class="o">=</span> <span class="nf">lock_file</span><span class="p">(</span><span class="s">&#34;/etc/iconfig.cfg&#34;</span><span class="p">);</span>
@@ -1117,7 +1060,7 @@ Bien que son objectif principal soit l&rsquo;analyse de firmwares, il prend en c
 </span></span><span class="line"><span class="cl"><span class="nv">dhcpd</span><span class="o">=</span><span class="m">1</span>
 </span></span><span class="line"><span class="cl"><span class="nv">dhcpd_conf</span><span class="o">=</span>br0,192.168.1.1,192.168.1.254,192.168.1.33,255.255.255.0
 </span></span><span class="line"><span class="cl"><span class="nv">dhcpd_dns</span><span class="o">=</span>168.126.63.1,168.126.63.2
-</span></span><span class="line"><span class="cl"><span class="nv">dhcpd_opt</span><span class="o">=</span>7200,30,200, 
+</span></span><span class="line"><span class="cl"><span class="nv">dhcpd_opt</span><span class="o">=</span>7200,30,200,
 </span></span><span class="line"><span class="cl"><span class="nv">dhcpd_configfile</span><span class="o">=</span>/etc/udhcpd.conf
 </span></span><span class="line"><span class="cl"><span class="nv">dhcpd_lease_file</span><span class="o">=</span>/etc/udhcpd.leases
 </span></span><span class="line"><span class="cl"><span class="nv">dhcpd_static_lease_file</span><span class="o">=</span>/etc/udhcpd.static
@@ -1141,7 +1084,7 @@ Bien que son objectif principal soit l&rsquo;analyse de firmwares, il prend en c
     >
         Secret en paramètre
     </h3>
-    <a data-clipboard-text="https://L3-S.github.io/0x09.github.io/posts/toto_decouvre_une_backdoor/#secret-en-paramètre" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Secret en paramètre" href="#secret-en-param%c3%a8tre">
+    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_backdoor/#secret-en-paramètre" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Secret en paramètre" href="#secret-en-param%c3%a8tre">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
@@ -1192,7 +1135,7 @@ Bien que son objectif principal soit l&rsquo;analyse de firmwares, il prend en c
     >
         Exploitation
     </h1>
-    <a data-clipboard-text="https://L3-S.github.io/0x09.github.io/posts/toto_decouvre_une_backdoor/#exploitation" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Exploitation" href="#exploitation">
+    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_backdoor/#exploitation" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Exploitation" href="#exploitation">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
@@ -1209,7 +1152,7 @@ Bien que son objectif principal soit l&rsquo;analyse de firmwares, il prend en c
         
           <span class="gblog-footer__item gblog-footer__item--row">
             <svg class="gblog-icon gblog_rss_feed"><use xlink:href="#gblog_rss_feed"></use></svg>
-            <a href="/0x09.github.io/feed.xml" class="gblog-footer__link">Atom Feed</a>
+            <a href="/feed.xml" class="gblog-footer__link">Atom Feed</a>
           </span>
         
         
