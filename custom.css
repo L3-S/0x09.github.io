@@ -1,1 +1,10 @@
-/* You can add custom styles here. */
+/* Scroll vertical pour les blocs de code */
+pre {
+  max-height: 100px;       /* Limite la hauteur visible */
+  overflow-y: auto;        /* Active le scroll vertical */
+  overflow-x: auto;        /* Garde le scroll horizontal aussi, au cas où */
+  white-space: pre-wrap;   /* Permet de couper les lignes si besoin (optionnel) */
+  padding: 1em;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+}

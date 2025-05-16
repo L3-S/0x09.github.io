@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
-    <generator uri="https://gohugo.io/" version="0.94.0">Hugo</generator>
+    <generator uri="https://gohugo.io/" version="0.147.3">Hugo</generator>
     <title>Windows on 0x09</title>
         <subtitle>I&#39;m trying to master some 0ffs3c skills, so let me teach you !</subtitle>
-            <link href="https://0x09.dev/tags/Windows/" rel="alternate" type="text/html" title="HTML" />
-            <link href="https://0x09.dev/tags/Windows/feed.xml" rel="self" type="application/atom+xml" title="Atom" />
-    <updated>2022-03-15T00:45:33+01:00</updated>
+            <link href="https://L3-S.github.io/0x09.github.io/tags/Windows/" rel="alternate" type="text/html" title="html" />
+            <link href="https://L3-S.github.io/0x09.github.io/tags/Windows/feed.xml" rel="self" type="application/atom+xml" title="atom" />
+    <updated>2025-05-16T22:02:04+02:00</updated>
         <author>
             <name>Skander BELABED</name>
                 <email>belabedskander@gmail.com</email>
         </author>
-    <id>https://0x09.dev/tags/Windows/</id>
+    <id>https://L3-S.github.io/0x09.github.io/tags/Windows/</id>
         <entry>
             <title>Le quiproquo NTLM</title>
-            <link href="https://0x09.dev/posts/quiproquo_ntlm/" rel="alternate" type="text/html"  hreflang="en" />
-            <id>https://0x09.dev/posts/quiproquo_ntlm/</id>
+            <link href="https://L3-S.github.io/0x09.github.io/posts/quiproquo_ntlm/" rel="alternate" type="text/html"  hreflang="en" />
+            <id>https://L3-S.github.io/0x09.github.io/posts/quiproquo_ntlm/</id>
                     <author>
                         <name>Skander BELABED</name>
                     </author>
@@ -22,13 +22,14 @@
             <updated>2022-03-06T19:25:50+01:00</updated>
             <content type="html">
                 &lt;hr&gt;
-&lt;div class=&#34;gblog-post__anchorwrap&#34;&gt;
-    &lt;h1 id=&#34;tldr&#34;&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h1 id=&#34;tldr&#34;
+    &gt;
         TL;DR
-        &lt;a data-clipboard-text=&#34;https://0x09.dev/posts/quiproquo_ntlm/#tldr&#34; class=&#34;gblog-post__anchor gblog-post__anchor--right clip&#34; aria-label=&#34;Anchor TL;DR&#34; href=&#34;#tldr&#34;&gt;
-            &lt;svg class=&#34;icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
-        &lt;/a&gt;
     &lt;/h1&gt;
+    &lt;a data-clipboard-text=&#34;https://L3-S.github.io/0x09.github.io/posts/quiproquo_ntlm/#tldr&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor TL;DR&#34; href=&#34;#tldr&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
 &lt;/div&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;LM-hash :&lt;/strong&gt; Ancien moyen de stocker le mot de passe utilisateur en local utilisé par LAN Manager&lt;/li&gt;
@@ -42,69 +43,70 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-&lt;div class=&#34;gblog-post__anchorwrap&#34;&gt;
-    &lt;h1 id=&#34;introduction&#34;&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h1 id=&#34;introduction&#34;
+    &gt;
         Introduction
-        &lt;a data-clipboard-text=&#34;https://0x09.dev/posts/quiproquo_ntlm/#introduction&#34; class=&#34;gblog-post__anchor gblog-post__anchor--right clip&#34; aria-label=&#34;Anchor Introduction&#34; href=&#34;#introduction&#34;&gt;
-            &lt;svg class=&#34;icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
-        &lt;/a&gt;
     &lt;/h1&gt;
+    &lt;a data-clipboard-text=&#34;https://L3-S.github.io/0x09.github.io/posts/quiproquo_ntlm/#introduction&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Introduction&#34; href=&#34;#introduction&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
 &lt;/div&gt;
 &lt;p&gt;Durant ma quête vers l&amp;rsquo;amélioration de mes connaissances de l&amp;rsquo;environnement Windows (afin de mieux l&amp;rsquo;exploiter &lt;span class=&#34;emoji&#34;&gt;😉&lt;/span&gt;
 ), je suis passé par différents articles qui évoquaient les mots NTLM, NT, LM, NTLMv1,&amp;hellip;. et ça a vite créée une confusion dans ma tête. Ce blogpost n&amp;rsquo;a pas pour but de rentrer dans des détails techniques poussés (d&amp;rsquo;autres posts le font très bien) mais juste de donner des définitions concises afin de lever les ambiguïtés.&lt;/p&gt;
-&lt;div class=&#34;gblog-post__anchorwrap&#34;&gt;
-    &lt;h1 id=&#34;new-technology-lan-manager-ntlm&#34;&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h1 id=&#34;new-technology-lan-manager-ntlm&#34;
+    &gt;
         New Technology LAN Manager (NTLM)
-        &lt;a data-clipboard-text=&#34;https://0x09.dev/posts/quiproquo_ntlm/#new-technology-lan-manager-ntlm&#34; class=&#34;gblog-post__anchor gblog-post__anchor--right clip&#34; aria-label=&#34;Anchor New Technology LAN Manager (NTLM)&#34; href=&#34;#new-technology-lan-manager-ntlm&#34;&gt;
-            &lt;svg class=&#34;icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
-        &lt;/a&gt;
     &lt;/h1&gt;
+    &lt;a data-clipboard-text=&#34;https://L3-S.github.io/0x09.github.io/posts/quiproquo_ntlm/#new-technology-lan-manager-ntlm&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor New Technology LAN Manager (NTLM)&#34; href=&#34;#new-technology-lan-manager-ntlm&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
 &lt;/div&gt;
 &lt;p&gt;Windows New Technology LAN Manager (NTLM) est une suite de protocols qui propose non pas qu&amp;rsquo;une authentification &lt;a
   class=&#34;gblog-markdown__link&#34;
   href=&#34;https://en.wikipedia.org/wiki/Single_sign-on&#34;
-  
 &gt;Signe-Sign On (SSO)&lt;/a&gt; en se basant sur le principe de &lt;a
   class=&#34;gblog-markdown__link&#34;
   href=&#34;https://en.wikipedia.org/wiki/Challenge%E2%80%93response_authentication&#34;
-  
 &gt;défi-réponse&lt;/a&gt; mais aussi d&amp;rsquo;autres aspects de sécurité comme garantir l&amp;rsquo;intégrité et la confidentialité de certaines informations qui transitent dans le réseau. Le protocol NTLM est venu succèder Microsoft &lt;a
   class=&#34;gblog-markdown__link&#34;
   href=&#34;https://en.wikipedia.org/wiki/LAN_Manager&#34;
-  
 &gt;LAN Manager (LANMAN)&lt;/a&gt; en rajoutant le &lt;em&gt;New Technology&lt;/em&gt; au début mais pas que&amp;hellip;&lt;/p&gt;
 &lt;figure align=&#34;center&#34;&gt;&lt;img src=&#34;/img/ntlm_authentication.png&#34; /&gt;&lt;figcaption align=&#34;center&#34;&gt;NTLM authentication protocol&lt;/figcaption&gt;&lt;/figure&gt;
-&lt;div class=&#34;gblog-post__anchorwrap&#34;&gt;
-    &lt;h2 id=&#34;nt-hash--lm-hash&#34;&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h2 id=&#34;nt-hash--lm-hash&#34;
+    &gt;
         NT-hash / LM-hash
-        &lt;a data-clipboard-text=&#34;https://0x09.dev/posts/quiproquo_ntlm/#nt-hash--lm-hash&#34; class=&#34;gblog-post__anchor gblog-post__anchor--right clip&#34; aria-label=&#34;Anchor NT-hash / LM-hash&#34; href=&#34;#nt-hash--lm-hash&#34;&gt;
-            &lt;svg class=&#34;icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
-        &lt;/a&gt;
     &lt;/h2&gt;
+    &lt;a data-clipboard-text=&#34;https://L3-S.github.io/0x09.github.io/posts/quiproquo_ntlm/#nt-hash--lm-hash&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor NT-hash / LM-hash&#34; href=&#34;#nt-hash--lm-hash&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
 &lt;/div&gt;
 &lt;p&gt;&lt;strong&gt;LM-hash&lt;/strong&gt; est l&amp;rsquo;ancien moyen de stocker les mots de passe utilisateur dans LAN Manager. En vue de sa facilité à être cracké, il est par defaut désactivé depuis Windows 7 et plus. Malgré ses faiblesses et la disponibilité d&amp;rsquo;autres technologies plus sécurisées, il n&amp;rsquo;a pas été complétement retiré afin d&amp;rsquo;assurer une certaine compatibilité.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;NT-hash&lt;/strong&gt; souvent aussi d&amp;rsquo;une manière grossière appelé &lt;del&gt;NTLM hash&lt;/del&gt;, est le hash venu remplacer le LM-hash. Il est obtenu en calculant le &lt;a
   class=&#34;gblog-markdown__link&#34;
   href=&#34;https://en.wikipedia.org/wiki/MD4&#34;
-  
 &gt;MD4&lt;/a&gt; de la version &lt;a
   class=&#34;gblog-markdown__link&#34;
   href=&#34;https://en.wikipedia.org/wiki/UTF-16&#34;
-  
 &gt;unicode&lt;/a&gt; du mot de passe en clair&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;NTHash&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;password&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; MD4&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;UTF-16LE&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;password&lt;span class=&#34;o&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; 8846F7EAEE8FB117AD06BDD830B7586C
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Donc le mot de passe d&amp;rsquo;un utilisateur est stocké localement sous ce format :&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Administrator:500:AAD3C435B514A4EEAAD3B935B51304FE:8846F7EAEE8FB117AD06BDD830B7586C
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        ^         ^                 ^                                ^
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;         &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;                 &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;                                &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Utilisateur ID unique      LM-hash &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;vide&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;                      NT-hash
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;gblog-post__anchorwrap&#34;&gt;
-    &lt;h2 id=&#34;ntlmv1-aka-net-ntlmv1&#34;&gt;
+&lt;pre&gt;&lt;code&gt;NTHash(password) = MD4(UTF-16LE(password)) = 8846F7EAEE8FB117AD06BDD830B7586C
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Donc le mot de passe d&amp;rsquo;un utilisateur est stocké localement sous ce format :&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Administrator:500:AAD3C435B514A4EEAAD3B935B51304FE:8846F7EAEE8FB117AD06BDD830B7586C
+     ^         ^                 ^                                ^
+     |         |                 |                                |
+Utilisateur ID unique      LM-hash (vide)                      NT-hash
+&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h2 id=&#34;ntlmv1-aka-net-ntlmv1&#34;
+    &gt;
         NTLMv1 (a.k.a Net-NTLMv1)
-        &lt;a data-clipboard-text=&#34;https://0x09.dev/posts/quiproquo_ntlm/#ntlmv1-aka-net-ntlmv1&#34; class=&#34;gblog-post__anchor gblog-post__anchor--right clip&#34; aria-label=&#34;Anchor NTLMv1 (a.k.a Net-NTLMv1)&#34; href=&#34;#ntlmv1-aka-net-ntlmv1&#34;&gt;
-            &lt;svg class=&#34;icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
-        &lt;/a&gt;
     &lt;/h2&gt;
+    &lt;a data-clipboard-text=&#34;https://L3-S.github.io/0x09.github.io/posts/quiproquo_ntlm/#ntlmv1-aka-net-ntlmv1&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor NTLMv1 (a.k.a Net-NTLMv1)&#34; href=&#34;#ntlmv1-aka-net-ntlmv1&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
 &lt;/div&gt;
 &lt;p&gt;NTLMv1 désigne la première version de l&amp;rsquo;authentification NTLM, voici comment se passe une authentification entre un client et un serveur d&amp;rsquo;un point de vu haut niveau :&lt;/p&gt;
 &lt;p&gt;1- Le client envoi une demande d&amp;rsquo;authentification&lt;/p&gt;
@@ -112,20 +114,20 @@
 &lt;p&gt;3- Le client récupère le &lt;em&gt;nonce&lt;/em&gt;, le crypt avec son NT-hash (ou son LM-hash, tout dépend de la configuration) puis le renvoi au serveur &lt;a
   class=&#34;gblog-markdown__link&#34;
   href=&#34;#ntlmv1v2-hash&#34;
-  
 &gt;&lt;em&gt;(NTLMv1 Hash)&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;4- Pour vérifier l&amp;rsquo;authenticité du client, le serveur peut par exemple :&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Dans le cas où le serveur est hors Domain, grâce à sa connaissance du mot de passe, décrypter la réponse pour retrouver le &lt;em&gt;nonce&lt;/em&gt; initial&lt;/li&gt;
 &lt;li&gt;Envoyer le résultat au Domain Controller pour qu&amp;rsquo;il vérifie à sa place&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;gblog-post__anchorwrap&#34;&gt;
-    &lt;h2 id=&#34;ntlmv2-aka-net-ntlmv2&#34;&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h2 id=&#34;ntlmv2-aka-net-ntlmv2&#34;
+    &gt;
         NTLMv2 (a.k.a Net-NTLMv2)
-        &lt;a data-clipboard-text=&#34;https://0x09.dev/posts/quiproquo_ntlm/#ntlmv2-aka-net-ntlmv2&#34; class=&#34;gblog-post__anchor gblog-post__anchor--right clip&#34; aria-label=&#34;Anchor NTLMv2 (a.k.a Net-NTLMv2)&#34; href=&#34;#ntlmv2-aka-net-ntlmv2&#34;&gt;
-            &lt;svg class=&#34;icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
-        &lt;/a&gt;
     &lt;/h2&gt;
+    &lt;a data-clipboard-text=&#34;https://L3-S.github.io/0x09.github.io/posts/quiproquo_ntlm/#ntlmv2-aka-net-ntlmv2&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor NTLMv2 (a.k.a Net-NTLMv2)&#34; href=&#34;#ntlmv2-aka-net-ntlmv2&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
 &lt;/div&gt;
 &lt;p&gt;Cette deuxième version, possède le même workflow que la première à quelques différences prés comme par exemple :&lt;/p&gt;
 &lt;ul&gt;
@@ -134,84 +136,83 @@
 &lt;li&gt;La réponse au défi n&amp;rsquo;est plus chiffré avec &lt;a
   class=&#34;gblog-markdown__link&#34;
   href=&#34;https://en.wikipedia.org/wiki/Data_Encryption_Standard&#34;
-  
 &gt;&lt;em&gt;Data Encryption Standard (DES)&lt;/em&gt;&lt;/a&gt; mais utilise d&amp;rsquo;autres algorithmes comme &lt;a
   class=&#34;gblog-markdown__link&#34;
   href=&#34;https://en.wikipedia.org/wiki/HMAC&#34;
-  
 &gt;&lt;em&gt;HMAC_MD5&lt;/em&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;gblog-post__anchorwrap&#34;&gt;
-    &lt;h2 id=&#34;ntlmv1v2-hash&#34;&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h2 id=&#34;ntlmv1v2-hash&#34;
+    &gt;
         NTLMv1/v2 hash
-        &lt;a data-clipboard-text=&#34;https://0x09.dev/posts/quiproquo_ntlm/#ntlmv1v2-hash&#34; class=&#34;gblog-post__anchor gblog-post__anchor--right clip&#34; aria-label=&#34;Anchor NTLMv1/v2 hash&#34; href=&#34;#ntlmv1v2-hash&#34;&gt;
-            &lt;svg class=&#34;icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
-        &lt;/a&gt;
     &lt;/h2&gt;
+    &lt;a data-clipboard-text=&#34;https://L3-S.github.io/0x09.github.io/posts/quiproquo_ntlm/#ntlmv1v2-hash&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor NTLMv1/v2 hash&#34; href=&#34;#ntlmv1v2-hash&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
 &lt;/div&gt;
 &lt;p&gt;Le hash NTLMv1/v2 est la réponse envoyée par le client au serveur (étape 3). D&amp;rsquo;un point de vu d&amp;rsquo;un attaquant, on peut penser au minimum à deux scénarios d&amp;rsquo;exploitation :&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Vu que le NTLMv1/v2 hash a été crypté grâce au NT-hash (ou LM-hash), on peut essayer de le cracker pour retrouver le mot de passe en clair&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ hashcat -h &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; grep &lt;span class=&#34;s2&#34;&gt;&amp;#34;NTLMv&amp;#34;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;m&#34;&gt;5500&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; NetNTLMv1 / NetNTLMv1+ESS                        &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; Network Protocols
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;m&#34;&gt;5600&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; NetNTLMv2                                        &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; Network Protocols
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;$ hashcat -a &lt;span class=&#34;m&#34;&gt;0&lt;/span&gt; -m &lt;span class=&#34;m&#34;&gt;5600&lt;/span&gt; my_hash /opt/SecLists/Passwords/rockyou.txt
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;c1&#34;&gt;#       ^ &lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;c1&#34;&gt;#       |&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;c1&#34;&gt;#   NetNTLMv2&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;Faire croire au client qu&amp;rsquo;on est le serveur, et au serveur qu&amp;rsquo;on est le client, ce qui mène à relayer cette réponse pour acceder à certains services avec l&amp;rsquo;identité du client, cette attaque est connue sous le nom de NTLM-relay. Bien sûr, il faut que certaines conditions soient réunies comme la signature SMB désactivée&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Vu que le NTLMv1/v2 hash a été crypté grâce au NT-hash (ou LM-hash), on peut essayer de le cracker pour retrouver le mot de passe en clair&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;  $ hashcat -h | grep &amp;quot;NTLMv&amp;quot;
+  5500 | NetNTLMv1 / NetNTLMv1+ESS                        | Network Protocols
+  5600 | NetNTLMv2                                        | Network Protocols
+  $ hashcat -a 0 -m 5600 my_hash /opt/SecLists/Passwords/rockyou.txt
+              #       ^ 
+              #       |
+              #   NetNTLMv2
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Faire croire au client qu&amp;rsquo;on est le serveur, et au serveur qu&amp;rsquo;on est le client, ce qui mène à relayer cette réponse pour acceder à certains services avec l&amp;rsquo;identité du client, cette attaque est connue sous le nom de NTLM-relay. Bien sûr, il faut que certaines conditions soient réunies comme la signature SMB désactivée&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;figure align=&#34;center&#34;&gt;&lt;img src=&#34;/img/relai_ntlm.png&#34; /&gt;&lt;figcaption align=&#34;center&#34;&gt;Attaque NTLM Relay&lt;/figcaption&gt;&lt;/figure&gt;
-&lt;div class=&#34;gblog-post__anchorwrap&#34;&gt;
-    &lt;h1 id=&#34;conclusion&#34;&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h1 id=&#34;conclusion&#34;
+    &gt;
         Conclusion
-        &lt;a data-clipboard-text=&#34;https://0x09.dev/posts/quiproquo_ntlm/#conclusion&#34; class=&#34;gblog-post__anchor gblog-post__anchor--right clip&#34; aria-label=&#34;Anchor Conclusion&#34; href=&#34;#conclusion&#34;&gt;
-            &lt;svg class=&#34;icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
-        &lt;/a&gt;
     &lt;/h1&gt;
+    &lt;a data-clipboard-text=&#34;https://L3-S.github.io/0x09.github.io/posts/quiproquo_ntlm/#conclusion&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Conclusion&#34; href=&#34;#conclusion&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
 &lt;/div&gt;
 &lt;p&gt;Malgré l&amp;rsquo;éxistance d&amp;rsquo;autres protocols d&amp;rsquo;authentification plus sécurisés, NTLM est encore très présent dans les infrastructures Windows. De ce fait comprendre les différentes terminologies et employer le bon mot pour désigner un élément précis dans le protocol NTLM peut aider à le décompléxifier et à mieux le comprendre.&lt;/p&gt;
-&lt;div class=&#34;gblog-post__anchorwrap&#34;&gt;
-    &lt;h1 id=&#34;ressources&#34;&gt;
+&lt;div class=&#34;flex align-center gblog-post__anchorwrap&#34;&gt;
+    &lt;h1 id=&#34;ressources&#34;
+    &gt;
         Ressources
-        &lt;a data-clipboard-text=&#34;https://0x09.dev/posts/quiproquo_ntlm/#ressources&#34; class=&#34;gblog-post__anchor gblog-post__anchor--right clip&#34; aria-label=&#34;Anchor Ressources&#34; href=&#34;#ressources&#34;&gt;
-            &lt;svg class=&#34;icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
-        &lt;/a&gt;
     &lt;/h1&gt;
+    &lt;a data-clipboard-text=&#34;https://L3-S.github.io/0x09.github.io/posts/quiproquo_ntlm/#ressources&#34; class=&#34;gblog-post__anchor clip flex align-center&#34; aria-label=&#34;Anchor Ressources&#34; href=&#34;#ressources&#34;&gt;
+        &lt;svg class=&#34;gblog-icon gblog_link&#34;&gt;&lt;use xlink:href=&#34;#gblog_link&#34;&gt;&lt;/use&gt;&lt;/svg&gt;
+    &lt;/a&gt;
 &lt;/div&gt;
 &lt;ul&gt;
 &lt;li&gt;[1] &lt;a
   class=&#34;gblog-markdown__link&#34;
   href=&#34;https://en.wikipedia.org/wiki/LAN_Manager&#34;
-  
 &gt;https://en.wikipedia.org/wiki/LAN_Manager&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;[2] &lt;a
   class=&#34;gblog-markdown__link&#34;
   href=&#34;https://en.wikipedia.org/wiki/NT_LAN_Manager&#34;
-  
 &gt;https://en.wikipedia.org/wiki/NT_LAN_Manager&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;[3] &lt;a
   class=&#34;gblog-markdown__link&#34;
   href=&#34;https://zer1t0.gitlab.io/posts/attacking_ad/&#34;
-  
 &gt;https://zer1t0.gitlab.io/posts/attacking_ad/&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;[4] &lt;a
   class=&#34;gblog-markdown__link&#34;
   href=&#34;https://byt3bl33d3r.github.io/practical-guide-to-ntlm-relaying-in-2017-aka-getting-a-foothold-in-under-5-minutes.html&#34;
-  
 &gt;https://byt3bl33d3r.github.io/practical-guide-to-ntlm-relaying-in-2017-aka-getting-a-foothold-in-under-5-minutes.html&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;[5] &lt;a
   class=&#34;gblog-markdown__link&#34;
   href=&#34;https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-samr/8c5c1438-1807-4d19-9f4e-66290f214a63&#34;
-  
 &gt;https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-samr/8c5c1438-1807-4d19-9f4e-66290f214a63&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
             </content>  
-                                <category scheme="https://0x09.dev/authors/skander-belabed" term="skander-belabed" label="skander-belabed" />  
-                                <category scheme="https://0x09.dev/tags/Windows" term="Windows" label="Windows" /> 
-                                <category scheme="https://0x09.dev/tags/Security" term="Security" label="Security" />
+                                <category scheme="https://L3-S.github.io/0x09.github.io/authors/skander-belabed" term="skander-belabed" label="skander-belabed" />  
+                                <category scheme="https://L3-S.github.io/0x09.github.io/tags/Windows" term="Windows" label="Windows" /> 
+                                <category scheme="https://L3-S.github.io/0x09.github.io/tags/Security" term="Security" label="Security" />
         </entry>
 </feed>
