@@ -241,196 +241,14 @@
     <article class="gblog-post">
       <header class="gblog-post__header">
         <h1 class="gblog-post__title">
-          <a href="/posts/toto_decouvre_une_backdoor/">Toto Découvre Une &#34;Interface De Debug&#34;</a>
-        </h1>
-      </header>
-
-      <section class="gblog-markdown">
-        <div class="flex align-center gblog-post__anchorwrap">
-    <h1 id="tldr"
-    >
-        TL;DR
-    </h1>
-    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_backdoor/#tldr" class="gblog-post__anchor clip flex align-center" aria-label="Anchor TL;DR" href="#tldr">
-        <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
-    </a>
-</div>
-<p>Après l&rsquo;extraction et l&rsquo;analyse du firmware d&rsquo;un router <em>TOTOLINK N300RB</em>, une <del>backdoor</del> interface de debug /cgi-b]]in/d.cgi permettant de lire des fichiers et d&rsquo;exécuter des commandes de manière arbitraire en tant qu&rsquo;utilisateur root a été découverte. Cette fonctionnalité peut être utilisée sous condition d&rsquo;activation d&rsquo;une option dans la configuration du router ainsi qu&rsquo;un mot de passe.</p>
-<div class="flex align-center gblog-post__anchorwrap">
-    <h1 id="introduction"
-    >
-        Introduction
-    </h1>
-    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_backdoor/#introduction" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Introduction" href="#introduction">
-        <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
-    </a>
-</div>
-<div class="flex align-center gblog-post__anchorwrap">
-    <h2 id="objectifs"
-    >
-        Objectifs
-    </h2>
-    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_backdoor/#objectifs" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Objectifs" href="#objectifs">
-        <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
-    </a>
-</div>
-<p>Dans une optique d&rsquo;apprentissage sur la sécurité hardware, nous allons retracer les différentes étapes réalisées lors de l&rsquo;analyse du firmware d&rsquo;un routeur cible et plus précisémment :</p>
-      </section>
-      <div class="gblog-post__readmore">
-        
-          <a
-            class="flex-inline align-center fake-link"
-            title="Read full post"
-            href="/posts/toto_decouvre_une_backdoor/"
-          >
-            Read full post
-            <i class="gblog-icon">gblog_arrow_right</i>
-          </a>
-        
-      </div>
-
-      <footer class="gblog-post__footer">
-        <div class="flex flex-wrap align-center gblog-post__meta">
-          <span class="flex align-center no-wrap gblog-post__meta--update">
-  <svg class="gblog-icon gblog_date"><use xlink:href="#gblog_date"></use></svg>
-  <span class="gblog-post__tag">
-    <time datetime="2025-05-16T22:40:34&#43;02:00">
-      
-        Updated on
-      
-      May 16, 2025
-    </time>
-  </span>
-</span>
-
-<span class="flex align-center no-wrap gblog-post__meta--readtime">
-  <svg class="gblog-icon gblog_timer"><use xlink:href="#gblog_timer"></use></svg>
-  <span class="gblog-post__tag">15 min read</span>
-</span>
-
-
-
-
-
-
-
-
-  
-    
-    
-      
-        <span class="flex align-center no-wrap gblog-post__meta--tag">
-          <svg class="gblog-icon gblog_bookmark"><use xlink:href="#gblog_bookmark"></use></svg>
-          
-  <span class="gblog-post__tag gblog-button gblog-button--regular">
-    <a
-      class="gblog-button__link"
-      href="/tags/Hardware/"
-      title="All posts tagged with 'Hardware'"
-    >
-      Hardware
-    </a>
-  </span>
-
-        </span>
-      
-    
-    
-  
-    
-    
-      
-        <span class="flex align-center gblog-post__meta--tag">
-          
-  <span class="gblog-post__tag gblog-button gblog-button--regular">
-    <a
-      class="gblog-button__link"
-      href="/tags/Reverse-engineering/"
-      title="All posts tagged with 'Reverse engineering'"
-    >
-      Reverse engineering
-    </a>
-  </span>
-
-        </span>
-      
-    
-    
-  
-    
-    
-      
-        <span class="flex align-center gblog-post__meta--tag">
-          
-  <span class="gblog-post__tag gblog-button gblog-button--regular">
-    <a
-      class="gblog-button__link"
-      href="/tags/Security/"
-      title="All posts tagged with 'Security'"
-    >
-      Security
-    </a>
-  </span>
-
-        </span>
-      
-    
-    
-  
-
-
-
-
-
-
-        </div>
-      </footer>
-    </article>
-  
-    <article class="gblog-post">
-      <header class="gblog-post__header">
-        <h1 class="gblog-post__title">
           <a href="/posts/undifined_but_simple_anti_decompiler/">Undifined but simple anti-decompiling instruction</a>
         </h1>
       </header>
 
       <section class="gblog-markdown">
-        <hr>
-<div class="flex align-center gblog-post__anchorwrap">
-    <h1 id="tldr"
-    >
-        TL;DR
-    </h1>
-    <a data-clipboard-text="https://0x09.dev/posts/undifined_but_simple_anti_decompiler/#tldr" class="gblog-post__anchor clip flex align-center" aria-label="Anchor TL;DR" href="#tldr">
-        <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
-    </a>
-</div>
-<p>UD2 is an x86 assembly instruction that simulates an invalid opcode and mostly used for testing purposes, but not only. Indeed it can be used by malware authors for example to disturbe the decompilation process of the malware.</p>
-<hr>
-<div class="flex align-center gblog-post__anchorwrap">
-    <h1 id="ud2-instruction"
-    >
-        UD2 instruction
-    </h1>
-    <a data-clipboard-text="https://0x09.dev/posts/undifined_but_simple_anti_decompiler/#ud2-instruction" class="gblog-post__anchor clip flex align-center" aria-label="Anchor UD2 instruction" href="#ud2-instruction">
-        <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
-    </a>
-</div>
-<p>UD2 is an x86 assembly <a
-  class="gblog-markdown__link"
-  href="https://en.wikipedia.org/wiki/Mnemonic"
->mnemonic</a> and stands for <strong>U</strong>n<strong>d</strong>efined instruction. Only used for testing purposes, this instruction simulates the presence of an invalid opcode in the code and when executed raises an <em>Invalid opcode</em> exception.</p>
+        UD2 is an x86 assembly instruction that simulates an invalid opcode and mostly used for testing purposes, but not only. Indeed it can be used by malware authors for example to disturbe the decompilation process of the malware&hellip;
       </section>
       <div class="gblog-post__readmore">
-        
-          <a
-            class="flex-inline align-center fake-link"
-            title="Read full post"
-            href="/posts/undifined_but_simple_anti_decompiler/"
-          >
-            Read full post
-            <i class="gblog-icon">gblog_arrow_right</i>
-          </a>
         
       </div>
 
@@ -439,11 +257,11 @@
           <span class="flex align-center no-wrap gblog-post__meta--update">
   <svg class="gblog-icon gblog_date"><use xlink:href="#gblog_date"></use></svg>
   <span class="gblog-post__tag">
-    <time datetime="2025-05-15T22:20:20&#43;02:00">
+    <time datetime="2025-05-17T15:23:05&#43;02:00">
       
         Updated on
       
-      May 15, 2025
+      May 17, 2025
     </time>
   </span>
 </span>

