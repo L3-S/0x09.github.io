@@ -2,15 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://0x09.dev/</loc>
+    <loc>./</loc>
     <lastmod>2025-05-17T15:26:46+02:00</lastmod>
   </url>
   <url>
-    <loc>https://0x09.dev/posts/toto_decouvre_une_interface_de_debug/</loc>
+    <loc>./posts/toto_decouvre_une_interface_de_debug/</loc>
     <lastmod>2025-05-17T15:26:46+02:00</lastmod>
   </url>
   <url>
-    <loc>https://0x09.dev/posts/undifined_but_simple_anti_decompiler/</loc>
+    <loc>./posts/undifined_but_simple_anti_decompiler/</loc>
     <lastmod>2025-05-17T15:23:05+02:00</lastmod>
   </url>
 </urlset>
