@@ -6,7 +6,7 @@
   class="color-toggle-hidden"
   
 >
-  <head>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     <meta charset="UTF-8" />
 <meta name="referrer" content="no-referrer" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -41,12 +41,16 @@
   <meta property="og:site_name" content="0x09" />
   <meta property="og:description" content="UD2 is an x86 assembly instruction that simulates an invalid opcode and mostly used for testing purposes, but not only. Indeed it can be used by malware authors for example to disturbe the decompilation process of the malware…" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://0x09.dev/posts/undifined_but_simple_anti_decompiler/" />
+<meta property="og:url" content="http://localhost:1313/posts/undifined_but_simple_anti_decompiler/" />
 
 <meta property="article:section" content="Posts" />
     <meta
       property="article:published_time"
       content="2022-03-12T15:37:43+01:00"
+    />
+    <meta
+      property="article:modified_time"
+      content="2025-05-17T15:23:05+02:00"
     />
 
 
@@ -60,7 +64,7 @@
       "@type": "BlogPosting",
       "articleSection": "Posts",
       "name": "Undifined but simple anti-decompiling instruction",
-      "url" : "https://0x09.dev/posts/undifined_but_simple_anti_decompiler/",
+      "url" : "http://localhost:1313/posts/undifined_but_simple_anti_decompiler/",
       "headline": "Undifined but simple anti-decompiling instruction",
       "description": "UD2 is an x86 assembly instruction that simulates an invalid opcode and mostly used for testing purposes, but not only. Indeed it can be used by malware authors for example to disturbe the decompilation process of the malware…",
       "wordCount" : "958",
@@ -69,7 +73,7 @@
       "isFamilyFriendly": "true",
       "mainEntityOfPage": {
           "@type": "WebPage",
-          "@id": "https://0x09.dev/posts/undifined_but_simple_anti_decompiler/"
+          "@id": "http://localhost:1313/posts/undifined_but_simple_anti_decompiler/"
       },
       "keywords" : [ "Reverse engineering" , "Security" ],
       "author" : [
@@ -86,10 +90,10 @@
       "publisher":{
           "@type":"Organization",
           "name": "0x09",
-          "url": "https://0x09.dev/",
+          "url": "http://localhost:1313/",
           "logo": {
               "@type": "ImageObject",
-              "url": "https://0x09.dev/img/logo.png",
+              "url": "http://localhost:1313/img/logo.png",
               "width":"32",
               "height":"32"
           }
@@ -167,8 +171,8 @@
   href="/custom.css"
   media="all"
 />
-  <link href="https://0x09.dev/posts/undifined_but_simple_anti_decompiler/" rel="canonical" type="text/html" />
-    <link href="https://0x09.dev/feed.xml" rel="alternate" type="application/atom+xml" title="0x09 atom Feed" />
+  <link href="http://localhost:1313/posts/undifined_but_simple_anti_decompiler/" rel="canonical" type="text/html" />
+    <link href="http://localhost:1313/feed.xml" rel="alternate" type="application/atom+xml" title="0x09 atom Feed" />
 
 <!-- Made with Geekblog theme https://github.com/thegeeklab/hugo-geekblog -->
 
@@ -191,7 +195,7 @@
   <div class="container flex flex-wrap">
     <div class="gblog-header__col-1 flex justify-start hidden-mobile"></div>
     <div class="gblog-header__col-2 flex align-center justify-center ">
-      <a class="gblog-header__link" rel="me" href="https://0x09.dev/">
+      <a class="gblog-header__link" rel="me" href="http://localhost:1313/">
         <span class="gblog-brand flex align-center justify-center">
           <img
             class="gblog-brand__img"
@@ -295,7 +299,7 @@
     >
         TL;DR
     </h1>
-    <a data-clipboard-text="https://0x09.dev/posts/undifined_but_simple_anti_decompiler/#tldr" class="gblog-post__anchor clip flex align-center" aria-label="Anchor TL;DR" href="#tldr">
+    <a data-clipboard-text="http://localhost:1313/posts/undifined_but_simple_anti_decompiler/#tldr" class="gblog-post__anchor clip flex align-center" aria-label="Anchor TL;DR" href="#tldr">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
@@ -306,7 +310,7 @@
     >
         UD2 instruction
     </h1>
-    <a data-clipboard-text="https://0x09.dev/posts/undifined_but_simple_anti_decompiler/#ud2-instruction" class="gblog-post__anchor clip flex align-center" aria-label="Anchor UD2 instruction" href="#ud2-instruction">
+    <a data-clipboard-text="http://localhost:1313/posts/undifined_but_simple_anti_decompiler/#ud2-instruction" class="gblog-post__anchor clip flex align-center" aria-label="Anchor UD2 instruction" href="#ud2-instruction">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
@@ -333,7 +337,7 @@
     >
         Microsoft Visual C++ example
     </h2>
-    <a data-clipboard-text="https://0x09.dev/posts/undifined_but_simple_anti_decompiler/#microsoft-visual-c-example" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Microsoft Visual C&#43;&#43; example" href="#microsoft-visual-c-example">
+    <a data-clipboard-text="http://localhost:1313/posts/undifined_but_simple_anti_decompiler/#microsoft-visual-c-example" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Microsoft Visual C&#43;&#43; example" href="#microsoft-visual-c-example">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
@@ -400,7 +404,7 @@
     >
         Anti-decompiling purpose
     </h1>
-    <a data-clipboard-text="https://0x09.dev/posts/undifined_but_simple_anti_decompiler/#anti-decompiling-purpose" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Anti-decompiling purpose" href="#anti-decompiling-purpose">
+    <a data-clipboard-text="http://localhost:1313/posts/undifined_but_simple_anti_decompiler/#anti-decompiling-purpose" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Anti-decompiling purpose" href="#anti-decompiling-purpose">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
@@ -413,7 +417,7 @@
     >
         Simple program
     </h2>
-    <a data-clipboard-text="https://0x09.dev/posts/undifined_but_simple_anti_decompiler/#simple-program" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Simple program" href="#simple-program">
+    <a data-clipboard-text="http://localhost:1313/posts/undifined_but_simple_anti_decompiler/#simple-program" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Simple program" href="#simple-program">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
@@ -544,7 +548,7 @@
     >
         &ldquo;Protected&rdquo; simple program
     </h2>
-    <a data-clipboard-text="https://0x09.dev/posts/undifined_but_simple_anti_decompiler/#protected-simple-program" class="gblog-post__anchor clip flex align-center" aria-label="Anchor &ldquo;Protected&rdquo; simple program" href="#protected-simple-program">
+    <a data-clipboard-text="http://localhost:1313/posts/undifined_but_simple_anti_decompiler/#protected-simple-program" class="gblog-post__anchor clip flex align-center" aria-label="Anchor &ldquo;Protected&rdquo; simple program" href="#protected-simple-program">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
@@ -659,7 +663,7 @@
     >
         &ldquo;Protection&rdquo; bypass
     </h2>
-    <a data-clipboard-text="https://0x09.dev/posts/undifined_but_simple_anti_decompiler/#protection-bypass" class="gblog-post__anchor clip flex align-center" aria-label="Anchor &ldquo;Protection&rdquo; bypass" href="#protection-bypass">
+    <a data-clipboard-text="http://localhost:1313/posts/undifined_but_simple_anti_decompiler/#protection-bypass" class="gblog-post__anchor clip flex align-center" aria-label="Anchor &ldquo;Protection&rdquo; bypass" href="#protection-bypass">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
@@ -704,7 +708,7 @@
     >
         Resources
     </h1>
-    <a data-clipboard-text="https://0x09.dev/posts/undifined_but_simple_anti_decompiler/#resources" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Resources" href="#resources">
+    <a data-clipboard-text="http://localhost:1313/posts/undifined_but_simple_anti_decompiler/#resources" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Resources" href="#resources">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>

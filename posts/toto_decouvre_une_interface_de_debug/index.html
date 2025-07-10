@@ -6,7 +6,7 @@
   class="color-toggle-hidden"
   
 >
-  <head>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     <meta charset="UTF-8" />
 <meta name="referrer" content="no-referrer" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -41,7 +41,7 @@
   <meta property="og:site_name" content="0x09" />
   <meta property="og:description" content="Après l’extraction et l’analyse du firmware d’un routeur TOTOLINK N300RB, une backdoor interface de debug (/cgi/d.cgi) permettant de lire des fichiers et d’exécuter des commandes de manière arbitraire en tant qu’utilisateur root a été découverte. Cette fonctionnalité peut être utilisée sous certaines conditions telles que l’activation d’une option spécifique de la configuration du routeur ainsi que l’utilisation d’un secret…" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://0x09.dev/posts/toto_decouvre_une_interface_de_debug/" />
+<meta property="og:url" content="http://localhost:1313/posts/toto_decouvre_une_interface_de_debug/" />
 
 <meta property="article:section" content="Posts" />
     <meta
@@ -64,7 +64,7 @@
       "@type": "BlogPosting",
       "articleSection": "Posts",
       "name": "Toto Découvre Une \"Interface De Debug\"",
-      "url" : "https://0x09.dev/posts/toto_decouvre_une_interface_de_debug/",
+      "url" : "http://localhost:1313/posts/toto_decouvre_une_interface_de_debug/",
       "headline": "Toto Découvre Une \"Interface De Debug\"",
       "description": "Après l’extraction et l’analyse du firmware d’un routeur TOTOLINK N300RB, une backdoor interface de debug (\/cgi\/d.cgi) permettant de lire des fichiers et d’exécuter des commandes de manière arbitraire en tant qu’utilisateur root a été découverte. Cette fonctionnalité peut être utilisée sous certaines conditions telles que l’activation d’une option spécifique de la configuration du routeur ainsi que l’utilisation d’un secret…",
       "wordCount" : "3833",
@@ -73,7 +73,7 @@
       "isFamilyFriendly": "true",
       "mainEntityOfPage": {
           "@type": "WebPage",
-          "@id": "https://0x09.dev/posts/toto_decouvre_une_interface_de_debug/"
+          "@id": "http://localhost:1313/posts/toto_decouvre_une_interface_de_debug/"
       },
       "keywords" : [ "Reverse engineering" , "Security" , "Hardware" ],
       "author" : [
@@ -90,10 +90,10 @@
       "publisher":{
           "@type":"Organization",
           "name": "0x09",
-          "url": "https://0x09.dev/",
+          "url": "http://localhost:1313/",
           "logo": {
               "@type": "ImageObject",
-              "url": "https://0x09.dev/img/logo.png",
+              "url": "http://localhost:1313/img/logo.png",
               "width":"32",
               "height":"32"
           }
@@ -171,8 +171,8 @@
   href="/custom.css"
   media="all"
 />
-  <link href="https://0x09.dev/posts/toto_decouvre_une_interface_de_debug/" rel="canonical" type="text/html" />
-    <link href="https://0x09.dev/feed.xml" rel="alternate" type="application/atom+xml" title="0x09 atom Feed" />
+  <link href="http://localhost:1313/posts/toto_decouvre_une_interface_de_debug/" rel="canonical" type="text/html" />
+    <link href="http://localhost:1313/feed.xml" rel="alternate" type="application/atom+xml" title="0x09 atom Feed" />
 
 <!-- Made with Geekblog theme https://github.com/thegeeklab/hugo-geekblog -->
 
@@ -195,7 +195,7 @@
   <div class="container flex flex-wrap">
     <div class="gblog-header__col-1 flex justify-start hidden-mobile"></div>
     <div class="gblog-header__col-2 flex align-center justify-center ">
-      <a class="gblog-header__link" rel="me" href="https://0x09.dev/">
+      <a class="gblog-header__link" rel="me" href="http://localhost:1313/">
         <span class="gblog-brand flex align-center justify-center">
           <img
             class="gblog-brand__img"
@@ -300,7 +300,7 @@
     >
         TL;DR
     </h1>
-    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_interface_de_debug/#tldr" class="gblog-post__anchor clip flex align-center" aria-label="Anchor TL;DR" href="#tldr">
+    <a data-clipboard-text="http://localhost:1313/posts/toto_decouvre_une_interface_de_debug/#tldr" class="gblog-post__anchor clip flex align-center" aria-label="Anchor TL;DR" href="#tldr">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
@@ -361,7 +361,7 @@
     >
         Introduction
     </h1>
-    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_interface_de_debug/#introduction" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Introduction" href="#introduction">
+    <a data-clipboard-text="http://localhost:1313/posts/toto_decouvre_une_interface_de_debug/#introduction" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Introduction" href="#introduction">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
@@ -370,7 +370,7 @@
     >
         Objectifs
     </h2>
-    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_interface_de_debug/#objectifs" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Objectifs" href="#objectifs">
+    <a data-clipboard-text="http://localhost:1313/posts/toto_decouvre_une_interface_de_debug/#objectifs" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Objectifs" href="#objectifs">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
@@ -385,7 +385,7 @@
     >
         Sujet N300RB
     </h2>
-    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_interface_de_debug/#sujet-n300rb" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Sujet N300RB" href="#sujet-n300rb">
+    <a data-clipboard-text="http://localhost:1313/posts/toto_decouvre_une_interface_de_debug/#sujet-n300rb" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Sujet N300RB" href="#sujet-n300rb">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
@@ -397,7 +397,7 @@
     >
         Une première autopsie
     </h1>
-    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_interface_de_debug/#une-première-autopsie" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Une première autopsie" href="#une-premi%c3%a8re-autopsie">
+    <a data-clipboard-text="http://localhost:1313/posts/toto_decouvre_une_interface_de_debug/#une-première-autopsie" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Une première autopsie" href="#une-premi%c3%a8re-autopsie">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
@@ -431,7 +431,7 @@
     >
         UART
     </h1>
-    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_interface_de_debug/#uart" class="gblog-post__anchor clip flex align-center" aria-label="Anchor UART" href="#uart">
+    <a data-clipboard-text="http://localhost:1313/posts/toto_decouvre_une_interface_de_debug/#uart" class="gblog-post__anchor clip flex align-center" aria-label="Anchor UART" href="#uart">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
@@ -444,7 +444,7 @@
     >
         Matériel utilisé
     </h2>
-    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_interface_de_debug/#matériel-utilisé" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Matériel utilisé" href="#mat%c3%a9riel-utilis%c3%a9">
+    <a data-clipboard-text="http://localhost:1313/posts/toto_decouvre_une_interface_de_debug/#matériel-utilisé" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Matériel utilisé" href="#mat%c3%a9riel-utilis%c3%a9">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
@@ -473,7 +473,7 @@
     >
         Brancher le tout
     </h2>
-    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_interface_de_debug/#brancher-le-tout" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Brancher le tout" href="#brancher-le-tout">
+    <a data-clipboard-text="http://localhost:1313/posts/toto_decouvre_une_interface_de_debug/#brancher-le-tout" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Brancher le tout" href="#brancher-le-tout">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
@@ -502,7 +502,7 @@
     >
         Impasse
     </h2>
-    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_interface_de_debug/#impasse" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Impasse" href="#impasse">
+    <a data-clipboard-text="http://localhost:1313/posts/toto_decouvre_une_interface_de_debug/#impasse" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Impasse" href="#impasse">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
@@ -552,7 +552,7 @@
     >
         Extraction du firmware via SPI
     </h1>
-    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_interface_de_debug/#extraction-du-firmware-via-spi" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Extraction du firmware via SPI" href="#extraction-du-firmware-via-spi">
+    <a data-clipboard-text="http://localhost:1313/posts/toto_decouvre_une_interface_de_debug/#extraction-du-firmware-via-spi" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Extraction du firmware via SPI" href="#extraction-du-firmware-via-spi">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
@@ -565,7 +565,7 @@
     >
         Matériel utilisé
     </h2>
-    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_interface_de_debug/#matériel-utilisé-1" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Matériel utilisé" href="#mat%c3%a9riel-utilis%c3%a9-1">
+    <a data-clipboard-text="http://localhost:1313/posts/toto_decouvre_une_interface_de_debug/#matériel-utilisé-1" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Matériel utilisé" href="#mat%c3%a9riel-utilis%c3%a9-1">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
@@ -602,7 +602,7 @@
     >
         Brancher le tout
     </h2>
-    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_interface_de_debug/#brancher-le-tout-1" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Brancher le tout" href="#brancher-le-tout-1">
+    <a data-clipboard-text="http://localhost:1313/posts/toto_decouvre_une_interface_de_debug/#brancher-le-tout-1" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Brancher le tout" href="#brancher-le-tout-1">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
@@ -660,7 +660,7 @@
     >
         Une deuxième autopsie
     </h2>
-    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_interface_de_debug/#une-deuxième-autopsie" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Une deuxième autopsie" href="#une-deuxi%c3%a8me-autopsie">
+    <a data-clipboard-text="http://localhost:1313/posts/toto_decouvre_une_interface_de_debug/#une-deuxième-autopsie" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Une deuxième autopsie" href="#une-deuxi%c3%a8me-autopsie">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
@@ -691,7 +691,7 @@
     >
         Analyse du firmware
     </h1>
-    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_interface_de_debug/#analyse-du-firmware" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Analyse du firmware" href="#analyse-du-firmware">
+    <a data-clipboard-text="http://localhost:1313/posts/toto_decouvre_une_interface_de_debug/#analyse-du-firmware" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Analyse du firmware" href="#analyse-du-firmware">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
@@ -700,7 +700,7 @@
     >
         &ldquo;run&rdquo; Binwalk
     </h2>
-    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_interface_de_debug/#run-binwalk" class="gblog-post__anchor clip flex align-center" aria-label="Anchor &ldquo;run&rdquo; Binwalk" href="#run-binwalk">
+    <a data-clipboard-text="http://localhost:1313/posts/toto_decouvre_une_interface_de_debug/#run-binwalk" class="gblog-post__anchor clip flex align-center" aria-label="Anchor &ldquo;run&rdquo; Binwalk" href="#run-binwalk">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
@@ -846,7 +846,7 @@ Bien que son objectif principal soit l&rsquo;analyse de firmwares, il prend en c
     >
         Mapping du code source
     </h2>
-    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_interface_de_debug/#mapping-du-code-source" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Mapping du code source" href="#mapping-du-code-source">
+    <a data-clipboard-text="http://localhost:1313/posts/toto_decouvre_une_interface_de_debug/#mapping-du-code-source" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Mapping du code source" href="#mapping-du-code-source">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
@@ -945,7 +945,7 @@ Bien que son objectif principal soit l&rsquo;analyse de firmwares, il prend en c
     >
         Un air de déjà vu
     </h2>
-    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_interface_de_debug/#un-air-de-déjà-vu" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Un air de déjà vu" href="#un-air-de-d%c3%a9j%c3%a0-vu">
+    <a data-clipboard-text="http://localhost:1313/posts/toto_decouvre_une_interface_de_debug/#un-air-de-déjà-vu" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Un air de déjà vu" href="#un-air-de-d%c3%a9j%c3%a0-vu">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
@@ -1002,7 +1002,7 @@ Bien que son objectif principal soit l&rsquo;analyse de firmwares, il prend en c
     >
         Analyse du fichier
     </h2>
-    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_interface_de_debug/#analyse-du-fichier" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Analyse du fichier" href="#analyse-du-fichier">
+    <a data-clipboard-text="http://localhost:1313/posts/toto_decouvre_une_interface_de_debug/#analyse-du-fichier" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Analyse du fichier" href="#analyse-du-fichier">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
@@ -1217,7 +1217,7 @@ Bien que son objectif principal soit l&rsquo;analyse de firmwares, il prend en c
     >
         Une option pas si optionnelle
     </h3>
-    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_interface_de_debug/#une-option-pas-si-optionnelle" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Une option pas si optionnelle" href="#une-option-pas-si-optionnelle">
+    <a data-clipboard-text="http://localhost:1313/posts/toto_decouvre_une_interface_de_debug/#une-option-pas-si-optionnelle" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Une option pas si optionnelle" href="#une-option-pas-si-optionnelle">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
@@ -1380,7 +1380,7 @@ Bien que son objectif principal soit l&rsquo;analyse de firmwares, il prend en c
     >
         Un &quot; <del>minerai</del>&quot; secret en paramètre
     </h3>
-    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_interface_de_debug/#un--minerai-secret-en-paramètre" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Un &quot; minerai&quot; secret en paramètre" href="#un--minerai-secret-en-param%c3%a8tre">
+    <a data-clipboard-text="http://localhost:1313/posts/toto_decouvre_une_interface_de_debug/#un--minerai-secret-en-paramètre" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Un &quot; minerai&quot; secret en paramètre" href="#un--minerai-secret-en-param%c3%a8tre">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
@@ -1431,7 +1431,7 @@ Bien que son objectif principal soit l&rsquo;analyse de firmwares, il prend en c
     >
         R00T
     </h1>
-    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_interface_de_debug/#r00t" class="gblog-post__anchor clip flex align-center" aria-label="Anchor R00T" href="#r00t">
+    <a data-clipboard-text="http://localhost:1313/posts/toto_decouvre_une_interface_de_debug/#r00t" class="gblog-post__anchor clip flex align-center" aria-label="Anchor R00T" href="#r00t">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
@@ -1442,7 +1442,7 @@ Bien que son objectif principal soit l&rsquo;analyse de firmwares, il prend en c
     >
         Références
     </h1>
-    <a data-clipboard-text="https://0x09.dev/posts/toto_decouvre_une_interface_de_debug/#références" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Références" href="#r%c3%a9f%c3%a9rences">
+    <a data-clipboard-text="http://localhost:1313/posts/toto_decouvre_une_interface_de_debug/#références" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Références" href="#r%c3%a9f%c3%a9rences">
         <svg class="gblog-icon gblog_link"><use xlink:href="#gblog_link"></use></svg>
     </a>
 </div>
