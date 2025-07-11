@@ -5,7 +5,7 @@
         <subtitle>Just Trying To Master Some 0ffs3c Skills...</subtitle>
             <link href="./tags/Reverse-engineering/" rel="alternate" type="text/html" title="html" />
             <link href="./tags/Reverse-engineering/feed.xml" rel="self" type="application/atom+xml" title="atom" />
-    <updated>2025-07-10T23:31:22+02:00</updated>
+    <updated>2025-07-11T18:52:02+02:00</updated>
         <author>
             <name>Skander BELABED</name>
                 <email>belabedskander@gmail.com</email>
@@ -15,7 +15,10 @@
             <title>Toto Découvre Une &#34;Interface De Debug&#34;</title>
             <link href="./posts/toto_decouvre_une_interface_de_debug/" rel="alternate" type="text/html"  hreflang="en" />
             <id>./posts/toto_decouvre_une_interface_de_debug/</id>
-            <published>2025-05-14T20:18:18+02:00</published>
+                    <author>
+                        <name>Skander BELABED</name>
+                    </author>
+            <published>2025-07-10T20:18:18+02:00</published>
             <updated>2025-05-17T15:26:46+02:00</updated>
             <content type="html">
                 &lt;figure style=&#34;text-align: center;&#34;&gt;&lt;img src=&#34;/img/toto/toto-door.png&#34; style=&#34;width: 80%; height: 100%;&#34; /&gt;&lt;/figure&gt;
@@ -1174,15 +1177,20 @@ Bien que son objectif principal soit l&amp;rsquo;analyse de firmwares, il prend 
 &lt;ul&gt;
 &lt;li&gt;[1] &lt;a
   class=&#34;gblog-markdown__link&#34;
+  href=&#34;https://nvd.nist.gov/vuln/detail/CVE-2025-52089&#34;
+&gt;https://nvd.nist.gov/vuln/detail/CVE-2025-52089&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;[2] &lt;a
+  class=&#34;gblog-markdown__link&#34;
   href=&#34;https://depier.re/old/understanding_iptime_configuration_backup_file_format.html&#34;
 &gt;https://depier.re/old/understanding_iptime_configuration_backup_file_format.html&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;[2] &lt;a
+&lt;li&gt;[3] &lt;a
   class=&#34;gblog-markdown__link&#34;
   href=&#34;https://github.com/DePierre/iptime_utils/tree/master&#34;
 &gt;https://github.com/DePierre/iptime_utils/tree/master&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-            </content>   
+            </content>  
+                                <category scheme="./authors/skander-belabed" term="skander-belabed" label="skander-belabed" />  
                                 <category scheme="./tags/Reverse-engineering" term="Reverse-engineering" label="Reverse engineering" /> 
                                 <category scheme="./tags/Security" term="Security" label="Security" /> 
                                 <category scheme="./tags/Hardware" term="Hardware" label="Hardware" />
