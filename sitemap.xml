@@ -2,11 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>./</loc>
+    <loc>./posts/toto_decouvre_une_interface_de_debug/</loc>
     <lastmod>2025-05-17T15:26:46+02:00</lastmod>
   </url>
   <url>
-    <loc>./posts/toto_decouvre_une_interface_de_debug/</loc>
+    <loc>./</loc>
     <lastmod>2025-05-17T15:26:46+02:00</lastmod>
   </url>
   <url>

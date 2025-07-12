@@ -5,14 +5,14 @@
         <subtitle>Just Trying To Master Some 0ffs3c Skills...</subtitle>
             <link href="./authors/skander-belabed/" rel="alternate" type="text/html" title="html" />
             <link href="./authors/skander-belabed/feed.xml" rel="self" type="application/atom+xml" title="atom" />
-    <updated>2025-07-11T18:52:02+02:00</updated>
+    <updated>2025-07-12T15:36:06+02:00</updated>
         <author>
             <name>Skander BELABED</name>
                 <email>belabedskander@gmail.com</email>
         </author>
     <id>./authors/skander-belabed/</id>
         <entry>
-            <title>Toto Découvre Une &#34;Interface De Debug&#34;</title>
+            <title>[CVE-2025-52089] Toto Découvre Une &#34;Interface De Debug&#34;</title>
             <link href="./posts/toto_decouvre_une_interface_de_debug/" rel="alternate" type="text/html"  hreflang="en" />
             <id>./posts/toto_decouvre_une_interface_de_debug/</id>
                     <author>
