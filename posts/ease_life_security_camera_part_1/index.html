@@ -546,7 +546,7 @@
 </span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span><span class=line><span class=cl><span class=p>}</span> <span class=k>while</span><span class=p>(</span> <span class=nb>true</span> <span class=p>);</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></div></div></div><p>Le diagramme de flux ci-dessous simple le fonctionnement de global de <strong>/bin/ukey</strong> :</p><script defer src=../../js/mermaid-e4baee02.bundle.min.js></script><pre class="gblog-mermaid mermaid text-center">flowchart LR
+</span></span></code></pre></div></div></div><p>Le diagramme de flux ci-dessous résume le fonctionnement de global de <strong>/bin/ukey</strong> :</p><script defer src=../../js/mermaid-e4baee02.bundle.min.js></script><pre class="gblog-mermaid mermaid text-center">flowchart LR
 A[Récupération des paramètres] --&gt; B{Vérification}
 
 B --&gt;|-t| D[Récupération de la varible KEY de ./auth.ini] --&gt; F[Vérification de la signature fichier ./auth.ini]
